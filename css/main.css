@@ -19,9 +19,9 @@ a {
 a:hover {
     text-decoration: underline;
 }
-a[href="#spoiler"] {
-    color: #666666;
-    background-color: #666666;
+a[href="#spoiler"]:link {
+    color: #666666 !important;
+    background-color: #666666 !important;
     text-decoration: none;
 }
 a[href="#spoiler"]:hover {
