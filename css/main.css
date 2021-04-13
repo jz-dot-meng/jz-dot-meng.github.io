@@ -1,5 +1,5 @@
 #canvas1 {
-    position:static;
+    position:absolute;
     margin-left: 60px;
     z-index: -1;    
 }
