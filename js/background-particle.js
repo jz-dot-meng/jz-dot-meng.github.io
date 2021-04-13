@@ -11,7 +11,7 @@ let particlesArray;
 
 // get mouse position as dictionary
 let mouse = {
-  x: null,
+  x: null - 60, // account for margin
   y: null,
   radius: (canvas.height/100)*(canvas.width/100),
 }
@@ -47,28 +47,6 @@ class Particle {
     }
     if(this.y > canvas.height || this.y < 0){
       this.directionY = -this.directionY;
-    }
-    // check collision detection w/ mouse
-    let dx = mouse.x - this.x;
-    let dy = mouse.y - this.y;
-    // distance between centres
-    let distance = Math.sqrt(dx*dx + dy*dy);
-    // if distance between centres is less than the two radius combined
-    if(distance < this.size + mouse.radius){
-      // if mouse.x is less than this.x, mouse is to left of point, so push the point further right... etc
-      // is there a neater way of doing this?
-      if(mouse.x < this.x && this.x < canvas.width - this.size*10){
-        this.x+=10;
-      }
-      if(mouse.x > this.x && this.x > this.size*10){
-        this.x-=10;
-      }
-      if(mouse.y > this.y && this.y < canvas.height - this.size*10){
-        this.y+=10;
-      }
-      if(mouse.y < this.y && this.y > this.size*10){
-        this.y-=10;
-      }
     }
     this.x += this.directionX;
     this.y += this.directionY;
