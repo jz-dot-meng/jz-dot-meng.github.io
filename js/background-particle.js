@@ -82,8 +82,8 @@ function init(){
   let numberOfParticles = canvas.height*canvas.width/9000;
   for(let i=0; i<numberOfParticles; i++){
     let size = 2;
-    let x = (Math.random() * (window.innerWidth - size*2) - (size*2)) + size*2);
-    let y = (Math.random() * (window.innerHeight - size*2) - (size*2)) + size*2);
+    let x = (Math.random() * ((window.innerWidth - size*2) - size*2) + size*2);
+    let y = (Math.random() * ((window.innerHeight - size*2) - size*2) + size*2);
     let directionX = Math.random()*2 - 1.0;
     let directionY = Math.random()*2 - 1.0;
     let color = "E62600";
