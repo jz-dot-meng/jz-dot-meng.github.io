@@ -10,14 +10,14 @@ canvas.height = window.innerHeight;
 let particlesArray;
 
 // get mouse position as dictionary
-let mouse = {
-  x: null - 60, // account for margin
-  y: null,
-  radius: (canvas.height/100)*(canvas.width/100),
-}
+//let mouse = {
+//  x: null - 60, // account for margin
+//  y: null,
+//  radius: (canvas.height/100)*(canvas.width/100),
+//}
 
 // event listener
-window.addEventListener("mousemove", function(event){mouse.x = event.x; mouse.y = event.y;});
+//window.addEventListener("mousemove", function(event){mouse.x = event.x; mouse.y = event.y;});
 
 // class creation - 'js classes are "syntactical sugar" over prototype-based inheritance (object constructor vs class object?)
 class Particle {
@@ -75,8 +75,8 @@ function init(){
       let size = 1.25;
       let x = (Math.random() * ((window.innerWidth - size*2) - size*2) + size*2);
       let y = (Math.random() * ((window.innerHeight - size*2) - size*2) + size*2);
-      let directionX = Math.random()*2 - 1.0;
-      let directionY = Math.random()*2 - 1.0;
+      let directionX = Math.random()*3 - 1.5;
+      let directionY = Math.random()*3 - 1.5;
       let color = "E62600";
       
       particlesArray.push(new Particle(x,y,directionX,directionY,size,color));
