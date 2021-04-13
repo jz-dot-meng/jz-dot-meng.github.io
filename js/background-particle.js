@@ -51,17 +51,17 @@ class Particle {
     this.x += this.directionX;
     this.y += this.directionY;
     // mouse to particle distance
-    let dx = mouse.x - this.x;
-    let dy = mouse.y - this.y;
-    let distance = Math.sqrt(dx*dx + dy*dy);
-    if(distance < mouse.radius){
-      ctx.strokeStyle= "rgba(240, 240, 240, 1)";
-      ctx.lineWidth = 0.6;
-      ctx.beginPath();
-      ctx.moveTo(mouse.x, mouse.y);
-      ctx.lineTo(this.x, this.y);
-      ctx.stroke();      
-    }
+    //let dx = mouse.x - this.x;
+    //let dy = mouse.y - this.y;
+    //let distance = Math.sqrt(dx*dx + dy*dy);
+    //if(distance < mouse.radius){
+    //  ctx.strokeStyle= "rgba(240, 240, 240, 1)";
+    //  ctx.lineWidth = 0.6;
+    //  ctx.beginPath();
+    //  ctx.moveTo(mouse.x, mouse.y);
+    //  ctx.lineTo(this.x, this.y);
+    //  ctx.stroke();      
+    //}
     // draw particle
     connectparticles();
     this.draw();
@@ -72,7 +72,7 @@ function init(){
   particlesArray = [];
   let numberOfParticles = canvas.height*canvas.width/9000;
   for(let i=0; i<numberOfParticles; i++){
-      let size = 2;
+      let size = 1.25;
       let x = (Math.random() * ((window.innerWidth - size*2) - size*2) + size*2);
       let y = (Math.random() * ((window.innerHeight - size*2) - size*2) + size*2);
       let directionX = Math.random()*2 - 1.0;
@@ -100,7 +100,7 @@ function connectparticles(){
       let distance = ( (particlesArray[a].x - particlesArray[b].x)*(particlesArray[a].x - particlesArray[b].x) + (particlesArray[a].y - particlesArray[b].y)*(particlesArray[a].y - particlesArray[b].y) );
       if(distance < (canvas.width/16)*(canvas.height/16)){
         ctx.strokeStyle= "rgba(240, 240, 240, 1)";
-        ctx.lineWidth = 0.6;
+        ctx.lineWidth = 0.25;
         ctx.beginPath();
         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
         ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
