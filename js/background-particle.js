@@ -17,8 +17,7 @@ let mouse = {
 }
 
 // event listener
-window.addEventListener("mousemove", function(event){mouse.x = event.x; mouse.y = event.y;}
-};
+window.addEventListener("mousemove", function(event){mouse.x = event.x; mouse.y = event.y;});
 
 // class creation - 'js classes are "syntactical sugar" over prototype-based inheritance (object constructor vs class object?)
 class Particle {
