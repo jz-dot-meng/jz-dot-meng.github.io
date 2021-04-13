@@ -51,6 +51,7 @@ class Particle {
     this.x += this.directionX;
     this.y += this.directionY;
     // draw particle
+    connectparticles();
     this.draw();
   }
 }
@@ -78,7 +79,6 @@ function animate(){
     for(let i = 0; i < particlesArray.length; i++){
       particlesArray[i].update();
     }
-    connectparticles();
 }
 
 // check if particles are close enough to draw line
@@ -86,7 +86,7 @@ function connectparticles(){
   for(let a = 0; a < particlesArray.length;a++){
     for(let b = a; b < particlesArray.length;b++){
       let distance = ( (particlesArray[a].x - particlesArray[b].x)*(particlesArray[a].x - particlesArray[b].x) + (particlesArray[a].y - particlesArray[b].y)*(particlesArray[a].y - particlesArray[b].y) );
-      if(distance < (canvas.width/7)*(canvas.height/7)){
+      if(distance < (canvas.width/16)*(canvas.height/16)){
         ctx.strokeStyle= "rgba(240, 240, 240, 1)";
         ctx.lineWidth = 0.8;
         ctx.beginPath();
