@@ -99,7 +99,7 @@ function connectparticles(){
     for(let b = a; b < particlesArray.length;b++){
       let distance = ( (particlesArray[a].x - particlesArray[b].x)*(particlesArray[a].x - particlesArray[b].x) + (particlesArray[a].y - particlesArray[b].y)*(particlesArray[a].y - particlesArray[b].y) );
       if(distance < (canvas.width/16)*(canvas.height/16)){
-        ctx.strokeStyle= "rgba(240, 240, 240, 1)";
+        ctx.strokeStyle= "rgba(255,204,204,1)"; //grey "rgba(240, 240, 240, 1)"
         ctx.lineWidth = 0.25;
         ctx.beginPath();
         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
