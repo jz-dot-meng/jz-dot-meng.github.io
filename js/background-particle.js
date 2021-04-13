@@ -70,7 +70,7 @@ class Particle {
 
 function init(){
   particlesArray = [];
-  let numberOfParticles = canvas.height*canvas.width/9000;
+  let numberOfParticles = canvas.height*canvas.width/8000;
   for(let i=0; i<numberOfParticles; i++){
       let size = 1.25;
       let x = (Math.random() * ((window.innerWidth - size*2) - size*2) + size*2);
@@ -98,7 +98,7 @@ function connectparticles(){
   for(let a = 0; a < particlesArray.length;a++){
     for(let b = a; b < particlesArray.length;b++){
       let distance = ( (particlesArray[a].x - particlesArray[b].x)*(particlesArray[a].x - particlesArray[b].x) + (particlesArray[a].y - particlesArray[b].y)*(particlesArray[a].y - particlesArray[b].y) );
-      if(distance < (canvas.width/12)*(canvas.height/12)){
+      if(distance < (canvas.width/10)*(canvas.height/10)){
         ctx.strokeStyle= "rgba(255,204,204,1)"; //grey "rgba(240, 240, 240, 1)"
         ctx.lineWidth = 0.25;
         ctx.beginPath();
