@@ -36,7 +36,7 @@ class Particle {
     ctx.beginPath();
     // arc draws a circle, params(x,y,rad,startAng,endAng,counterclockwise)
     ctx.arc(this.x,this.y,this.size, 0, Math.PI*2, false);
-    ctx.fillStyle = "E62600";
+    ctx.fillStyle = this.color;
     ctx.fill();
   }
   // check particle pos, mouse pos, move particle pos and draw
@@ -98,7 +98,7 @@ function connectparticles(){
   for(let a = 0; a < particlesArray.length;a++){
     for(let b = a; b < particlesArray.length;b++){
       let distance = ( (particlesArray[a].x - particlesArray[b].x)*(particlesArray[a].x - particlesArray[b].x) + (particlesArray[a].y - particlesArray[b].y)*(particlesArray[a].y - particlesArray[b].y) );
-      if(distance < (canvas.width/16)*(canvas.height/16)){
+      if(distance < (canvas.width/12)*(canvas.height/12)){
         ctx.strokeStyle= "rgba(255,204,204,1)"; //grey "rgba(240, 240, 240, 1)"
         ctx.lineWidth = 0.25;
         ctx.beginPath();
