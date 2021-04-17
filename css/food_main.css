@@ -88,7 +88,7 @@ ul.posts li {
     z_index: 1;
     max-width: 300px;
     height: auto;
-    animation: knife 1s linear;
+    animation: knife 5s linear;
 }
 @keyframes knife {
     0% {
@@ -97,7 +97,7 @@ ul.posts li {
     }
     25% {
         top: 37.5%;
-        transform: rotateX(15deg);        
+        transform: rotateX(45deg);        
     }
     50% {
         top: 50%;
@@ -105,7 +105,7 @@ ul.posts li {
     }
     75% {
         top: 37.5%;
-        transform: rotateX(-15deg);        
+        transform: rotateX(-45deg);        
     }
     100% {
         top: 25%;
