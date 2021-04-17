@@ -1,0 +1,91 @@
+body {
+    margin: 60px auto;
+    width: 70%;
+}
+nav ul, footer ul {
+    font-family: 'Futura';
+    padding: 0px;
+    list-style: none;
+    font-weight: bold;
+}
+nav ul li, footer ul li {
+    display: inline;
+    margin-right: 20px;
+}
+a {
+    text-decoration: none;
+    color: #FF7F50;
+}
+a:hover {
+    text-decoration: underline;
+}
+span {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 24px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px;     
+}
+span b {
+    font-size: 14px;
+}
+h1 {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 24px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px; 
+}
+h3 {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 15.4px; 
+}
+p {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; 
+    line-height: 20px;
+}
+footer {
+    border-top: 1px solid #d5d5d5;
+    font-size: .8em;
+}
+
+ul.posts { 
+    margin: 20px auto 40px; 
+    font-size: 1.25em;
+}
+
+ul.posts li {
+    list-style: none;
+}
+
+.chop_wrap {
+    --size: 30vmin;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    perspective: 100vmin;  
+}
+
+.onion {
+    background-image: url("/food/scrollanim/food-onionback.png");
+}
+
+.knife {
+    background-image: url("/food/scrollanim/food-knife");
+}
+
+.slice {
+    background-image: url("/food/scrollanim/food-onionslice");
+}
