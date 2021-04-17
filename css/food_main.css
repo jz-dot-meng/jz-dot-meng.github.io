@@ -80,16 +80,16 @@ ul.posts li {
     position: fixed;
     z-index: -1;
     background-image: url("/food/scrollanim/food-onionback.png");
-    max-width: 10%;
-    height: auto;
+    width: 10%;
+    height: 10%;
 }
 
 .knife {
     position: fixed;
     z_index: 1;
     background-image: url("/food/scrollanim/food-knife.png");
-    max-width: 10%;
-    height: auto;
+    width: 10%;
+    height: 10%;
 }
 
 .slice {
@@ -97,5 +97,5 @@ ul.posts li {
     z-index: 2;
     background-image: url("/food/scrollanim/food-onionslice.png");
     max-width: 10%;
-    height: auto;
+    width: 10%;
 }
