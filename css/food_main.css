@@ -119,6 +119,28 @@ ul.posts li {
     max-width: 300px;
     height: auto;    
 }
+@keyframes slice {
+    0% {
+        top: 50%;        
+        transform: rotateZ(0deg);        
+    }
+    25% {
+        top: 50%;        
+        transform: rotateZ(0deg);
+    }
+    50% {
+        top: 50%;
+        transform: rotateZ(10deg);
+    }
+    75% {
+        top: 37.5%;
+        transform: rotateZ(10deg);
+    }
+    100% {
+        top: 55%;
+        transform: rotateX(90deg) rotateZ(10deg);
+    }
+}
 
 :root * {
   /* Pause the animation */
