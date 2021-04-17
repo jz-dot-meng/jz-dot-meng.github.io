@@ -87,7 +87,30 @@ ul.posts li {
     position: fixed;
     z_index: 1;
     max-width: 300px;
-    height: auto;    
+    height: auto;
+    animation: knife 1s linear;
+}
+@keyframes knife {
+    0% {
+        top: 25%;
+        transform: rotateX(0deg);
+    }
+    25% {
+        top: 37.5%;
+        transform: rotateX(15deg);        
+    }
+    50% {
+        top: 50%;
+        transform: rotateX(0deg);
+    }
+    75% {
+        top: 37.5%;
+        transform: rotateX(-15deg);        
+    }
+    100% {
+        top: 25%;
+        transform: rotateX(0deg);          
+    }
 }
 
 .slice {
@@ -95,4 +118,14 @@ ul.posts li {
     z-index: 2;
     max-width: 300px;
     height: auto;    
+}
+
+:root * {
+  /* Pause the animation */
+  animation-play-state: paused;
+  /* Bind the animation to scroll */
+  animation-delay: calc(var(--scroll) * -1s);
+  /* These last 2 properites clean up overshoot weirdness */
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
 }
