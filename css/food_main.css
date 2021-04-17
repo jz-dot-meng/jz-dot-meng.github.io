@@ -79,20 +79,20 @@ ul.posts li {
 .onion {
     position: fixed;
     z-index: -1;
-    background-image: url("/food/scrollanim/food-onionback.png");
-    background-size: 150px;
+    max-width: 50%;
+    height: auto;
 }
 
 .knife {
     position: fixed;
     z_index: 1;
-    background-image: url("/food/scrollanim/food-knife.png");
-    background-size: 150px;
+    max-width: 50%;
+    height: auto;    
 }
 
 .slice {
     position: fixed;
     z-index: 2;
-    background-image: url("/food/scrollanim/food-onionslice.png");
-    background-size: 150px;
+    max-width: 50%;
+    height: auto;    
 }
