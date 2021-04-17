@@ -79,20 +79,20 @@ ul.posts li {
 .onion {
     position: fixed;
     z-index: -1;
-    max-width: 50%;
+    max-width: 300px;
     height: auto;
 }
 
 .knife {
     position: fixed;
     z_index: 1;
-    max-width: 50%;
+    max-width: 300px;
     height: auto;    
 }
 
 .slice {
     position: fixed;
     z-index: 2;
-    max-width: 50%;
+    max-width: 300px;
     height: auto;    
 }
