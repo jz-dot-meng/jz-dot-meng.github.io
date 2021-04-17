@@ -80,18 +80,18 @@ ul.posts li {
 
 .onion {
     background-image: url("/food/scrollanim/food-onionback.png");
-    width: 44.7px;
-    height: 30px;
+    width: 10%;
+    height: auto;
 }
 
 .knife {
     background-image: url("/food/scrollanim/food-knife.png");
-    width: 44.7px;
-    height: 30px;
+    width: 10%;
+    height: auto;
 }
 
 .slice {
     background-image: url("/food/scrollanim/food-onionslice.png");
-    width: 44.7px;
-    height: 30px;
+    width: 10%;
+    height: auto;
 }
