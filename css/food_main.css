@@ -117,7 +117,8 @@ ul.posts li {
     position: fixed;
     z-index: 2;
     max-width: 300px;
-    height: auto;    
+    height: auto;   
+    animation: slice 1s linear;    
 }
 @keyframes slice {
     0% {
