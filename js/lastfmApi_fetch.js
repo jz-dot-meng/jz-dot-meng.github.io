@@ -1,5 +1,4 @@
 const recentlyplayed = document.getElementById("recentlyplayed");
-
 // spotify scrobbles to last.fm, which has an api call 
 
   // base api: 'http://ws.audioscrobbler.com/2.0/'
@@ -8,22 +7,25 @@ const recentlyplayed = document.getElementById("recentlyplayed");
 
 
 
-function callScrobble() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      if (response == 0){
-        myFunction(xmlhttp);
-      }
-    }
-  };
-  xmlhttp.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=mengbeats&api_key=31945ed15b54754af0b0a1c93a4a269b", true);
-  xmlhttp.send();
+function callScrobble(path) {
+    return new Promise(function (resolve, reject) {
+        axios.get(path).then(
+            (response) => {
+                var result = response.data;
+                console.log('Processing Request');
+                resolve(result); // do i need .responseXML?
+            },
+                (error) => {
+                reject(error);
+            }
+        );
+    });
 }
-function myFunction(xml) {
-  const xmlDoc = xml.responseXML;
+
+async function main(){
+  const result = await callScrobble("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=mengbeats&api_key=31945ed15b54754af0b0a1c93a4a269b");
   recentlyplayed.innerHTML = "<table>";
-  let track = xmlDoc.getElementsByTagName("track");
+  const track = result.getElementsByTagName("track");
   for(i=0;i<track.length;i++){
     recentlyplayed.innerHTML += "<tr><td><img src='";
     recentlyplayed.innerHTML += track[i].childNodes[15].innerHTML;
@@ -35,8 +37,8 @@ function myFunction(xml) {
   }
   recentlyplayed.innerHTML += "</table>";
   console.log(recentlyplayed.innerHTML);
-  
 }
+main();
 
-callScrobble();
+
 
