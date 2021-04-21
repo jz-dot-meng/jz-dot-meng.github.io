@@ -25,11 +25,11 @@ function myFunction(xml) {
   console.log(track);
   for(i=0;i<track.length;i++){
     recentlyplayed.innerHTML += "<tr><td><img src='";
-    recentlyplayed.innerHTML += track[i].getElementsByTagName("Image")[1].innerHTML;
+    recentlyplayed.innerHTML += track[i].childNodes[15].innerHTML;
     recentlyplayed.innerHTML += "'></td><td>";
-    recentlyplayed.innerHTML += track[i].getElementsByTagName("Name").innerHTML;
+    recentlyplayed.innerHTML += track[i].childNodes[3].innerHTML;
     recentlyplayed.innerHTML += "</td><td>";
-    recentlyplayed.innerHTML += track[i].getElementsByTagName("Artist").innerHTML;
+    recentlyplayed.innerHTML += track[i].childNodes[1].innerHTML;
     recentlyplayed.innerHTML += "</td></tr>";
   }
   recentlyplayed.innerHTML += "</table>";
