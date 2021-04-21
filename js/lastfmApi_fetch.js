@@ -19,9 +19,20 @@ function callScrobble() {
   xmlhttp.send();
 }
 function myFunction(xml) {
-  var xmlDoc = xml.responseXML;
-  console.log(xmlDoc)
-  recentlyplayed.innerHTML = xmlDoc;
+  const xmlDoc = xml.responseXML;
+  console.log(xmlDoc);
+  recentlyplayed.innerHTML += "<table>";
+  let track = xmlDoc.getElementsByTagName("track");
+  for(i=0;i<track.length;i++){
+    recentlyplayed.innerHTML += "<tr><td><img src='";
+    recentlyplayed.innerHTML += track[i].getElementByTagName("Image").childNodes[0].nodeValue;
+    recentlyplayed.innerHTML += "'></td><td>";
+    recentlyplayed.innerHTML += track[i].getElementByTagName("Name").childNodes[0].nodeValue;
+    recentlyplayed.innerHTML += "</td><td>";
+    recentlyplayed.innerHTML += track[i].getElementByTagName("Artist").childNodes[0].nodeValue;
+    recentlyplayed.innerHTML += "</td></tr>";
+  }
+  recentlyplayed.innerHTML += "</table>";
 }
 
 callScrobble();
