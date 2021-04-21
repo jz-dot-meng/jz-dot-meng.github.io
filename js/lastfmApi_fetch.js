@@ -22,7 +22,9 @@ function myFunction(xml) {
   const xmlDoc = xml.responseXML;
   console.log(xmlDoc);
   recentlyplayed.innerHTML += "<table>";
-  let track = xmlDoc.getElementsByTagName("track");
+  let find1 = xmlDoc.getElementsByTagName("lfm");
+  let find2 = find1.getElementsByTagName("recenttracks");
+  let track = find2.getElementsByTagName("track");
   for(i=0;i<track.length;i++){
     recentlyplayed.innerHTML += "<tr><td><img src='";
     recentlyplayed.innerHTML += track[i].getElementsByTagName("Image")[1].innerHTML;
