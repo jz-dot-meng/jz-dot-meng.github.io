@@ -8,7 +8,7 @@ const recentlyplayed = document.getElementById("recentlyplayed");
 
 
 
-function loadXMLDoc() {
+function callScrobble() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -23,4 +23,6 @@ function myFunction(xml) {
   console.log(xmlDoc)
   recentlyplayed.innerHTML = xmlDoc;
 }
+
+callScrobble();
 
