@@ -25,11 +25,11 @@ function myFunction(xml) {
   let track = xmlDoc.getElementsByTagName("track");
   for(i=0;i<track.length;i++){
     recentlyplayed.innerHTML += "<tr><td><img src='";
-    recentlyplayed.innerHTML += track[i].getElementByTagName("Image").childNodes[0].nodeValue;
+    recentlyplayed.innerHTML += track[i].getElementByTagName("Image")[0].innerHTML;
     recentlyplayed.innerHTML += "'></td><td>";
-    recentlyplayed.innerHTML += track[i].getElementByTagName("Name").childNodes[0].nodeValue;
+    recentlyplayed.innerHTML += track[i].getElementByTagName("Name").innerHTML;
     recentlyplayed.innerHTML += "</td><td>";
-    recentlyplayed.innerHTML += track[i].getElementByTagName("Artist").childNodes[0].nodeValue;
+    recentlyplayed.innerHTML += track[i].getElementByTagName("Artist").innerHTML;
     recentlyplayed.innerHTML += "</td></tr>";
   }
   recentlyplayed.innerHTML += "</table>";
