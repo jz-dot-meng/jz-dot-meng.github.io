@@ -20,6 +20,7 @@ function loadXMLDoc() {
 }
 function myFunction(xml) {
   var xmlDoc = xml.responseXML;
+  console.log(xmlDoc)
   recentlyplayed.innerHTML = xmlDoc;
 }
 
