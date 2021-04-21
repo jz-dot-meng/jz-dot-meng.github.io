@@ -25,7 +25,7 @@ function myFunction(xml) {
   let track = xmlDoc.getElementsByTagName("track");
   for(i=0;i<track.length;i++){
     recentlyplayed.innerHTML += "<tr><td><img src='";
-    recentlyplayed.innerHTML += track[i].getElementsByTagName("Image")[0].innerHTML;
+    recentlyplayed.innerHTML += track[i].getElementsByTagName("Image")[1].innerHTML;
     recentlyplayed.innerHTML += "'></td><td>";
     recentlyplayed.innerHTML += track[i].getElementsByTagName("Name").innerHTML;
     recentlyplayed.innerHTML += "</td><td>";
