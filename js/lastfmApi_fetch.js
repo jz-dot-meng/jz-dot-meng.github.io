@@ -12,7 +12,9 @@ function callScrobble() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      myFunction(xmlhttp);
+      if (response == 0){
+        myFunction(xmlhttp);
+      }
     }
   };
   xmlhttp.open("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=mengbeats&api_key=31945ed15b54754af0b0a1c93a4a269b", true);
