@@ -20,9 +20,8 @@ function callScrobble() {
 }
 function myFunction(xml) {
   const xmlDoc = xml.responseXML;
-  recentlyplayed.innerHTML += "<table>";
+  recentlyplayed.innerHTML = "<table>";
   let track = xmlDoc.getElementsByTagName("track");
-  console.log(track);
   for(i=0;i<track.length;i++){
     recentlyplayed.innerHTML += "<tr><td><img src='";
     recentlyplayed.innerHTML += track[i].childNodes[15].innerHTML;
@@ -33,6 +32,8 @@ function myFunction(xml) {
     recentlyplayed.innerHTML += "</td></tr>";
   }
   recentlyplayed.innerHTML += "</table>";
+  console.log(recentlyplayed.innerHTML);
+  
 }
 
 callScrobble();
