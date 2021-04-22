@@ -1,5 +1,5 @@
 const recentlyplayed = document.getElementById("recentlyplayed");
-const track;
+const track = document.getElementsById("li"); // create a dummy htmlcollection global, to be replaced by api data?
 
 // spotify scrobbles to last.fm, which has an api call 
   // base api: 'http://ws.audioscrobbler.com/2.0/'
