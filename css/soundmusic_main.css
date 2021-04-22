@@ -80,3 +80,13 @@ ul.posts {
 ul.posts li {
     list-style: none;
 }
+
+table {
+    width: 75%;
+}
+
+td {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 14px; 
+    border-bottom: 1px solid #ddd
+}
