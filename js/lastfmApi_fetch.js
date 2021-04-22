@@ -15,9 +15,7 @@ async function callScrobble() {
   console.log(track);
   //recentlyplayed.innerHTML = "<table>";
   for(i=0;i<track.length;i++){
-    recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td>";
-    recentlyplayed.innerHTML += "<td>"+track[i].childNodes[3].innerHTML+"</td>";
-    recentlyplayed.innerHTML += "<td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
+    recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
   }
   //recentlyplayed.innerHTML += "</table>";
   console.log(recentlyplayed.innerHTML);
