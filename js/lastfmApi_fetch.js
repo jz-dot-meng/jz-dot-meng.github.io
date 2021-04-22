@@ -1,4 +1,5 @@
 const recentlyplayed = document.getElementById("recentlyplayed");
+const track;
 
 // spotify scrobbles to last.fm, which has an api call 
   // base api: 'http://ws.audioscrobbler.com/2.0/'
@@ -10,12 +11,17 @@ async function callScrobble() {
   // await code here
   let result = await makeRequest("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=mengbeats&api_key=31945ed15b54754af0b0a1c93a4a269b");
   // code below here will only execute when await makeRequest() finishes loading
+  track = result.getElementsByTagName("track");
+}
+
+document.addEventListener("DOMContentLoaded", function(){
   recentlyplayed.innerHTML = "<table>";
-  let track = result.getElementsByTagName("track");
   for(i=0;i<track.length;i++){
     recentlyplayed.innerHTML += "<tr><td><img src='";
+    console.log('is this even procesing?');
     recentlyplayed.innerHTML += track[i].childNodes[15].innerHTML;
     recentlyplayed.innerHTML += "'></td><td>";
+    console.log('even just a little??');
     recentlyplayed.innerHTML += track[i].childNodes[3].innerHTML;
     recentlyplayed.innerHTML += "</td><td>";
     recentlyplayed.innerHTML += track[i].childNodes[1].innerHTML;
@@ -23,9 +29,6 @@ async function callScrobble() {
   }
   recentlyplayed.innerHTML += "</table>";
   console.log(recentlyplayed.innerHTML);
-}
-
-document.addEventListener("DOMContentLoaded", function(){
   
 });
 
