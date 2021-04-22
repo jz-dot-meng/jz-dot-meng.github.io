@@ -12,12 +12,12 @@ async function callScrobble() {
   let result = await makeRequest("GET", "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=mengbeats&api_key=31945ed15b54754af0b0a1c93a4a269b");
   // code below here will only execute when await makeRequest() finishes loading
   let track = result.getElementsByTagName("track");
+  console.log(track);
   //recentlyplayed.innerHTML = "<table>";
   for(i=0;i<track.length;i++){
-    recentlyplayed.innerHTML += "<table><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td>";
-    console.log('even just a little??');
+    recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td>";
     recentlyplayed.innerHTML += "<td>"+track[i].childNodes[3].innerHTML+"</td>";
-    recentlyplayed.innerHTML += "<td>"+track[i].childNodes[1].innerHTML+"</td></tr></table>";
+    recentlyplayed.innerHTML += "<td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
   }
   //recentlyplayed.innerHTML += "</table>";
   console.log(recentlyplayed.innerHTML);
