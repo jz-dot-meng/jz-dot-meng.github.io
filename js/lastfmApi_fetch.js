@@ -14,15 +14,10 @@ async function callScrobble() {
   let track = result.getElementsByTagName("track");
   //recentlyplayed.innerHTML = "<table>";
   for(i=0;i<track.length;i++){
-    recentlyplayed.innerHTML += "<table><tr><td><img src='";
-    console.log('is this even procesing?');
-    recentlyplayed.innerHTML += track[i].childNodes[15].innerHTML;
-    recentlyplayed.innerHTML += "'></td><td>";
+    recentlyplayed.innerHTML += "<table><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td>";
     console.log('even just a little??');
-    recentlyplayed.innerHTML += track[i].childNodes[3].innerHTML;
-    recentlyplayed.innerHTML += "</td><td>";
-    recentlyplayed.innerHTML += track[i].childNodes[1].innerHTML;
-    recentlyplayed.innerHTML += "</td></tr></table>";
+    recentlyplayed.innerHTML += "<td>"+track[i].childNodes[3].innerHTML+"</td>";
+    recentlyplayed.innerHTML += "<td>"+track[i].childNodes[1].innerHTML+"</td></tr></table>";
   }
   //recentlyplayed.innerHTML += "</table>";
   console.log(recentlyplayed.innerHTML);
