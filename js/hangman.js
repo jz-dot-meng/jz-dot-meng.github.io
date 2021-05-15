@@ -46,6 +46,5 @@ function checkletter(){
   }
 }
 
-while(numwrongguess<11){
-  submit.onclick = checkletter();
-}
+submit.onclick = checkletter();
+
