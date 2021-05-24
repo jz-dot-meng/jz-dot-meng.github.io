@@ -11,7 +11,7 @@ let numwrongguess = 0;
 const unknown = '_ ';
 
 async function callWordnik(){
-  let apireq = await makeRequest("GET", "http://api.wordnik.com/v4/words.json/randomWord?api_key=YOURKEYHERE");
+  let apireq = await makeRequest("GET", "http://api.wordnik.com/v4/words.json/randomWord?api_key=e0m3otfuzjft9r5fr7z524tm2tj5yq2t5qug5zs5qht1sp8gy");
   newword = apireq["word"];
   hiddenword = unknown.repeat(newword.length);
   unknownword.innerHTML = hiddenword;
