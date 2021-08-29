@@ -11,8 +11,13 @@ async function callWordnik(){
   const submit = document.getElementById("submit");
   const error = document.getElementById("error");
   const incorrectguesses = document.getElementById("incorrectguesses");
-  let apireq = await makeRequest("GET", "http://api.wordnik.com/v4/words.json/randomWord?api_key=e0m3otfuzjft9r5fr7z524tm2tj5yq2t5qug5zs5qht1sp8gy");
-  newword = apireq["word"];
+  //let apireq = await makeRequest("GET", "http://api.wordnik.com/v4/words.json/randomWord?api_key=e0m3otfuzjft9r5fr7z524tm2tj5yq2t5qug5zs5qht1sp8gy");
+  fetch("http://api.wordnik.com/v4/words.json/randomWord?api_key=e0m3otfuzjft9r5fr7z524tm2tj5yq2t5qug5zs5qht1sp8gy").then(response=>{
+    return response.json();
+  }).then(data=>{
+    const{id,word} = data;
+    newword = word;
+  });
   hiddenword = unknown.repeat(newword.length);
   unknownword.innerHTML = hiddenword;
 }
