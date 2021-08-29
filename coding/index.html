@@ -2,28 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/coding_main.css">
-    <script src="/js/hangman.js"></script>
+    <script src="hangman.js"></script>
   </head>
-  
-  <header>
-    <h3><a href="/">@jz-dot-meng</a></h3>
-    <span>coding<b> :: learn by doing </b></span>
-  </header>
-  
-  <div class='container'>
-    <h3>hangman</h3>
-    <p>guess the word</p>
-    <div id='unknownword'></div>
-    <form action='#' method='post' id='guessLetter' onsubmit="return checkletter()">
-      <input type='text' id='guess'>
-      <input type='submit' id='submit' value='guess letter'/>
-    </form>
-    <div id='error'></div>
-    <div id='incorrectguesses'></div>
-    <!-- 11 incorect guesses -->
-    <!-- graphic here -->
-    <!-- would love to implement refreshing probability of guessing word after each guess --> 
-  </div>
+
+  <body onload="demo()">
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>coding<b> :: learn by doing </b></span>
+    </header>
+    
+    <div class='container'>
+        <h3>hangman</h3>
+        <p>guess the word</p>
+        <div id='unknownword'></div>
+        <div id='graphic'></br></br></br></br></br></br></br></div>
+        <div id='incorrectguesses'></br></div>
+        <form action='#' method='post' id='guessLetter' onsubmit="return checkletter()">
+        <input type='text' id='guess'>
+        <input type='submit' id='submit' value='guess letter'/>
+        </form>
+        <div id='error'></div>
+        <!-- would love to implement refreshing probability of guessing word after each guess --> 
+    </div>
+  </body>
 
 </html>
