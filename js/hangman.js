@@ -29,22 +29,21 @@ demo();
 function checkletter(){
   let letter = guess.value;
   if(typeof letter != 'string'){
-    error.innerHTML = 'Please enter a letter';
+    error.innerText = 'Please enter a letter';
   } else if (letter.length > 1){
-    error.innerHTML = 'Please only enter one letter';
+    error.innerText = 'Please only enter one letter';
   } else {
     for(i=0;i<newword;i++){
       if(newword[i]==letter){
         // demo word 'crypt' hiddenword equiv '_ _ _ _ _ '; we want indexes 0,2,4,6,8 from iterators 0,1,2,3,4
         hiddenword = hiddenword.replace(hiddenword[(2*i)],letter);
-        unknownword.innerHTML = hiddenword;
+        unknownword.innerText = hiddenword;
       } else {
-        incorrectguesses.innerHTML += letter+" ";
+        incorrectguesses.innerText += letter+" ";
         numwrongguess++;
       }
     }
   }
+  return false;
 }
-
-submit.onclick = checkletter();
 
