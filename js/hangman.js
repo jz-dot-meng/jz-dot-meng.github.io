@@ -17,9 +17,9 @@ async function callWordnik(){
   }).then(data=>{
     const{id,word} = data;
     newword = word;
+    hiddenword = unknown.repeat(newword.length);
+    unknownword.innerText = hiddenword;
   });
-  hiddenword = unknown.repeat(newword.length);
-  unknownword.innerText = hiddenword;
 }
 
 // testing onload
@@ -50,20 +50,17 @@ function checkletter(){
   } else {
     // check for match in newword
     let isInWord = false;
-    let index = -1;
     for(let i=0;i<newword.length;i++){
       if(newword[i]==letter){
-        index = i;
+        // demo word 'crypt' hiddenword equiv '_ _ _ _ _ '; we want indexes 0,2,4,6,8 from iterators 0,1,2,3,4
         isInWord=true;
-        break;
+        hiddenword = hiddenword.substring(0,2*i)+letter+hiddenword.substring(2*i+1);
+        unknownword.innerText = hiddenword;
       } else {
         continue;
       }
     }
     if(isInWord==true){
-        // demo word 'crypt' hiddenword equiv '_ _ _ _ _ '; we want indexes 0,2,4,6,8 from iterators 0,1,2,3,4
-        hiddenword = hiddenword.substring(0,2*index)+letter+hiddenword.substring(2*index+1);
-        unknownword.innerText = hiddenword;
         draw(numwrongguess);
     } else{
         if(incorrect==""){
