@@ -19,7 +19,7 @@ async function callWordnik(){
     newword = word;
   });
   hiddenword = unknown.repeat(newword.length);
-  unknownword.innerHTML = hiddenword;
+  unknownword.innerText = hiddenword;
 }
 
 // testing onload
