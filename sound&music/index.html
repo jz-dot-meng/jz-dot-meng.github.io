@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-
-<link rel="stylesheet" type="text/css" href="/css/soundmusic_main.css">
-<html>
+<html lang="en">
+  <!-- will this affect polish songs? no ą -->
   <head>
-    <h3><a href="/">@jz-dot-meng</a></h3>
-    <span>sound & music</span>
+      <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="/css/soundmusic_main.css">
   </head>
   
   <body>
+    <head>
+      <h3><a href="/">@jz-dot-meng</a></h3>
+      <span>sound & music</span>
+    </head>
     
     <div class="container">
       <h3>what meng is listening to:</h3>
+      <div id="lastlistened"></div>
       <div id="recentlyplayed"></div>
-      <!-- add a 'last listened' for date/time since last listened, or even currently listening to <div id="lastlistened"></div> -->
       <script src="/js/lastfmApi_fetch.js"></script>
     </div>
     
