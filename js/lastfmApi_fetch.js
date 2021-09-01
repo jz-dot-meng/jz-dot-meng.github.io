@@ -15,9 +15,11 @@ async function callScrobble() {
   let date = Date.parse(result.getElementsByTagName("date")[0].childNodes[0].nodeValue+" EST");
   let printDate = new Date(date).toDateString();
   let isCurrent = new Date();
-  if(Math.abs((Date.parse(isCurrent)) - date)<600000){
+  isCurrent = Date.parse(isCurrent);
+  let howCurrent = date - isCurrent;
+  if(howCurrent<60000000){
     lastlistened.innerHTML+= "<p>Currently listening to: </p>";
-    recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[0].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[0].childNodes[1].innerHTML+"</td></tr></tbody></table>";
+    recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[0].childNodes[15].innerHTML+"'></td><td>"+track[0].childNodes[3].innerHTML+"</td><td>"+track[0].childNodes[1].innerHTML+"</td></tr></tbody></table>";
     let otherlistened = document.createElement("div");
     otherlistened.setAttribute("id","otherlistened");
     otherlistened.innerHTML+="<p>Recently played: </p>";
@@ -28,22 +30,32 @@ async function callScrobble() {
       pastplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
     }
     document.getElementById("container").appendChild(pastplayed);
+    let button = document.createElement("button");
+    button.setAttribute("id","showHide")
+    button.setAttribute("type","button");
+    button.innerHTML="Show more";
+    button.setAttribute("onclick", "showRows()");
+    let width = getComputedStyle(document.querySelector("tbody")).width;
+    button.setAttribute("style","position:relative; width:"+width+";")
+    pastplayed.appendChild(button);
+    hideRows();
   } else {
     lastlistened.innerHTML+="<p>Last listened: "+printDate+"</p>";
     //recentlyplayed.innerHTML = "<table>";
     for(i=0;i<track.length;i++){
       recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
     }
+    let button = document.createElement("button");
+    button.setAttribute("id","showHide")
+    button.setAttribute("type","button");
+    button.innerHTML="Show more";
+    button.setAttribute("onclick", "showRows()");
+    let width = getComputedStyle(document.querySelector("tbody")).width;
+    button.setAttribute("style","position:relative; width:"+width+";")
+    recentlyplayed.appendChild(button);
+    hideRows();
   }
-  let button = document.createElement("button");
-  button.setAttribute("id","showHide")
-  button.setAttribute("type","button");
-  button.innerHTML="Show more";
-  button.setAttribute("onclick", "showRows()");
-  let width = getComputedStyle(document.querySelector("tbody")).width;
-  button.setAttribute("style","position:relative; width:"+width+";")
-  recentlyplayed.appendChild(button);
-  hideRows();
+
 }
 
 function makeRequest(method, url) {
