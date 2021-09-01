@@ -43,6 +43,7 @@ async function callScrobble() {
   let width = getComputedStyle(document.querySelector("tbody")).width;
   button.setAttribute("style","position:relative; width:"+width+";")
   recentlyplayed.appendChild(button);
+  hideRows();
 }
 
 function makeRequest(method, url) {
