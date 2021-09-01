@@ -18,7 +18,7 @@ async function callScrobble() {
   isCurrent = Date.parse(isCurrent);
   let howCurrent = date - isCurrent;
   if(howCurrent<60000000){
-    lastlistened.innerHTML+= "<p>Currently listening to: </p>";
+    lastlistened.innerHTML+= "<p>&#128308;LIVE Currently listening to: </p>";
     recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[0].childNodes[15].innerHTML+"'></td><td>"+track[0].childNodes[3].innerHTML+"</td><td>"+track[0].childNodes[1].innerHTML+"</td></tr></tbody></table>";
     let otherlistened = document.createElement("div");
     otherlistened.setAttribute("id","otherlistened");
