@@ -2,8 +2,12 @@ let level = 1;
 let levelArr = [];
 
 function startgame(){
+    level = 1;
     document.getElementById("control").style.display="none";
     document.getElementById("score").innerText = "Level "+level;
+    if(typeof(document.getElementById("replay"))!="undefined"&& document.getElementById("replay")!=null){
+        document.getElementById("replay").remove();
+    }
     // draw board
     drawboard(level);
     // create levelArray, show memory tiles
@@ -13,47 +17,19 @@ function startgame(){
     },500);
     // hide memory tiles
     let hide = setTimeout(function(){
-        for(let i=1;i<=16;i++){
-            document.getElementById(i).style.background = 'gainsboro';
+        for(let i=1;i<=40;i++){ // needs reworking!!
+            if(typeof(document.getElementById(i))!="undefined"&& document.getElementById(i)!=null){
+                document.getElementById(i).style.background = 'gainsboro';
+            }
         }
         document.getElementById("score").innerText = "Pick out the correct positions";
     },1000);
     // event listener
     document.querySelectorAll(".gametile").forEach(button=>{
         button.addEventListener('click', function(){
-            // return id
-            let id = button.id;
-            let isCorrect = false;
-            //is in arr?
-            for(let i =0; i<levelArr.length;i++){
-                if(levelArr[i]==id){
-                    // match
-                    isCorrect=true;
-                    // remove from arr
-                    levelArr.splice(i,1);
-                    // colour
-                    button.style.background = 'coral';
-                    // check for level end
-                    let allSelected = levelPassed();
-                    if (allSelected==true){
-                        level++;
-                        let pause2 = setTimeout(function(){
-                            newlevel(level);
-                        },500);
-                        break;
-                    }
-                } 
-            }
-            // if no match
-            if(isCorrect==false){
-                document.getElementById("score").innerText="Game over!";
-              // ADD PLAY AGAIN
-              // PREVENT FURTHER PLAY
-            }
+            tileClick(button);
         })
     })
-    // user input, validate
-    // if correct, level increment    
 }
 
 
@@ -68,41 +44,17 @@ function newlevel(level){
     },500);
     // hide memory tiles
     let hide = setTimeout(function(){
-        for(let i=1;i<=16;i++){
-            document.getElementById(i).style.background = 'gainsboro';
+        for(let i=1;i<=40;i++){ // needs reworking!!
+            if(typeof(document.getElementById(i))!="undefined"&& document.getElementById(i)!=null){
+                document.getElementById(i).style.background = 'gainsboro';
+            }
         }
         document.getElementById("score").innerText = "Pick out the correct positions";
     },1000);
     // event listener
     document.querySelectorAll(".gametile").forEach(button=>{
         button.addEventListener('click', function(){
-            // return id
-            let id = button.id;
-            let isCorrect = false;
-            //is in arr?
-            for(let i =0; i<levelArr.length;i++){
-                if(levelArr[i]==id){
-                    // match
-                    isCorrect=true;
-                    // remove from arr
-                    levelArr.splice(i,1);
-                    // colour
-                    button.style.background = 'coral';
-                    // check for level end?
-                    let allSelected = levelPassed();
-                    if (allSelected==true){
-                        level++;
-                        let pause2 = setTimeout(function(){
-                            newlevel(level);
-                        },500);
-                        break;
-                    }
-                } 
-            }
-            // if no match
-            if(isCorrect==false){
-                document.getElementById("score").innerText="Game over!";
-            }
+            tileClick(button);
         })
     })
 }
@@ -184,7 +136,7 @@ function generateArray(level){
         let count = level+1;
         let newSet = new Set();
         while(newSet.size < count){
-            newSet.add(Math.ceil(Math.random()*16));
+            newSet.add(Math.ceil(Math.random()*20));
         }
         let levelAr = [];
         for(let item of newSet){
@@ -196,7 +148,7 @@ function generateArray(level){
         let count = level+1;
         let newSet = new Set();
         while(newSet.size < count){
-            newSet.add(Math.ceil(Math.random()*16));
+            newSet.add(Math.ceil(Math.random()*25));
         }
         let levelAr = [];
         for(let item of newSet){
@@ -208,7 +160,7 @@ function generateArray(level){
         let count = level;
         let newSet = new Set();
         while(newSet.size < count){
-            newSet.add(Math.ceil(Math.random()*16));
+            newSet.add(Math.ceil(Math.random()*30));
         }
         let levelAr = [];
         for(let item of newSet){
@@ -232,7 +184,50 @@ function levelPassed(){
     }
 }
 
-
+function tileClick(button){
+    // return id
+    let id = button.id;
+    let isCorrect = false;
+    //is in arr?
+    for(let i =0; i<levelArr.length;i++){
+        if(levelArr[i]==id){
+            // match
+            isCorrect=true;
+            // remove from arr
+            levelArr.splice(i,1);
+            // colour
+            button.style.background = 'coral';
+            // check for level end
+            let allSelected = levelPassed();
+            if (allSelected==true){
+                level++;
+                let pause2 = setTimeout(function(){
+                    newlevel(level);
+                },500);
+                break;
+            }
+        } 
+    }
+    // if no match
+    if(isCorrect==false){
+        document.getElementById("score").innerText="Game over! You reached level "+level;
+        // add replay
+        let replay = document.createElement("button");
+        replay.innerHTML="Replay";
+        replay.setAttribute('id','replay');
+        replay.setAttribute("onclick","startgame()");
+        document.getElementById("score").innerHTML+="</br>";
+        document.getElementById("score").appendChild(replay);
+        // prevent clicking - how?
+        document.querySelectorAll(".gametile").forEach(button=>{
+            button.setAttribute("disabled",true);
+        })
+        // show correct tiles
+        for(let i = 0; i< levelArr.length;i++){
+            document.getElementById(levelArr[i]).style.background ='crimson';
+        }
+    }
+}
     // level1 - 4x4, 3
     // level2 - 4x4, 4
     // level3 - 4x4, 5
