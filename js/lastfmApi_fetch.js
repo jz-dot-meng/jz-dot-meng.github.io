@@ -14,17 +14,25 @@ async function callScrobble() {
   let track = result.getElementsByTagName("track");
   let date = Date.parse(result.getElementsByTagName("date")[0].childNodes[0].nodeValue+" EST");
   let printDate = new Date(date).toDateString();
-  lastlistened.innerHTML+="<p>Last listened: "+printDate+"</p>";
-  //recentlyplayed.innerHTML = "<table>";
-  for(i=0;i<track.length;i++){
-    recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
-  }
-  //recentlyplayed.innerHTML += "</table>";
-  let tr = document.getElementsByTagName('tr');
-  for(i=0;i<tr.length;i++){
-      if(i>5){
-          tr[i].style.display = 'none';
-      }
+  let isCurrent = new Date();
+  if(Math.abs(isCurrent- new Date(date))<600000){
+    lastlistened.innerHTML+= "<p>Currently listening to: </p>";
+    recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[0].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[0].childNodes[1].innerHTML+"</td></tr></tbody></table>";
+    let otherlistened = document.createElement("div");
+    otherlistened.setAttribute("id","otherlistened");
+    otherlistened.innerHTML+="<p>Recently played: </p>";
+    document.getElementById("container").appendChild(otherlistened);
+    let pastplayed = document.createElement("div");
+    pastplayed.setAttribute("id","pastplayed");
+     for(i=1;i<track.length;i++){
+      pastplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
+    }   
+  } else {
+    lastlistened.innerHTML+="<p>Last listened: "+printDate+"</p>";
+    //recentlyplayed.innerHTML = "<table>";
+    for(i=0;i<track.length;i++){
+      recentlyplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
+    }
   }
   let button = document.createElement("button");
   button.setAttribute("id","showHide")
