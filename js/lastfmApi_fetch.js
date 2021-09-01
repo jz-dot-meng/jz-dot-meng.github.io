@@ -26,7 +26,8 @@ async function callScrobble() {
     pastplayed.setAttribute("id","pastplayed");
      for(i=1;i<track.length;i++){
       pastplayed.innerHTML += "<table><tbody><tr><td><img src='"+track[i].childNodes[15].innerHTML+"'></td><td>"+track[i].childNodes[3].innerHTML+"</td><td>"+track[i].childNodes[1].innerHTML+"</td></tr></tbody></table>";
-    }   
+    }
+    document.getElementById("container").appendChild(pastplayed);
   } else {
     lastlistened.innerHTML+="<p>Last listened: "+printDate+"</p>";
     //recentlyplayed.innerHTML = "<table>";
