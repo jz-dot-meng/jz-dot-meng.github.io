@@ -20,6 +20,8 @@ function startgame(){
         for(let i=1;i<=40;i++){ // needs reworking!!
             if(typeof(document.getElementById(i))!="undefined"&& document.getElementById(i)!=null){
                 document.getElementById(i).style.background = 'gainsboro';
+                document.getElementById(i).removeAttribute("disabled");
+                document.getElementById(i).setAttribute("enabled",true);
             }
         }
         document.getElementById("score").innerText = "Pick out the correct positions";
@@ -47,6 +49,8 @@ function newlevel(level){
         for(let i=1;i<=40;i++){ // needs reworking!!
             if(typeof(document.getElementById(i))!="undefined"&& document.getElementById(i)!=null){
                 document.getElementById(i).style.background = 'gainsboro';
+                document.getElementById(i).removeAttribute("disabled");
+                document.getElementById(i).setAttribute("enabled",true);
             }
         }
         document.getElementById("score").innerText = "Pick out the correct positions";
@@ -117,6 +121,9 @@ function drawboard(level){
             }
         }
     }
+    document.querySelectorAll(".gametile").forEach(button=>{
+        button.setAttribute("disabled",true);
+    })
 }
 
 function generateArray(level){
