@@ -1,36 +1,42 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<link rel="stylesheet" type="text/css" href="/css/greenfi_main.css">
-<html>
-  <head>
-    <h3><a href="/">@jz-dot-meng</a></h3>
-    <span>greenfi<b> :: reflections and ideas </b></span>
-  </head>
-  
-  <body>
-    <nav>
-      <ul>
-        <li><a href="/greenfi/index.html">Blog (under development)</a></li>
-      </ul>
-    </nav>
-    
-    <div class="container">
-      <h3>random thoughts</h3>
-      <p>~</p>
-      <p>19 april 2021</p>
-      <p><em>using blockchain technology to help build community-owned renewable energy</em></p>
-      <p>adapting the decentralised nature of blockchain to generate agency at the individual level, no matter how small, through goverance - especially where it is lacking on a national level (at least in Australia) -
-        by creating a token with value that represents a stake in an investment in community renewable energy projects (wind, solar, and eventually even larger scale projects like solar thermal and offshore wind that can employ locals)</p>
-      <p>in a simplistic way, it's an 'impact investment' vehicle without the prohibitively expensive barriers that traditional impact investment funds have, but on top of that the combination of <a href="https://blockonomi.com/blockchain-governance/">on-chain and off-chain governance</a> 
-        to empower individuals to vote on projects, offer their expertise or even suggest their projects to be developed.</p>
-      <p>obviously the token can't completely be traded in the normal sense, as a transaction between a buyer and seller doesn't generate new money to be pooled for community projects - perhaps a 'buy order' is divided into 50% market (someone wishing to offload their stake) and 50% a communal wallet
-        that receives the traded pair to be converted into fiat (if necessary) in order to fund the project?</p>
-      <p>this means that the ecosystem isn't completely decentralised, but with hypothetical complete decentralisation, would anything be able to proceed at all, considering the complexity of actually realising a real-world project?</p>
-      <p>This <a href="https://www.environment.nsw.gov.au/resources/communities/cpa-community-energy-how-to.pdf">guide</a> provides a framework for designing and realising a community-led green energy project. inevitably, a lot of the steps (social feasability, technical feasability, planning approval and construction)
-        happens off-chain, requiring (at first) the developers to be invested in actually garnering local support, hiring appropriate professionals and negotiating with grid operators for sale prices (profits to be distributed back to token holders?), and eventually maybe token holders invested enough to undergo the process
-        for their own communities</p>
-      <p>have to give this some more thought, could be interesting...</p>
+<head>
+    <meta charset="utf-8">
+    <title>dca calculator</title>
+    <link rel="stylesheet" type="text/css" href="/css/coding_dca.css">
+</head>
+
+<body>
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>dollar-cost average calculator<b> :: see how your money grows </b></span>
+    </header>
+
+    <div id="container">
+        <div id="piechart"></div>
+        <canvas id="graph" width="800" height="400"></canvas>
+        <div>
+            <table id="assets">
+                <tr>
+                    <th>initial investment</th>
+                    <th>dca amount</th>
+                    <th>period</th>
+                    <th>asset type</th>
+                    <th>avg yearly growth</th>
+                    <th><small>remove</small></th>
+                </tr>
+            </table>
+        </div>
+        <button id="newdca" onclick="addnewdca()">new dca</button>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="/js/dcacalculator.js"></script>
     
-  </body>
+    <footer>
+      <p>still in development</p>
+    </footer>
+</body>
+
 </html>
