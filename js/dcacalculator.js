@@ -2,7 +2,20 @@ let rowcount = 0;
 const table = document.getElementById("assets");
 const assetOptions = ["stock-only", "balanced stock-bond", "bond-only", "savings", "crypto"];
 
-const ctx = document.getElementById("graph").getContext('2d')
+const ctx = document.getElementById("graph").getContext('2d');
+const dataChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        datasets: [],
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+            }
+        }
+    }
+});
 
 let assetArr = [];
 
@@ -207,21 +220,10 @@ function weekConverter(value, display) {
 function removerow(rowno) {
     let bye = document.getElementById(rowno);
     bye.remove();
+    // change all data points for line graph to nan, because popping it from the array will mess everything up :/
+    dataChart.data.datasets[rowno]['data'] = [NaN];
+    dataChart.update();
 }
-
-const dataChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        datasets: [],
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-            }
-        }
-    }
-})
 
 class DCA {
     constructor(id, initial, amount, period, growth) {
