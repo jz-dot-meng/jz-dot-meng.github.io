@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/coding_stroop.css">
+  </head>
+
+  <body>
+    <header>
+      <h3><a href="/">@jz-dot-meng</a></h3>
+      <span>coding<b> :: learn by doing </b></span>
+      <nav>
+        <ul>
+          <li><a href="/coding/index.html">hangman</a></li>
+          <li><a href="/coding/memory.html">memory</a></li>
+          <li><a href="/coding/stroopeffect.html">stroop effect</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <div id='container'>
+      <h3>stroop effect</h3>
+      <p>click or use the arrow keys to say whether the text matches the colour</p>
+      <div id="gameelements" style="visibility:hidden">
+        <div id="frequency" class='details'>Freq: </div>
+        <div id="score" class='details'>Score: </div>
+        <div id="display"></div>
+      </div>
+      <div id="controls">
+        <button id="nomatch" class="choice" style="display:none">&#60;no match</button>
+        <button id="match" class='choice' style="display:none">match&#62;</button>
+        <button id="newgame" onclick="newgame()">start game</button>
+      </div>
+    </div>
+    <script src='/js/stroop.js'></script>
+</body>
+
+</html>
