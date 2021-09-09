@@ -123,7 +123,7 @@ function draw(noIncorrect){
             break;
         case 3:
             gallow = "</br>"+
-                "</br>&nbsp;&nbsp;|-----------"+
+                "</br>&nbsp;&nbsp;|------------"+
                 "</br>&nbsp;&nbsp;|"+
                 "</br>&nbsp;&nbsp;|"+
                 "</br>&nbsp;&nbsp;|"+
@@ -132,7 +132,7 @@ function draw(noIncorrect){
             break;
         case 4:
             gallow = "</br>"+
-                "</br>&nbsp;&nbsp;|-/---------"+
+                "</br>&nbsp;&nbsp;|--/---------"+
                 "</br>&nbsp;&nbsp;|/"+
                 "</br>&nbsp;&nbsp;|"+
                 "</br>&nbsp;&nbsp;|"+
@@ -141,7 +141,7 @@ function draw(noIncorrect){
             break;
         case 5:
             gallow = "</br>"+
-                "</br>&nbsp;&nbsp;|-/---------|"+
+                "</br>&nbsp;&nbsp;|--/---------|"+
                 "</br>&nbsp;&nbsp;|/"+
                 "</br>&nbsp;&nbsp;|"+
                 "</br>&nbsp;&nbsp;|"+
@@ -150,7 +150,7 @@ function draw(noIncorrect){
             break;
         case 6:
             gallow = "</br>"+
-                "</br>&nbsp;&nbsp;|-/---------|"+
+                "</br>&nbsp;&nbsp;|--/---------|"+
                 "</br>&nbsp;&nbsp;|/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0"+
                 "</br>&nbsp;&nbsp;|"+
                 "</br>&nbsp;&nbsp;|"+
@@ -159,7 +159,7 @@ function draw(noIncorrect){
             break;
         case 7:
             gallow = "</br>"+
-                "</br>&nbsp;&nbsp;|-/---------|"+
+                "</br>&nbsp;&nbsp;|--/---------|"+
                 "</br>&nbsp;&nbsp;|/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0"+
                 "</br>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| "+
                 "</br>&nbsp;&nbsp;|"+
@@ -168,7 +168,7 @@ function draw(noIncorrect){
             break;
         case 8:
             gallow = "</br>"+
-                "</br>&nbsp;&nbsp;|-/---------|"+
+                "</br>&nbsp;&nbsp;|--/---------|"+
                 "</br>&nbsp;&nbsp;|/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0"+
                 "</br>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/|&nbsp;"+
                 "</br>&nbsp;&nbsp;|"+
@@ -177,7 +177,7 @@ function draw(noIncorrect){
             break;
         case 9:
             gallow = "</br>" +
-                "</br>&nbsp;&nbsp;|-/---------|" +
+                "</br>&nbsp;&nbsp;|--/---------|" +
                 "</br>&nbsp;&nbsp;|/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0" +
                 "</br>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/|\\" +
                 "</br>&nbsp;&nbsp;|" +
@@ -186,7 +186,7 @@ function draw(noIncorrect){
             break;
         case 10:
             gallow = "</br>" +
-                "</br>&nbsp;&nbsp;|-/---------|" +
+                "</br>&nbsp;&nbsp;|--/---------|" +
                 "</br>&nbsp;&nbsp;|/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0" +
                 "</br>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/|\\" +
                 "</br>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ " +
@@ -195,7 +195,7 @@ function draw(noIncorrect){
             break;
         case 11:
             gallow = "</br>" +
-                "</br>&nbsp;&nbsp;|-/---------|" +
+                "</br>&nbsp;&nbsp;|--/---------|" +
                 "</br>&nbsp;&nbsp;|/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0" +
                 "</br>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/|\\" +
                 "</br>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ \\ bad luck!" +
