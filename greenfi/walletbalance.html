@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/js/greenfi_walletbalance.css">
+</head>
+
+<body>
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>wallet balance<b> :: a simple api to check your crypto wallet balance</b></span>
+        <nav>
+        <ul>
+          <li><a href="/greenfi/index.html">dca calculator</a></li>
+          <li><a href="/greenfi/index.html">wallet balance</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="container">
+        <div id="piechart"></div>
+        <div>
+            <p>Display currency: <a href="#" id='aud' onclick="changeAUD()">AUD</a> <a href="#" id='usd' onclick="changeUSD()">USD</a></p>
+        </div>
+        <div>
+            <table id="assetTable" style="visibility:hidden;">
+                <tr>
+                    <th>Blockchain</th>
+                    <th>Address</th>
+                    <th>Total coin/token amount</th>
+                    <th>Value</th>
+                </tr>
+            </table>
+        </div>
+        <button id="addAsset" onclick="addAddress()">Add wallet address</button>
+    </div>
+    </br>
+    </br>
+    <footer>
+        <xx-small>
+          <p> In development: Node.js Express server currently interfacing with <a href="https://github.com/polkadot-js/api/">@polkadot/api</a>, deployed on Heroku</p>
+          <p> Hopefully, future integration of more blockchain APIs coming soon!</p>
+         
+        </xx-small>
+    </footer>
+
+    <script src="/js/wallet.js"></script>
+</body>
+
+</html>
