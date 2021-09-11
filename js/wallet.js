@@ -38,6 +38,7 @@ function addAddress() {
     selector.addEventListener('change', function () {
         generateForm(selector.value, rowcount);
     })
+    rowcount++;
 }
 
 function generateForm(item, rowcount) {
