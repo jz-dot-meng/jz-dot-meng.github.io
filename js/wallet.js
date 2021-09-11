@@ -17,6 +17,7 @@ let rowcount = 0;
 const table = document.getElementById("assetTable")
 
 function addAddress() {
+    let temprow = rowcount;
     table.style.visibility = "visible";
     let newRow = document.createElement("tr");
     newRow.setAttribute("id", rowcount);
@@ -36,7 +37,7 @@ function addAddress() {
     }
     selectorCell.appendChild(selector);
     selector.addEventListener('change', function () {
-        generateForm(selector.value, rowcount);
+        generateForm(selector.value, temprow);
     })
     rowcount++;
 }
