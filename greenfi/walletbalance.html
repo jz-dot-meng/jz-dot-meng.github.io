@@ -19,7 +19,9 @@
     </header>
 
     <div id="container">
-        <div id="piechart"></div>
+        <div id="chartstyle" style="position:relative;width:400px;height:400px;">
+            <canvas id="piechart"></canvas>
+        </div>
         <div>
             <p>Display currency: <a href="#" id='aud' onclick="changeAUD()">AUD</a> <a href="#" id='usd' onclick="changeUSD()">USD</a></p>
         </div>
@@ -39,12 +41,12 @@
     </br>
     <footer>
         <xx-small>
-          <p> In development: Node.js Express server currently interfacing with <a href="https://github.com/polkadot-js/api/">@polkadot/api</a>, deployed on Heroku</p>
+          <p> In development: Node.js Express server currently interfacing with <a href="https://github.com/polkadot-js/api/">@polkadot/api</a> and <a href="https://github.com/stellar/js-stellar-sdk">js-stellar-sdk</a>, deployed on Heroku</p>
           <p> Hopefully, future integration of more blockchain APIs coming soon!</p>
          
         </xx-small>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script src="/js/wallet.js"></script>
 </body>
 
