@@ -153,6 +153,7 @@ function xlmcreator(rowcount) {
         })
     } else {
         // change event listener
+        alert("Functionality not implemented yet!");
     }
 }
 
@@ -222,6 +223,7 @@ function dotcreator(rowcount) {
         })
     } else {
         // change event listener
+        alert("Functionality not implemented yet!");
     }
 }
 
