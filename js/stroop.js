@@ -82,7 +82,7 @@ function iscorrect() {
             // stop timer
             clearInterval(timerInterval);
             // display avg freq
-            document.getElementById('frequency').innerHTML = "Avg freq: " + findavgfreq() / 10.0 + "ms";
+            document.getElementById('frequency').innerHTML = "Avg freq: " + findavgfreq()  + "ms";
             // display replay button;
             document.getElementById('newgame').innerHTML = "replay";
             document.getElementById('newgame').style.visibility = "visible";
@@ -96,7 +96,7 @@ function iscorrect() {
             document.getElementById('match').style.display = "none";
             document.removeEventListener('keyup', keycode);
             clearInterval(timerInterval);
-            document.getElementById('frequency').innerHTML = "Avg freq: " + findavgfreq() / 10.0 + "ms";
+            document.getElementById('frequency').innerHTML = "Avg freq: " + findavgfreq()  + "ms";
             document.getElementById('newgame').innerHTML = "replay";
             document.getElementById('newgame').style.visibility = "visible";
         } else if (playerchoice == "nomatch") {
