@@ -124,7 +124,7 @@ function findavgfreq() {
         total += avgfreq[i];
     }
     let avg = total / avgfreq.length;
-    return total;
+    return avg;
 }
 
 // gameloop, without creating a while-loop
