@@ -21,15 +21,49 @@
 
     <div id="container">
         <canvas id="graph"></canvas>
-        <div>
-            Display currency: <a href="#" id='aud' onclick="changeAUD()">AUD</a> <a href="#" id='usd'
-                onclick="changeUSD()">USD</a> <a href="#" id="eur" onclick="changeEUR()">EUR</a>
-        </div>
-        <div>
-            <label for="address">Staking address:</label>
-            <input id="address" type="text" onblur="retrieveRewards()" style="width:397px">
-        </div>
-        <div id="errorMessage"></div>
+        <table>
+            <tr>
+                <td>
+                    <div id="left">
+                        <div>
+                            Display currency: <a href="#" id='aud' onclick="changeAUD()">AUD</a> <a href="#" id='usd'
+                                onclick="changeUSD()">USD</a> <a href="#" id="eur" onclick="changeEUR()">EUR</a>
+                        </div>
+                        <div>
+                            <label for="address">Staking address:</label>
+                            <input id="address" type="text" onblur="retrieveRewards()" style="width:390px">
+                        </div>
+                        <div id="errorMessage"></div>
+                    </div>
+                </td>
+                <td>
+                    <div id='right'>
+                        <div style="margin:auto;">
+                            <div id='avg'>
+                                <table>
+                                    <tr id='r1' style="visibility: hidden;">
+                                        <td>Wallet balance:</td>
+                                        <td id="walletBal"></td>
+                                    </tr>
+                                    <tr id='r2' style="visibility: hidden;">
+                                        <td>Average daily reward:</td>
+                                        <td id="avgDaily"></td>
+                                    </tr>
+                                    <tr id='r3' style="visibility: hidden;">
+                                        <td>APY based on average daily reward:</td>
+                                        <td id="apyAvg"></td>
+                                    </tr>
+                                    <tr id='r4' style="visibility: hidden;">
+                                        <td>APY based on last daily reward:</td>
+                                        <td id="apyLast"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
     </br>
     </br>
