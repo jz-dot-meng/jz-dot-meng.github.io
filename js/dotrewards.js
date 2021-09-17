@@ -2,14 +2,23 @@ let currency = 'aud';
 function changeAUD() {
     currency = 'aud';
     alert("currency: " + currency);
+    if (document.getElementById("address").value != '') {
+        retrieveRewards();
+    }
 }
 function changeUSD() {
     currency = 'usd';
     alert("currency: " + currency);
+    if (document.getElementById("address").value != '') {
+        retrieveRewards();
+    }
 }
 function changeEUR() {
     currency = 'eur';
     alert("currency: " + currency);
+    if (document.getElementById("address").value != '') {
+        retrieveRewards();
+    }
 }
 
 const ctx = document.getElementById('graph').getContext('2d');
@@ -63,7 +72,12 @@ let cumulativeFiat = [];
 let total = 0;
 
 async function retrieveRewards() {
-    // clear out any previous errors
+    // clear out any previous errors, and data
+    dates = [];
+    amount = [];
+    fiat = [];
+    cumulativeFiat = [];
+    total = 0;
     document.getElementById("errorMessage").innerHTML = "";
     const address = document.getElementById("address");
     try {
