@@ -79,15 +79,21 @@ let dates = [];
 let amount = [];
 let fiat = []
 let cumulativeFiat = [];
-let total = 0;
+let totalFiat = 0;
+let totalCoin = 0;
 
 async function retrieveRewards() {
     // clear out any previous errors
+    document.getElementById('r1').style.visibility = "hidden";
+    document.getElementById('r2').style.visibility = "hidden";
+    document.getElementById('r3').style.visibility = "hidden";
+    document.getElementById('r4').style.visibility = "hidden";
     dates = [];
     amount = [];
     fiat = [];
     cumulativeFiat = [];
-    total = 0;
+    totalFiat = 0;
+    totalCoin = 0;
     document.getElementById("errorMessage").innerHTML = "";
     const address = document.getElementById("address");
     try {
@@ -106,8 +112,9 @@ async function retrieveRewards() {
                     dates.push(json["Rewards"][i]['reward_date']);
                     amount.push(json["Rewards"][i]['reward_amount']);
                     fiat.push(json["Rewards"][i]['fiat_conversion']);
-                    total += json["Rewards"][i]['fiat_conversion'];
-                    cumulativeFiat.push(total);
+                    totalFiat += json["Rewards"][i]['fiat_conversion'];
+                    totalCoin += json["Rewards"][i]['reward_amount'];
+                    cumulativeFiat.push(totalFiat);
                 }
                 dataChart.data.labels = dates;
                 dataChart.data.datasets[0]['data'] = amount;
@@ -120,13 +127,49 @@ async function retrieveRewards() {
                     csv.setAttribute('onclick', "generatecsv()");
                     document.getElementById("container").appendChild(csv);
                 }
+                // create loader
+                let loader1 = document.createElement('div');
+                loader1.setAttribute("id", "loaderOne");
+                loader1.setAttribute("class", 'loader');
+                document.getElementById('right').appendChild(loader1);
+                // calculate avg, estimated apy
+                let avgCoin = totalCoin / dates.length;
+                let avgFiat = totalFiat / dates.length;
+                let balance;
+                let avgApy;
+                let lastApy;
+                // get coin balance
+                let wallet = await fetch("https://rocky-beyond-27768.herokuapp.com/testpolkadot/address/" + address.value)
+                if (wallet.ok) {
+                    let jsonB = await wallet.json();
+                    balance = jsonB['Balance'] / Math.pow(10, 10);
+                    avgApy = Math.pow((1 + (avgCoin / balance)), 365) - 1;
+                    lastApy = Math.pow((1 + (json['Rewards'][0]['reward_amount'] / balance)), 365) - 1;
+                }
+                if (balance == undefined) {
+                    loader1.style.display = "none";
+                    document.getElementById('r2').style.visibility = "visible";
+                    document.getElementById("avgDaily").innerText = avgCoin.toFixed(5) + " DOT, " + new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase(), minimumFractionDigits: 4 }).format(avgFiat);
+                } else {
+                    loader1.style.display = "none";
+                    document.getElementById('r1').style.visibility = "visible";
+                    document.getElementById('r2').style.visibility = "visible";
+                    document.getElementById('r3').style.visibility = "visible";
+                    document.getElementById('r4').style.visibility = "visible";
+                    document.getElementById("walletBal").innerText = balance + " DOT";
+                    document.getElementById("avgDaily").innerText = avgCoin.toFixed(5) + " DOT, " + new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase(), minimumFractionDigits: 4 }).format(avgFiat);
+                    document.getElementById("apyAvg").innerText = avgApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
+                    document.getElementById('apyLast').innerText = lastApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
+                }
             }
         }
+
     } catch (err) {
         document.getElementById("errorMessage").innerHTML = "<p>Invalid input, not a Polkadot address</p>"
         address.value = "";
     }
 }
+
 
 function generatecsv() {
     let str = ',Date, Reward (DOT), ' + currency.toUpperCase() + ' Fiat conversion\n';
