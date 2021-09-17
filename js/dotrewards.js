@@ -38,14 +38,14 @@ const dataChart = new Chart(ctx, {
         labels: [], // dates
         datasets: [
             {
-                label: 'Rewards (in DOT)',
+                label: 'Daily rewards (in DOT)',
                 data: [],
                 backgroundColor: "rgba(230,0,30,0.5)",
                 order: 1, // background
                 yAxisID: 'yLeft'
             },
             {
-                label: 'Cumulative rewards (in fiat)',
+                label: 'Cumulative rewards based on latest price (in fiat)',
                 data: [],
                 backgroundColor: "rgba(0,35,230,0.5)",
                 order: 0,
@@ -88,6 +88,7 @@ async function retrieveRewards() {
     document.getElementById('r2').style.visibility = "hidden";
     document.getElementById('r3').style.visibility = "hidden";
     document.getElementById('r4').style.visibility = "hidden";
+    document.getElementById('r5').style.visibility = "hidden";
     dates = [];
     amount = [];
     fiat = [];
@@ -96,6 +97,12 @@ async function retrieveRewards() {
     totalCoin = 0;
     document.getElementById("errorMessage").innerHTML = "";
     const address = document.getElementById("address");
+    // get dot price
+    let latestprice = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=polkadot&vs_currencies=" + currency)
+    if (latestprice.ok) {
+        let priceJson = await latestprice.json();
+        latestprice = priceJson['polkadot'][currency];
+    }
     try {
         let response = await fetch('https://rocky-beyond-27768.herokuapp.com/testpolkadot/rewards/' + address.value + "&currency=" + currency);
         if (response.ok) {
@@ -112,7 +119,7 @@ async function retrieveRewards() {
                     dates.push(json["Rewards"][i]['reward_date']);
                     amount.push(json["Rewards"][i]['reward_amount']);
                     fiat.push(json["Rewards"][i]['fiat_conversion']);
-                    totalFiat += json["Rewards"][i]['fiat_conversion'];
+                    totalFiat += json["Rewards"][i]['reward_amount'] * latestprice;
                     totalCoin += json["Rewards"][i]['reward_amount'];
                     cumulativeFiat.push(totalFiat);
                 }
@@ -156,7 +163,9 @@ async function retrieveRewards() {
                     document.getElementById('r2').style.visibility = "visible";
                     document.getElementById('r3').style.visibility = "visible";
                     document.getElementById('r4').style.visibility = "visible";
+                    document.getElementById('r5').style.visibility = "visible";
                     document.getElementById("walletBal").innerText = balance + " DOT";
+                    document.getElementById("totalRew").innerText = totalCoin + " DOT";
                     document.getElementById("avgDaily").innerText = avgCoin.toFixed(5) + " DOT, " + new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase(), minimumFractionDigits: 4 }).format(avgFiat);
                     document.getElementById("apyAvg").innerText = avgApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
                     document.getElementById('apyLast').innerText = lastApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
@@ -165,7 +174,7 @@ async function retrieveRewards() {
         }
 
     } catch (err) {
-        document.getElementById("errorMessage").innerHTML = "<p>Invalid input, not a Polkadot address</p>"
+        document.getElementById("errorMessage").innerHTML = "<p>Invalid input, or a server error</p>"
         address.value = "";
     }
 }
