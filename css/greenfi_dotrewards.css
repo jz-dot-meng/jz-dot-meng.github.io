@@ -1,0 +1,119 @@
+body {
+    position: relative;
+    margin: 60px auto;
+    width: 70%;
+}
+nav ul, footer ul {
+    font-family: 'Futura';
+    padding: 0px;
+    list-style: none;
+    font-weight: bold;
+}
+nav ul li, footer ul li {
+    display: inline;
+    margin-right: 20px;
+}
+a {
+    text-decoration: none;
+    color: #FF7F50;
+}
+a:hover {
+    text-decoration: underline;
+}
+a[href="#spoiler"]:link {
+    color: #666666 !important;
+    background-color: #666666 !important;
+    text-decoration: none;
+}
+a[href="#spoiler"]:hover {
+    text-decoration: none;
+}
+a[href="#spoiler"]:visited {
+    color: #000000;
+    background-color: #f2f2f2;
+    text-decoration: none;
+}
+span {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 24px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px;     
+}
+span b {
+    font-size: 14px;
+}
+h1 {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 24px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px; 
+}
+h3 {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 15.4px; 
+}
+p {
+    width:50%; 
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; 
+    line-height: 20px;
+}
+div{
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;   
+    font-size: 14px;   
+}
+footer {
+    border-top: 1px solid #d5d5d5;
+    font-size: .8em;
+}
+
+ul.posts { 
+    margin: 20px auto 40px; 
+    font-size: 1.25em;
+}
+
+ul.posts li {
+    list-style: none;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #FF7F50;
+    width: 10px;
+    height: 10px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+  
+/* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+div{
+    margin:auto;
+}
+
+button{
+    position:relative;
+    left:50%;
+    transform: translate(-50%, 0%);
+}
