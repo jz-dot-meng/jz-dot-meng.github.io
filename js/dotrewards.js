@@ -1,21 +1,31 @@
 let currency = 'aud';
+
 function changeAUD() {
     currency = 'aud';
-    alert("currency: " + currency);
+    dataChart.options.scales.yRight.ticks.callback = function (value, index, values) {
+        return value.toLocaleString("en-US", { style: "currency", currency: currency.toUpperCase() });
+    };
+    dataChart.update();
     if (document.getElementById("address").value != '') {
         retrieveRewards();
     }
 }
 function changeUSD() {
     currency = 'usd';
-    alert("currency: " + currency);
+    dataChart.options.scales.yRight.ticks.callback = function (value, index, values) {
+        return value.toLocaleString("en-US", { style: "currency", currency: currency.toUpperCase() });
+    };
+    dataChart.update();
     if (document.getElementById("address").value != '') {
         retrieveRewards();
     }
 }
 function changeEUR() {
     currency = 'eur';
-    alert("currency: " + currency);
+    dataChart.options.scales.yRight.ticks.callback = function (value, index, values) {
+        return value.toLocaleString("en-US", { style: "currency", currency: currency.toUpperCase() });
+    };
+    dataChart.update();
     if (document.getElementById("address").value != '') {
         retrieveRewards();
     }
@@ -72,7 +82,7 @@ let cumulativeFiat = [];
 let total = 0;
 
 async function retrieveRewards() {
-    // clear out any previous errors, and data
+    // clear out any previous errors
     dates = [];
     amount = [];
     fiat = [];
@@ -103,11 +113,13 @@ async function retrieveRewards() {
                 dataChart.data.datasets[0]['data'] = amount;
                 dataChart.data.datasets[1]['data'] = cumulativeFiat;
                 dataChart.update();
-                let csv = document.createElement("button");
-                csv.setAttribute("id", "dlcsv");
-                csv.innerHTML = "generate and download csv";
-                csv.setAttribute('onclick', "generatecsv()");
-                document.getElementById("container").appendChild(csv);
+                if (document.getElementById('dlcsv') == undefined) {
+                    let csv = document.createElement("button");
+                    csv.setAttribute("id", "dlcsv");
+                    csv.innerHTML = "generate and download csv";
+                    csv.setAttribute('onclick', "generatecsv()");
+                    document.getElementById("container").appendChild(csv);
+                }
             }
         }
     } catch (err) {
