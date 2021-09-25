@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/coding_hash.css">
+</head>
+
+<body>
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>coding<b> :: learn by doing </b></span>
+        <nav>
+        <ul>
+          <li><a href="/coding/index.html">hangman</a></li>
+          <li><a href="/coding/memory.html">memory</a></li>
+          <li><a href="/coding/stroopeffect.html">stroop effect</a></li>
+          <li><a href="/coding/hashfunctions.html.html">sha-256</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id='container'>
+        <h3>Understanding hashing</h3>
+        <p>A SHA-256 cryptographic hash (also known as a 'digest') is a 'one-way' cryptographic function generating an
+            almost-unique 256-bit/32byte signature from a string</p>
+        <h3>Pure javascript academic application of SHA-256</h3>
+        <div id='moving'>
+            <label for='usrIn'>Enter text to be hashed: </label>
+            <input id='usrIn' type='text' maxlength="55">
+        </div>
+        <div id='dynamic'>
+            <div id='length'>
+                <div id='pre-length'></div>
+                <div id='post-length'></div>
+            </div>
+            <div id='array'>
+
+            </div>
+            <div id="endian">
+
+            </div>
+            <div id='hash'>
+
+            </div>
+            <div id='hex'>
+
+            </div>
+        </div>
+    </div>
+
+    <script src='/js/hash.js'></script>
+</body>
+
+</html>
