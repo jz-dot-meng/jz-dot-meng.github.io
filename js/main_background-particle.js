@@ -4,7 +4,7 @@ const canvas = document.getElementById("canvas1");
 // remembering const (for static) and let (for manipulable) are currently more accepted than var
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = window.innerHeight * 0.9;
 
 // initialise array of particles
 let particlesArray;
@@ -21,7 +21,7 @@ let particlesArray;
 
 // class creation - 'js classes are "syntactical sugar" over prototype-based inheritance (object constructor vs class object?)
 class Particle {
-  constructor(x,y,directionX,directionY,size,color){
+  constructor(x, y, directionX, directionY, size, color) {
     this.x = x;
     this.y = y;
     this.directionX = directionX;
@@ -31,21 +31,21 @@ class Particle {
     this.color = color;
   }
   // methods for drawing particles
-  draw(){
+  draw() {
     // beginPath() begins a path, or resets current path
     ctx.beginPath();
     // arc draws a circle, params(x,y,rad,startAng,endAng,counterclockwise)
-    ctx.arc(this.x,this.y,this.size, 0, Math.PI*2, false);
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
     ctx.fillStyle = this.color;
     ctx.fill();
   }
   // check particle pos, mouse pos, move particle pos and draw
-  update(){
+  update() {
     // first check if particle is still within the canvas; reverse direction if outside bounds
-    if(this.x > canvas.width || this.x < 0){
+    if (this.x > canvas.width || this.x < 0) {
       this.directionX = -this.directionX;
     }
-    if(this.y > canvas.height || this.y < 0){
+    if (this.y > canvas.height || this.y < 0) {
       this.directionY = -this.directionY;
     }
     this.x += this.directionX;
@@ -68,38 +68,38 @@ class Particle {
   }
 }
 
-function init(){
+function init() {
   particlesArray = [];
-  let numberOfParticles = canvas.height*canvas.width/9000;
-  for(let i=0; i<numberOfParticles; i++){
-      let size = 1.25;
-      let x = (Math.random() * ((window.innerWidth - size*2) - size*2) + size*2);
-      let y = (Math.random() * ((window.innerHeight - size*2) - size*2) + size*2);
-      let directionX = Math.random()*3 - 1.5;
-      let directionY = Math.random()*3 - 1.5;
-      let color = "E62600";
-      
-      particlesArray.push(new Particle(x,y,directionX,directionY,size,color));
+  let numberOfParticles = canvas.height * canvas.width / 9000;
+  for (let i = 0; i < numberOfParticles; i++) {
+    let size = 1.25;
+    let x = (Math.random() * ((window.innerWidth - size * 2) - size * 2) + size * 2);
+    let y = (Math.random() * ((window.innerHeight - size * 2) - size * 2) + size * 2);
+    let directionX = Math.random() * 3 - 1.5;
+    let directionY = Math.random() * 3 - 1.5;
+    let color = "E62600";
+
+    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
   };
 }
-  
-  // animation loop
-function animate(){
-    requestAnimationFrame(animate);
-    ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-    
-    for(let i = 0; i < particlesArray.length; i++){
-      particlesArray[i].update();
-    }
+
+// animation loop
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+  for (let i = 0; i < particlesArray.length; i++) {
+    particlesArray[i].update();
+  }
 }
 
 // check if particles are close enough to draw line
-function connectparticles(){
-  for(let a = 0; a < particlesArray.length;a++){
-    for(let b = a; b < particlesArray.length;b++){
-      let distance = ( (particlesArray[a].x - particlesArray[b].x)*(particlesArray[a].x - particlesArray[b].x) + (particlesArray[a].y - particlesArray[b].y)*(particlesArray[a].y - particlesArray[b].y) );
-      if(distance < (canvas.width/10)*(canvas.height/10)){
-        ctx.strokeStyle= "rgba(255,204,204,1)"; //grey "rgba(240, 240, 240, 1)"
+function connectparticles() {
+  for (let a = 0; a < particlesArray.length; a++) {
+    for (let b = a; b < particlesArray.length; b++) {
+      let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x) + (particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+      if (distance < (canvas.width / 10) * (canvas.height / 10)) {
+        ctx.strokeStyle = "rgba(255,204,204,1)"; //grey "rgba(240, 240, 240, 1)"
         ctx.lineWidth = 0.25;
         ctx.beginPath();
         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -109,6 +109,6 @@ function connectparticles(){
     }
   }
 }
-  
-init(); 
+
+init();
 animate();

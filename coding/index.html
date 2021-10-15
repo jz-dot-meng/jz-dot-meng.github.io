@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/coding_main.css">
-    <script src="/js/hangman.js"></script>
-  </head>
 
-  <body onload="callWordnik()">
-    <header>
-      <h3><a href="/">@jz-dot-meng</a></h3>
-      <span>coding<b> :: learn by doing </b></span>
-      <nav>
-        <ul>
-          <li><a href="/coding/index.html">hangman</a></li>
-          <li><a href="/coding/memory.html">memory</a></li>
-          <li><a href="/coding/stroopeffect.html">stroop effect</a></li>
-          <li><a href="/coding/hashfunctions.html">sha-256</a></li>
-        </ul>
-      </nav>
-    </header>
-    
-    <div class='container'>
-        <h3>hangman</h3>
-        <p>guess the word</p>
-        <div id='unknownword'></div>
-        <div id='graphic'></br></br></br></br></br></br></br></div>
-        <div id='incorrectguesses'></br></div>
-        <form action='#' method='post' id='guessLetter' onsubmit="return checkletter()">
-        <input type='text' id='guess'>
-        <input type='submit' id='submit' value='guess letter'/>
-        </form>
-        <div id='error'></div>
-        <!-- would love to implement refreshing probability of guessing word after each guess --> 
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/coding_hangman.css">
+  <script src="/js/coding_hangman.js"></script>
+</head>
+
+<body onload="callWordnik()">
+  <header>
+    <h3><a href="/">@jz-dot-meng</a></h3>
+    <span>coding<b> :: learn by doing </b></span>
+    <nav>
+      <ul>
+        <li>
+          <div class="dropdown"><a>simple games</a>
+            <div class="dropdownContent">
+              <a href="/coding/index.html">hangman</a>
+              <a href="/coding/memory.html">memory</a>
+              <a href="/coding/stroopeffect.html">stroop effect</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown"><a>breakdowns</a>
+            <div class="dropdownContent">
+              <a href="/coding/hashfunctions.html">sha-256</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown"><a>creative visuals</a>
+            <div class="dropdownContent">
+              <a href="https://obscure-oasis-83886.herokuapp.com/">Dot Blockchain visualiser</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class='container'>
+    <h3>hangman</h3>
+    <p>guess the word</p>
+    <div id='unknownword'></div>
+    <div id='graphic'></br></br></br></br></br></br></br></div>
+    <div id='incorrectguesses'></br></div>
+    <form action='#' method='post' id='guessLetter' onsubmit="return checkletter()">
+      <input type='text' id='guess'>
+      <input type='submit' id='submit' value='guess letter' />
+    </form>
+    <div id='error'></div>
+    <!-- would love to implement refreshing probability of guessing word after each guess -->
+  </div>
+</body>
 
 </html>

@@ -1,48 +1,14 @@
-.choice {
-    display:flex;
-    float:left;
-    width:25%;
-}
-#nomatch{
-    justify-content: left;
-}
-#match{
-    justify-content: right;
-}
-button{
-    text-align: center;
+#error {
+    animation: fadeOut ease 4s;
 }
 
-.details{
-    display:flex;
-    float:left;
-    width:50%;
-}
-
-#freq{
-    justify-content: left;
-}
-
-#score{
-    justify-content: right;
-}
-
-#gameelements{
-    position:relative;
-    width:50%;
-}
-
-#display{
-    display:block;
-    text-align: center;
-    font-size: xxx-large;
-    padding: 2em;
-}
-
-#newgame{
-    clear:both;
-    width: 50%;
-    display: block;
+@keyframes fadeOut {
+    0% {
+        opacity:1;
+    }
+    100% {
+        opacity:0;
+    }
 }
 
 .dropdown {

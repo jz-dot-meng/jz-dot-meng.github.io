@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/greenfi_walletbalance.css">
 </head>
 
@@ -11,12 +12,12 @@
         <h3><a href="/">@jz-dot-meng</a></h3>
         <span>wallet balance<b> :: a simple api to check your crypto wallet balance</b></span>
         <nav>
-        <ul>
-          <li><a href="/greenfi/index.html">dca calculator</a></li>
-          <li><a href="/greenfi/walletbalance.html">wallet balance</a></li>
-          <li><a href="/greenfi/stakingrewards.html">polkadot rewards</a></li>
-        </ul>
-      </nav>
+            <ul>
+                <li><a href="/greenfi/index.html">dca calculator</a></li>
+                <li><a href="/greenfi/walletbalance.html">wallet balance</a></li>
+                <li><a href="/greenfi/stakingrewards.html">polkadot rewards</a></li>
+            </ul>
+        </nav>
     </header>
 
     <div id="container">
@@ -24,7 +25,8 @@
             <canvas id="piechart"></canvas>
         </div>
         <div>
-            <p>Display currency: <a href="#" id='aud' onclick="changeAUD()">AUD</a> <a href="#" id='usd' onclick="changeUSD()">USD</a></p>
+            <p>Display currency: <a href="#" id='aud' onclick="changeAUD()">AUD</a> <a href="#" id='usd'
+                    onclick="changeUSD()">USD</a></p>
         </div>
         <div>
             <table id="assetTable" style="visibility:hidden;">
@@ -42,13 +44,16 @@
     </br>
     <footer>
         <xx-small>
-          <p> In development: Node.js Express server currently interfacing with <a href="https://github.com/polkadot-js/api/">@polkadot/api</a> and <a href="https://github.com/stellar/js-stellar-sdk">js-stellar-sdk</a>, deployed on Heroku</p>
-          <p> Hopefully, future integration of more blockchain APIs coming soon!</p>
-         
+            <p> In development: Node.js Express server currently interfacing with <a
+                    href="https://github.com/polkadot-js/api/">@polkadot/api</a> and <a
+                    href="https://github.com/stellar/js-stellar-sdk">js-stellar-sdk</a>, as well as Algorand and Tezos
+                endpoint APIs, deployed on Heroku</p>
+            <p> Hopefully, future integration of more blockchain APIs coming soon!</p>
+
         </xx-small>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <script src="/js/wallet.js"></script>
+    <script src="/js/greenfi_wallet.js"></script>
 </body>
 
 </html>

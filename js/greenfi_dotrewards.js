@@ -104,6 +104,11 @@ async function retrieveRewards() {
         latestprice = priceJson['polkadot'][currency];
     }
     try {
+        // create loader
+        let loader1 = document.createElement('div');
+        loader1.setAttribute("id", "loaderOne");
+        loader1.setAttribute("class", 'loader');
+        document.getElementById('right').appendChild(loader1);
         let response = await fetch('https://rocky-beyond-27768.herokuapp.com/testpolkadot/rewards/' + address.value + "&currency=" + currency);
         if (response.ok) {
             let json = await response.json();
@@ -134,11 +139,6 @@ async function retrieveRewards() {
                     csv.setAttribute('onclick', "generatecsv()");
                     document.getElementById("container").appendChild(csv);
                 }
-                // create loader
-                let loader1 = document.createElement('div');
-                loader1.setAttribute("id", "loaderOne");
-                loader1.setAttribute("class", 'loader');
-                document.getElementById('right').appendChild(loader1);
                 // calculate avg, estimated apy
                 let avgCoin = totalCoin / dates.length;
                 let avgFiat = totalFiat / dates.length;
@@ -174,6 +174,7 @@ async function retrieveRewards() {
         }
 
     } catch (err) {
+        document.getElementById("loaderOne").style.display = "none";
         document.getElementById("errorMessage").innerHTML = "<p>Invalid input, or a server error</p>"
         address.value = "";
     }

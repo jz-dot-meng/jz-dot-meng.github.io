@@ -1,33 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/coding_memory.css">
-  </head>
 
-  <body>
-    <header>
-      <h3><a href="/">@jz-dot-meng</a></h3>
-      <span>coding<b> :: learn by doing </b></span>
-      <nav>
-        <ul>
-          <li><a href="/coding/index.html">hangman</a></li>
-          <li><a href="/coding/memory.html">memory</a></li>
-          <li><a href="/coding/stroopeffect.html">stroop effect</a></li>
-          <li><a href="/coding/hashfunctions.html">sha-256</a></li>
-        </ul>
-      </nav>
-    </header>
-    
-    <div class='container'>
-        <h3>memory:: in development</h3>
-        <p>how far can you go?</p>
-        <button id="control" onclick="startgame()">start game</button>
-        <div id='drawboard'></div>
-        <div id='score'></br></div>
-        <script src="/js/memory.js"></script>
-        <!-- memory percentile? --> 
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/coding_memory.css">
+</head>
+
+<body>
+  <header>
+    <h3><a href="/">@jz-dot-meng</a></h3>
+    <span>coding<b> :: learn by doing </b></span>
+    <nav>
+      <ul>
+        <li>
+          <div class="dropdown"><a>simple games</a>
+            <div class="dropdownContent">
+              <a href="/coding/index.html">hangman</a>
+              <a href="/coding/memory.html">memory</a>
+              <a href="/coding/stroopeffect.html">stroop effect</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown"><a>breakdowns</a>
+            <div class="dropdownContent">
+              <a href="/coding/hashfunctions.html">sha-256</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown"><a>creative visuals</a>
+            <div class="dropdownContent">
+              <a href="https://obscure-oasis-83886.herokuapp.com/">Dot Blockchain visualiser</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class='container'>
+    <h3>memory game</h3>
+    <p>how far can you go?</p>
+    <button id="control" onclick="startgame()">start game</button>
+    <div id='drawboard'></div>
+    <div id='score'></br></div>
+    <script src="/js/coding_memory.js"></script>
+    <!-- memory percentile? -->
+  </div>
+</body>
 
 </html>

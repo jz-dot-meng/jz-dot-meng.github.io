@@ -1,4 +1,4 @@
-const option = ["choose...", "Polkadot", "Stellar", "Algorand"];
+const option = ["choose...", "Polkadot", "Stellar", "Algorand", "Tezos"];
 
 let currency = 'aud';
 function changeAUD() {
@@ -92,6 +92,9 @@ function generateForm(item, rowcount) {
         case "3":
             address.addEventListener('focusout', algocreator(address, loader1, loader2, value, amount));
             break;
+        case "4":
+            address.addEventListener('focusout', tezoscreator(address, loader1, loader2, value, amount));
+            break;
     }
 
 }
@@ -131,6 +134,35 @@ function create(rowcount, row) {
     loader2.setAttribute("class", 'loader');
     loader2.style.display = "none";
     valueCell.appendChild(loader2);
+}
+
+function tezoscreator(address, loader1, loader2, value, amount) {
+    return async function () {
+        // add event listener
+        loader1.style.display = "block";
+        loader2.style.display = "block";
+        let response = await fetch("https://rocky-beyond-27768.herokuapp.com/testtezos/address/" + address.value)
+        if (response.ok) {
+            let json = await response.json();
+            if (!Object.keys(json).length) {
+                // ie if json is empty, indicating an error
+                address.value = "";
+            } else {
+                let numtokens = Number(json["Balance"]);
+                loader1.style.display = 'none';
+                amount.innerText = numtokens + " XTZ";
+
+                let gecko = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=tezos&vs_currencies=" + currency);
+                if (gecko.ok) {
+                    let jsonB = await gecko.json();
+                    loader2.style.display = "none";
+                    value.innerText = currency.toUpperCase() + "$" + Number(jsonB["tezos"][currency]) * numtokens;
+                    piechartData.push({ "coin": "XTZ", "value": (Number(jsonB["tezos"][currency]) * numtokens) });
+                    redrawPie();
+                }
+            }
+        }
+    }
 }
 
 function algocreator(address, loader1, loader2, value, amount) {
