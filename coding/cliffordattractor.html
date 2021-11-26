@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset="utf-8">
+    <title>clifford attractor</title>
+    <link rel='stylesheet' href='/css/main.css'>
+    <link rel='stylesheet' href='/css/coding_clifford.css'>
+</head>
+
+<body>
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>coding<b> :: learn by doing </b></span>
+        <nav>
+            <ul>
+                <li>
+                    <div class="dropdown"><a>simple games</a>
+                        <div class="dropdownContent">
+                            <a href="/coding/index.html">hangman</a>
+                            <a href="/coding/memory.html">memory</a>
+                            <a href="/coding/stroopeffect.html">stroop effect</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown"><a>breakdowns</a>
+                        <div class="dropdownContent">
+                            <a href="/coding/hashfunctions.html">sha-256</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown"><a>creative visuals</a>
+                        <div class="dropdownContent">
+                            <a href="https://obscure-oasis-83886.herokuapp.com/">dot blockchain visualiser</a>
+                            <a href="/coding/cliffordattractor.html">clifford attractor</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <h3>clifford attractor</h3>
+    <p>Use keys 1 - 8 to change control parameters, and 'A' and 'D' to notch down or up each param</p>
+    <div id='popup'>
+        <div id='popupContainer'>
+            <p id='popupMessage'></p>
+        </div>
+    </div>
+    <div class='control'>
+        <div id='cliffordControlHidden' style='display:none'>
+            <p>clifford variables <span class='smaller'><a onclick='show("cliffordControl")'>
+                        show
+                    </a></span></p>
+        </div>
+        <div id='cliffordControl'>
+            <p>clifford variables <span class='smaller'><a onclick='hide("cliffordControl")'>
+                        hide
+                    </a></span></p>
+            <div>
+                <label for='aSlider'>A: </label>
+                <input type="range" min='0' max='3' step="0.0001" id='aSlider' />
+                <span id='aDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='bSlider'>B: </label>
+                <input type="range" min='0' max='3' step="0.0001" id='bSlider' />
+                <span id='bDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='cSlider'>C: </label>
+                <input type="range" min='-1' max='2' step="0.0001" id='cSlider' />
+                <span id='cDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='dSlider'>D: </label>
+                <input type="range" min='-2.5' max='1.5' step="0.0001" id='dSlider' />
+                <span id='dDisplay' class='smaller'></span>
+            </div>
+        </div>
+        <div id='colourInitHidden' style='display:none'>
+            <p>colour variables<span class='smaller'><a onclick='show("colourInit")'>
+                        show
+                    </a></span></p>
+        </div>
+        <div id='colourInit'>
+            <p>colour variable<span class='smaller'><a onclick="hide('colourInit')">
+                        hide
+                    </a></span></p>
+            <div>
+                <label for='redSlider'>R: </label>
+                <input type="range" min='0' max='255' step="1" id='redSlider' />
+                <span id='redDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='greenSlider'>G: </label>
+                <input type="range" min='0' max='255' step="1" id='greenSlider' />
+                <span id='greenDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='blueSlider'>B: </label>
+                <input type="range" min='0' max='255' step="0.1" id='blueSlider' />
+                <span id='blueDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='rgradSlider'>(Rgrad): </label>
+                <input type="range" min='-100' max='100' step="0.1" id='rgradSlider' />
+                <span id='rgradDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='ggradSlider'>(Ggrad): </label>
+                <input type="range" min='-100' max='100' step="0.1" id='ggradSlider' />
+                <span id='ggradDisplay' class='smaller'></span>
+            </div>
+            <div>
+                <label for='bgradSlider'>(Bgrad): </label>
+                <input type="range" min='-100' max='100' step="0.1" id='bgradSlider' />
+                <span id='bgradDisplay' class='smaller'></span>
+            </div>
+        </div>
+        <div id='particleControlHidden' style='display:none'>
+            <p>particle variable<span class='smaller'><a onclick='show("particleControl")'>
+                        show
+                    </a></span></p>
+        </div>
+        <div id='particleControl'>
+            <p>particle variable<span class='smaller'><a onclick="hide('particleControl')">
+                        hide
+                    </a></span></p>
+            <div>
+                <label for='particleSlider'>Particles </label>
+                <input type="range" min='2000' max='200000' step="10" id='particleSlider' />
+                <span id='particleDisplay' class='smaller'></span>
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
+    <canvas id='canvas1'></canvas>
+</body>
+<script src='/js/clifford.js'></script>
+
+</html>
