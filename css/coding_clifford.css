@@ -1,3 +1,19 @@
+.dropdown {
+            display: inline-block;
+            position: relative;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+.dropdown a {
+            text-decoration: none;
+}
+
+a {
+            cursor: pointer;
+}
+
 .dropdownContent {
             display: none;
             position: absolute;
