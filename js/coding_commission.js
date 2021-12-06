@@ -22,12 +22,12 @@ const titleConfig = (tooltipItems) => {
     if (parseInt(tooltipItems[0].label) > reserve.value) {
         let valueover = new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: 0 }).format(tooltipItems[0].label - reserve.value);
         let percentover = ((tooltipItems[0].label - reserve.value) * 100 / reserve.value).toFixed(3);
-        labelTitle += ' : ' + valueover + ' or ' + percentover + '% over reserve';
+        labelTitle += ' : ' + valueover + ' / ' + percentover + '% over reserve';
     }
     else if (parseInt(tooltipItems[0].label) < reserve.value) {
         let valueunder = new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: 0 }).format(reserve.value - tooltipItems[0].label);
         let percentunder = ((reserve.value - tooltipItems[0].label) * 100 / reserve.value).toFixed(3);
-        labelTitle += ' : ' + valueunder + ' or ' + percentunder + '% under reserve';
+        labelTitle += ' : ' + valueunder + ' / ' + percentunder + '% under reserve';
     }
     return labelTitle;
 }
