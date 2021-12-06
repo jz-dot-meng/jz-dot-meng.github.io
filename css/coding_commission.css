@@ -1,0 +1,22 @@
+label {
+    width: 250px;
+}
+
+.input-group-text{
+    /* box-sizing: border-box; */
+    display: flex;
+    float:left;
+    align-items: center;
+    padding:.25rem .25rem;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    width:20px;    
+    justify-content: center;
+}
