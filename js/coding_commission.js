@@ -1,5 +1,4 @@
-
-
+// ******* HTML Elements ********
 const reserve = document.getElementById("reserve");
 reserve.addEventListener('change', () => {
     recalculate();
@@ -16,7 +15,7 @@ const flexabovecommission = document.getElementById('flexabovecommission');
 flexabovecommission.addEventListener('change', () => {
     recalculate();
 })
-
+// ******* Chart.js Functions and Elements ********
 const titleConfig = (tooltipItems) => {
     // HACK - use the label for the first set
     let labelTitle = new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: 0 }).format(tooltipItems[0].label);
