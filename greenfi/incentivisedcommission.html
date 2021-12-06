@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>incentivised commission</title>
+    <link rel='stylesheet' type="text/css" href='/css/main.css'>
+    <link rel='stylesheet' type="text/css" href='/css/coding_commission.css'>
+</head>
+
+<body>
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>incentivised commission<b> :: REA risk-reward </b></span>
+    </header>
+
+    <div id='container'>
+        <canvas id="graph" width="800" height="400"></canvas>
+        <div id='controls'>
+            <div style='display:flex'>
+                <label for='reserve'>Seller reserve price</label>
+                <div style="display:flex">
+                    <span class='input-group-text' id='dollarReserve'>$</span>
+                    <input id='reserve' type="number">
+                </div>
+            </div>
+            <h3>flat rate commission structure</h3>
+            <div style='display: flex;'>
+                <label for='flatrate'>Flat rate commission</label>
+                <div style='display:flex'>
+                    <input id='flatrate' type="number" min='0' max='10' step='0.05'>
+                    <span style='float:right' class='input-group-text' id='dollarReserve'>%</span>
+                </div>
+            </div>
+            <h3>incentivised commission structure</h3>
+            <div style='display: flex;'>
+                <label for='flexbasecommission'>Base rate up to reserve</label>
+                <div style='display:flex'>
+                    <input id='flexbasecommission' type="number" min='0' max='10' step='0.05'>
+                    <span style='float:right' class='input-group-text' id='dollarReserve'>%</span>
+                </div>
+            </div>
+            <div style='display: flex;'>
+                <label for='flexabovecommission'>Incentive rate above reserve price</label>
+                <div style='display:flex'>
+                    <input id='flexabovecommission' type="number" min='0' max='10' step='0.05'>
+                    <span style='float:right' class='input-group-text' id='dollarReserve'>%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script src='/js/coding_commission.js'></script>
+
+</html>
