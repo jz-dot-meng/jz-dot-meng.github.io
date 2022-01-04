@@ -207,10 +207,19 @@ function xlmcreator(address, loader1, loader2, value, amount) {
                 let tokenArr = json["Balances"];
                 loader1.style.display = 'none';
                 for (let i = 0; i < tokenArr.length; i++) {
-                    let tokenDiv = document.createElement("div");
-                    tokenDiv.setAttribute("id", "xlmToken" + i);
-                    amount.appendChild(tokenDiv);
-                    tokenDiv.innerText = tokenArr[i]["Balance"] + " " + tokenArr[i]["Asset_code"];
+                    if (tokenArr[i]["Asset_type"] !== "liquidity_pool_shares") {
+                        let tokenDiv = document.createElement("div");
+                        tokenDiv.setAttribute("id", "xlmToken" + i);
+                        amount.appendChild(tokenDiv);
+                        tokenDiv.innerText = Number(tokenArr[i]["Balance"]).toFixed(6) + " " + tokenArr[i]["Asset_code"];
+                    } else {
+                        for (let j = 0; j < tokenArr[i]["Current_pooled_asset"].length; j++) {
+                            let tokenDiv = document.createElement("div");
+                            tokenDiv.setAttribute("id", "xlmTokenLP" + i + "_" + j);
+                            amount.appendChild(tokenDiv);
+                            tokenDiv.innerText = Number(tokenArr[i]["Current_pooled_asset"][j]["Balance"]).toFixed(6) + " " + tokenArr[i]["Current_pooled_asset"][j]["Asset_code"] + " " + tokenArr[i]["Liquidity_pool"] + "-LP";
+                        }
+                    }
                 }
 
                 let gecko = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=stellar&vs_currencies=" + currency);
@@ -218,20 +227,39 @@ function xlmcreator(address, loader1, loader2, value, amount) {
                     let jsonB = await gecko.json();
                     loader2.style.display = "none";
                     for (let i = 0; i < tokenArr.length; i++) {
-                        let tokenValDiv = document.createElement('div');
-                        tokenValDiv.setAttribute("id", 'xlmValToken' + i);
-                        value.appendChild(tokenValDiv);
-                        // if not xlm, retrieve xlm conversion
-                        if (tokenArr[i]["Asset_code"] == "XLM") {
-                            tokenValDiv.innerText = currency.toUpperCase() + "$" + (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"]));
-                            piechartData.push({ "coin": tokenArr[i]["Asset_code"], "value": (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"])) });
-                            redrawPie();
-                        } else if (tokenArr[i]["Asset_code"] != "XLM" && tokenArr[i]["Latest_bid_to_xlm"] != "not_available") {
-                            tokenValDiv.innerText = currency.toUpperCase() + "$" + (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"]) * Number(tokenArr[i]["Latest_bid_to_xlm"]))
-                            piechartData.push({ "coin": tokenArr[i]["Asset_code"], "value": (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"]) * Number(tokenArr[i]["Latest_bid_to_xlm"])) });
-                            redrawPie();
+                        if (tokenArr[i]["Asset_type"] !== "liquidity_pool_shares") {
+                            let tokenValDiv = document.createElement('div');
+                            tokenValDiv.setAttribute("id", 'xlmValToken' + i);
+                            value.appendChild(tokenValDiv);
+                            // if not xlm, retrieve xlm conversion
+                            if (tokenArr[i]["Asset_code"] == "XLM") {
+                                tokenValDiv.innerText = currency.toUpperCase() + "$" + (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"])).toFixed(2);
+                                piechartData.push({ "coin": tokenArr[i]["Asset_code"], "value": (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"])).toFixed(2) });
+                                redrawPie();
+                            } else if (tokenArr[i]["Asset_code"] != "XLM" && tokenArr[i]["Latest_bid_to_xlm"] != "not_available") {
+                                tokenValDiv.innerText = currency.toUpperCase() + "$" + (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"]) * Number(tokenArr[i]["Latest_bid_to_xlm"])).toFixed(2)
+                                piechartData.push({ "coin": tokenArr[i]["Asset_code"], "value": (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Balance"]) * Number(tokenArr[i]["Latest_bid_to_xlm"])).toFixed(2) });
+                                redrawPie();
+                            } else {
+                                tokenValDiv.innerText = "Token conversion to XLM not found, unable to provide fiat value";
+                            }
                         } else {
-                            tokenValDiv.innerText = "Token conversion to XLM not found, unable to provide fiat value";
+                            for (let j = 0; j < tokenArr[i]["Current_pooled_asset"].length; j++) {
+                                let tokenValDiv = document.createElement('div');
+                                tokenValDiv.setAttribute("id", 'xlmValTokenLP' + i + "_" + j);
+                                value.appendChild(tokenValDiv);
+                                if (tokenArr[i]["Current_pooled_asset"][j]["Asset_code"] == "XLM") {
+                                    tokenValDiv.innerText = currency.toUpperCase() + "$" + (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Current_pooled_asset"][j]["Balance"])).toFixed(2);
+                                    piechartData.push({ "coin": tokenArr[i]["Current_pooled_asset"][j]["Asset_code"] + " LP", "value": (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Current_pooled_asset"][j]["Balance"])).toFixed(2) });
+                                    redrawPie();
+                                } else if (tokenArr[i]["Asset_code"] != "XLM" && tokenArr[i]["Latest_bid_to_xlm"] != "not_available") {
+                                    tokenValDiv.innerText = currency.toUpperCase() + "$" + (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Current_pooled_asset"][j]["Balance"]) * Number(tokenArr[i]["Current_pooled_asset"][j]["Latest_bid_to_xlm"])).toFixed(2)
+                                    piechartData.push({ "coin": tokenArr[i]["Current_pooled_asset"][j]["Asset_code"] + " LP", "value": (Number(jsonB["stellar"][currency]) * Number(tokenArr[i]["Current_pooled_asset"][j]["Balance"]) * Number(tokenArr[i]["Current_pooled_asset"][j]["Latest_bid_to_xlm"])).toFixed(2) });
+                                    redrawPie();
+                                } else {
+                                    tokenValDiv.innerText = "Token conversion to XLM not found, unable to provide fiat value";
+                                }
+                            }
                         }
                     }
                 }
