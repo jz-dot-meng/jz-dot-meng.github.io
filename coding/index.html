@@ -4,49 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/common/coding_navbar.css">
   <link rel="stylesheet" type="text/css" href="/css/coding_hangman.css">
-  <script src="/js/coding_hangman.js"></script>
 </head>
 
 <body onload="callWordnik()">
   <header>
     <h3><a href="/">@jz-dot-meng</a></h3>
     <span>coding<b> :: learn by doing </b></span>
-    <nav>
-      <ul>
-        <li>
-          <div class="dropdown"><a>simple games</a>
-            <div class="dropdownContent">
-              <a href="/coding/index.html">hangman</a>
-              <a href="/coding/memory.html">memory</a>
-              <a href="/coding/stroopeffect.html">stroop effect</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="dropdown"><a>breakdowns</a>
-            <div class="dropdownContent">
-              <a href="/coding/hashfunctions.html">sha-256</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="dropdown"><a>creative visuals</a>
-            <div class="dropdownContent">
-                            <a href="https://obscure-oasis-83886.herokuapp.com/">dot blockchain visualiser</a>
-                            <a href="/coding/cliffordattractor.html">clifford attractor</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="dropdown"><a>smart contracts</a>
-            <div class="dropdownContent">
-              <a href="https://jz-dot-meng-sc1.herokuapp.com/">Stroop v2</a>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <nav id='navbar'></nav>
   </header>
 
   <div class='container'>
@@ -63,5 +29,7 @@
     <!-- would love to implement refreshing probability of guessing word after each guess -->
   </div>
 </body>
+<script src='/js/components/coding_navbar.js'></script>
+<script src="/js/coding_hangman.js"></script>
 
 </html>

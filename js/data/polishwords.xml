@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wordlist>
+    <word ref='store'> 
+        <nom>sklep</nom>
+        <gen>sklepu</gen>
+        <dat>sklepowi</dat>
+        <acc>sklep</acc>
+        <ins>sklepem</ins>
+        <loc>sklepie</loc>
+        <voc>sklepie</voc>
+    </word>
+    <word ref='girl'>
+        <nom>dziewczyna</nom>
+        <gen>dziewczyny</gen>
+        <dat>dziewczynie</dat>
+        <acc>dziewczynę</acc>
+        <ins>dziewczyną</ins>
+        <loc>dziewczynie</loc>
+        <voc>dziewczyno</voc>
+    </word>
+    <word ref='car'>
+        <nom>samochód</nom>
+        <gen>samochodu</gen>
+        <dat>samochodowi</dat>
+        <acc>samochód</acc>
+        <ins>samochodem</ins>
+        <loc>samochodzie</loc>
+        <voc>samochodzie</voc>
+    </word>
+    <word ref='cat'>
+        <nom>kot</nom>
+        <gen>kota</gen>
+        <dat>kotu</dat>
+        <acc>kota</acc>
+        <ins>kotem</ins>
+        <loc>kocie</loc>
+        <voc>kocie</voc>
+    </word>
+    <word ref='milk'>
+        <nom>mleko</nom>
+        <gen>mleka</gen>
+        <dat>mleku</dat>
+        <acc>mleko</acc>
+        <ins>mlekiem</ins>
+        <loc>mleku</loc>
+        <voc>mleko</voc>
+    </word>
+    <word ref='boss'>
+        <nom>szef</nom>
+        <gen>szefa</gen>
+        <dat>szefowi</dat>
+        <acc>szefa</acc>
+        <ins>szefem</ins>
+        <loc>szefie</loc>
+        <voc>szefie</voc>
+    </word>
+    <word ref='song'>
+        <nom>piosenka</nom>
+        <gen>piosenki</gen>
+        <dat>piosence</dat>
+        <acc>piosenkę</acc>
+        <ins>piosenką</ins>
+        <loc>piosence</loc>
+        <voc>piosenko</voc>
+    </word>
+    <word ref='house'>
+        <nom>dom</nom>
+        <gen>domu</gen>
+        <dat>domowi</dat>
+        <acc>dom</acc>
+        <ins>domem</ins>
+        <loc>domu</loc>
+        <voc>domie</voc>
+    </word>
+    <word ref='afternoon'>
+        <nom>południe</nom>
+        <gen>południa</gen>
+        <dat>południu</dat>
+        <acc>południe</acc>
+        <ins>południem</ins>
+        <loc>południu</loc>
+        <voc>południe</voc>
+    </word>  
+    <word ref='street'>
+        <nom>ulica</nom>
+        <gen>ulicy</gen>
+        <dat>ulicy</dat>
+        <acc>ulicę</acc>
+        <ins>ulicą</ins>
+        <loc>ulicy</loc>
+        <voc>ulico</voc>
+    </word>  
+    <word ref='night'>
+        <nom>noc</nom>
+        <gen>nocy</gen>
+        <dat>nocy</dat>
+        <acc>noc</acc>
+        <ins>nocą</ins>
+        <loc>nocy</loc>
+        <voc>nocy</voc>
+    </word> 
+    <word ref='table'>
+        <nom>stół</nom>
+        <gen>stołu</gen>
+        <dat>stołowi</dat>
+        <acc>stół</acc>
+        <ins>stołem</ins>
+        <loc>stole</loc>
+        <voc>stole</voc>
+    </word>  
+    <word ref='work'>
+        <nom>praca</nom>
+        <gen>pracy</gen>
+        <dat>pracy</dat>
+        <acc>pracę</acc>
+        <ins>pracą</ins>
+        <loc>pracy</loc>
+        <voc>praco</voc>
+    </word> 
+    <word ref='cinema'>
+        <nom>kino</nom>
+        <gen>kina</gen>
+        <dat>kinu</dat>
+        <acc>kino</acc>
+        <ins>kino</ins>
+        <loc>kinu</loc>
+        <voc>kinom</voc>
+    </word>
+    <word ref='time'>
+        <nom>czas</nom>
+        <gen>czasu</gen>
+        <dat>czasowi</dat>
+        <acc>czas</acc>
+        <ins>czasem</ins>
+        <loc>czasie</loc>
+        <voc>czasie</voc>
+    </word>       
+    <word ref='friend-m'>
+        <nom>przyjaciel</nom>
+        <gen>przyjaciela</gen>
+        <dat>przyjacielowi</dat>
+        <acc>przyjaciela</acc>
+        <ins>przyjacielem</ins>
+        <loc>przyjacielu</loc>
+        <voc>przyjacielu</voc>
+    </word>    
+    <word ref='friend-f'>
+        <nom>przyjaciółka</nom>
+        <gen>przyjaciółki</gen>
+        <dat>przyjaciółce</dat>
+        <acc>przyjaciółkę</acc>
+        <ins>przyjaciółką</ins>
+        <loc>przyjaciółce</loc>
+        <voc>przyjaciółko</voc>
+    </word>  
+    <word ref='doctor-f'>
+        <nom>lekarka</nom>
+        <gen>lekarki</gen>
+        <dat>lekarce</dat>
+        <acc>lekarkę</acc>
+        <ins>lekarką</ins>
+        <loc>lekarce</loc>
+        <voc>lekarko</voc>
+    </word>   
+    <word ref='future'>
+        <nom>przyszłość</nom>
+        <gen>przyszłości</gen>
+        <dat>przyszłości</dat>
+        <acc>przyszłość</acc>
+        <ins>przyszłością</ins>
+        <loc>przyszłości</loc>
+        <voc>przyszłości</voc>
+    </word>  
+    <word ref='sea'>
+        <nom>morze</nom>
+        <gen>morza</gen>
+        <dat>morzu</dat>
+        <acc>morze</acc>
+        <ins>morzem</ins>
+        <loc>morzu</loc>
+        <voc>morze</voc>
+    </word>
+    <word ref='child'>
+        <nom>dziecko</nom>
+        <gen>dziecka</gen>
+        <dat>dziecku</dat>
+        <acc>dziecko</acc>
+        <ins>dzieckiem</ins>
+        <loc>dziecku</loc>
+        <voc>dziecko</voc>
+    </word>
+    <word ref='hour'>
+        <nom>godzina</nom>
+        <gen>godziny</gen>
+        <dat>godzinie</dat>
+        <acc>godzinę</acc>
+        <ins>godziną</ins>
+        <loc>godzinie</loc>
+        <voc>godzino</voc>
+    </word>
+    <word ref='meeting'>
+        <nom>spotkanie</nom>
+        <gen>spotkania</gen>
+        <dat>spotkaniu</dat>
+        <acc>spotkanie</acc>
+        <ins>spotkaniem</ins>
+        <loc>spotkaniu</loc>
+        <voc>spotkanie</voc>
+    </word>
+    <word ref='book'>
+        <nom>książka</nom>
+        <gen>książki</gen>
+        <dat>książce</dat>
+        <acc>książkę</acc>
+        <ins>książką</ins>
+        <loc>książce</loc>
+        <voc>książko</voc>
+    </word>
+    <word ref='day'>
+        <nom>dzień</nom>
+        <gen>dnia</gen>
+        <dat>dniowi</dat>
+        <acc>dzień</acc>
+        <ins>dniem</ins>
+        <loc>dniu</loc>
+        <voc>dniu</voc>
+    </word>
+    <word ref='beer'>
+        <nom>piwo</nom>
+        <gen>piwa</gen>
+        <dat>piwu</dat>
+        <acc>piwo</acc>
+        <ins>piwem</ins>
+        <loc>piwie</loc>
+        <voc>piwo</voc>
+    </word>
+    <word ref='mother'>
+        <nom>mama</nom>
+        <gen>mamy</gen>
+        <dat>mamie</dat>
+        <acc>mamę</acc>
+        <ins>mamą</ins>
+        <loc>mamie</loc>
+        <voc>mamo</voc>
+    </word>
+    <word ref='colleague-m'>
+        <nom>kolega</nom>
+        <gen>kolegi</gen>
+        <dat>koledze</dat>
+        <acc>kolegę</acc>
+        <ins>kolegą</ins>
+        <loc>koledze</loc>
+        <voc>kolego</voc>
+    </word>
+    <word ref='radio'>
+        <nom>radio</nom>
+        <gen>radia</gen>
+        <dat>radiu</dat>
+        <acc>radio</acc>
+        <ins>radiem</ins>
+        <loc>radiu</loc>
+        <voc>radio</voc>
+    </word>
+    <word ref='dog'>
+        <nom>pies</nom>
+        <gen>psa</gen>
+        <dat>psu</dat>
+        <acc>psa</acc>
+        <ins>psem</ins>
+        <loc>psie</loc>
+        <voc>psie</voc>
+    </word>
+    <word ref='music'>
+        <nom>muzyka</nom>
+        <gen>muzyki</gen>
+        <dat>muzyce</dat>
+        <acc>muzykę</acc>
+        <ins>muzyką</ins>
+        <loc>muzyce</loc>
+        <voc>muzyko</voc>
+    </word>
+    <word ref='school'>
+        <nom>szkoła</nom>
+        <gen>szkoły</gen>
+        <dat>szkole</dat>
+        <acc>szkołę</acc>
+        <ins>szkołą</ins>
+        <loc>szkole</loc>
+        <voc>szkoło</voc>
+    </word>
+    <word ref='man'>
+        <nom>człowiek</nom>
+        <gen>człowieka</gen>
+        <dat>człowiekowi</dat>
+        <acc>człowieka</acc>
+        <ins>człowiekiem</ins>
+        <loc>człowieku</loc>
+        <voc>człowieku</voc>
+    </word>
+</wordlist>

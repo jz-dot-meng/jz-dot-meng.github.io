@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navelements>
+    <dropdown name='simple games'>
+        <page title='hangman' link='/coding/index.html'/>
+        <page title='memory' link='/coding/memory.html'/>
+        <page title='stroop effect' link='/coding/stroopeffect.html'/>
+        <page title='polish cases' link='/coding/cases.html'/>
+    </dropdown>
+    <dropdown name='breakdowns'>
+        <page title='sha-256' link='/coding/hashfunctions.html'/>
+    </dropdown>
+    <dropdown name='creative visuals'>
+        <page title='dot blockchain visualiser' link='https://obscure-oasis-83886.herokuapp.com/'/>
+        <page title='clifford attractor' link='/coding/cliffordattractor.html'/>
+    </dropdown>
+    <dropdown name='smart contracts'>
+        <page title='stroop v2' link='https://jz-dot-meng-sc1.herokuapp.com/'/>
+    </dropdown>
+</navelements>

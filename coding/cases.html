@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/coding_navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/coding_cases.css">
+</head>
+
+<body>
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>coding<b> :: learn by doing </b></span>
+        <nav id='navbar'></nav>
+    </header>
+
+    <div id='container'>
+        <h3>polish cases</h3>
+        <p>choose the correct case for the sentence</p>
+        <div id='display'>
+            <p id='polish'></p>
+            <p id='translation'></p>
+        </div>
+        <div id='choices'></div>
+        <div id='hint'>Hint
+            <span id='tooltip' class='tooltipHint'></span>
+        </div>
+        <div id='next'>
+            <button onclick=newWord()>Next</button>
+        </div>
+
+    </div>
+</body>
+<script src='/js/components/coding_navbar.js'></script>
+<script src='/js/coding_cases.js'></script>
+
+</html>

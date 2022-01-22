@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sentences>
+    <nom>
+        <sentence ref='girl' hint='to jest X'>
+            <disp>To jest moja _____</disp>
+            <trans>This is my girlfriend</trans>
+        </sentence>
+        <sentence ref='mother' hint='kto? co?'>
+            <disp>Moja _____ pomaga dziecku</disp>
+            <trans>My mother is helping the child</trans>
+        </sentence>
+        <sentence ref='book' hint='kto? co?'>
+            <disp>Ta nowa _____ jest bardzo interesująca</disp>
+            <trans>This book is very interesting</trans>
+        </sentence>
+        <sentence ref='school' hint='kto? co?'>
+            <disp>_____ jest nudna</disp>
+            <trans>School is boring</trans>
+        </sentence> 
+        <sentence ref='friend-m' hint='to jest X'>
+            <disp>Mój kuzyn to mój _____</disp>
+            <trans>My cousin is my friend</trans>
+        </sentence>
+    </nom>
+    <acc>
+        <sentence ref='song' hint='direct object (co?)'>
+            <disp>Bożena śpiewa _____</disp>
+            <trans>Bożena is singing a song</trans>
+        </sentence>
+        <sentence ref='time' hint='direct object (co?)'>
+            <disp>Chętnie spędzam wolny _____ ze moim przyjacielem</disp>
+            <trans>I like to spend my free time with my friend</trans>
+        </sentence>
+        <sentence ref='hour' hint='temporal/spatial phrase'>
+            <disp>Za _____ mam spotkanie</disp>
+            <trans>I have a meeting within an hour</trans>
+        </sentence>
+        <sentence ref='day' hint='temporal/spatial phrase'>
+            <disp>Ona pracuje cały _____</disp>
+            <trans>She works all day</trans>
+        </sentence>
+        <sentence ref='meeting' hint='przez/po/na (acc motion preposition)'>
+            <disp>Idę na _____</disp>
+            <trans>I'm going to a meeting</trans>
+        </sentence>
+        <sentence ref='beer' hint='przez/po/na (acc motion preposition)'>
+            <disp>Idę po _____</disp>
+            <trans>I'm going for a beer</trans>
+        </sentence>
+        <sentence ref='night' hint='temporal/spatial phrase'>
+            <disp>Spała calą _____</disp>
+            <trans>She slept all night</trans>
+        </sentence>
+        <sentence ref='store' hint='przez/po/na (acc motion preposition)'>
+            <disp>Przerobili stary dom w mojej okolicy na _____ z serami</disp>
+            <trans>They turned an old house in my neighborhood into a cheese shop</trans>
+        </sentence>
+        <sentence ref='book' hint='direct object (co?)'>
+            <disp>Dziecko czyta _____</disp>
+            <trans>The child reads a book</trans>
+        </sentence>
+        <sentence ref='house' hint='direct object (co?)'>
+            <disp>Kupiliśmy nowy _____</disp>
+            <trans>We bought a new house</trans>
+        </sentence>
+    </acc>
+    <gen>
+        <sentence ref='milk' hint='object in negation'>
+            <disp>On nie pije _____</disp>
+            <trans>He doesn't drink milk</trans>
+        </sentence>
+        <sentence ref='colleague-m' hint='object in negation'>
+            <disp>Nie lubię tego _____</disp>
+            <trans>I don't like this colleague</trans>
+        </sentence>
+        <sentence ref='beer' hint='object in negation'>
+            <disp>Nie piję _____</disp>
+            <trans>I don't drink beer</trans>
+        </sentence>
+        <sentence ref='cat' hint='ownership'>
+            <disp>Mleko _____ jest ciepłe</disp>
+            <trans>The cat's milk is warm</trans>
+        </sentence>
+        <sentence ref='colleague-m' hint='ownership'>
+            <disp>To jest ołówek mojego _____</disp>
+            <trans>This is my colleague's pencil</trans>
+        </sentence>
+        <sentence ref='house' hint='do/bez/dla (gen preposition)'>
+            <disp>Kilka razy poszła do tamtego _____</disp>
+            <trans>She went to the house several times</trans>
+        </sentence>
+        <sentence ref='store' hint='do/bez/dla (gen preposition)'>
+            <disp>Po pracy poszła do _____</disp>
+            <trans>After work she went to the store</trans>
+        </sentence>  
+        <sentence ref='cinema' hint='do/bez/dla (gen preposition)'>
+            <disp>Po pracy poszła do _____</disp>
+            <trans>After work she went to the cinema</trans>
+        </sentence>
+        <sentence ref='mother' hint='ownership'>
+            <disp>Torba _____ leży na podłodze</disp>
+            <trans>My mother's bag is laying on the floor</trans>
+        </sentence>
+        <sentence ref='radio' hint='(gen verb)'>
+            <disp>Słycham _____</disp>
+            <trans>I listen to the radio</trans>
+        </sentence>
+    </gen>
+    <ins>
+        <sentence ref='car' hint='tool/means'>
+            <disp>Basia jedzie _____</disp>
+            <trans>Basia is driving a car</trans>
+        </sentence>
+        <sentence ref='friend-m' hint='with (z kims?)'>
+            <disp>Chętnie spędzam wolny czas ze moim _____</disp>
+            <trans>I like to spend my free time with my friend</trans>
+        </sentence>
+        <sentence ref='friend-f' hint='with (z kims?)'>
+            <disp>Chętnie spędzam wolny czas ze moim _____</disp>
+            <trans>I like to spend my free time with my friend</trans>
+        </sentence> 
+        <sentence ref='colleague-m' hint='with (z kims?)'>
+            <disp>Mieszkam z _____ i z psem</disp>
+            <trans>I live with a colleague and a dog</trans>
+        </sentence> 
+        <sentence ref='dog' hint='with (z kims?)'>
+            <disp>Mieszkam z kolegą i z _____</disp>
+            <trans>I live with a colleague and a dog</trans>
+        </sentence>
+        <sentence ref='milk' hint='with (z kims?)'>
+            <disp>Lubię kawę z _____</disp>
+            <trans>I like coffee with milk</trans>
+        </sentence>
+        <sentence ref='house' hint='nad/przed/pod (ins prepositions)'>
+            <disp>On stoi przed _____</disp>
+            <trans>He's standing in front of the house</trans>
+        </sentence>
+        <sentence ref='sea' hint='nad/przed/pod (ins preposition)'>
+            <disp>Mieszkam nad _____</disp>
+            <trans>I live by the sea</trans>
+        </sentence>  
+        <sentence ref='doctor-f' hint='zostaç/interesowaç się/byç'>
+            <disp>Chciałbym w przyszłości zostać _____</disp>
+            <trans>I would like to become a doctor in the future</trans>
+        </sentence>  
+        <sentence ref='music' hint='zostaç/interesowaç się/byç'>
+            <disp>Interesuję się _____</disp>
+            <trans>I'm interested in music</trans>
+        </sentence>  
+    </ins>
+    <dat>
+        <sentence ref='cat' hint='to whom the action (komu? czemu?)'>
+            <disp>Basia daje _____ mleko</disp>
+            <trans>Basia gives milk to the cat</trans>
+        </sentence>
+        <sentence ref='friend-m' hint='to whom the action (komu? czemu?)'>
+            <disp>Przesyłem _____ pocztą</disp>
+            <trans>I sent my friend the letter</trans>
+        </sentence>
+        <sentence ref='friend-f' hint='to whom the action (komu? czemu?)'>
+            <disp>Przesyłem _____ pocztą</disp>
+            <trans>I sent my friend the letter</trans>
+        </sentence>
+        <sentence ref='child' hint='to whom the action (komu? czemu?)'>
+            <disp>Opowiedzieł _____ ciekawe historie</disp>
+            <trans>He told the child exciting stories</trans>
+        </sentence>
+    </dat>
+    <loc>
+        <sentence ref='store' hint='at (loc preposition)'>
+            <disp>Jestem w _____</disp>
+            <trans>I am at the store</trans>
+        </sentence>
+        <sentence ref='girl' hint='about (o kim?)'>
+            <disp>Chłopak myśli o _____</disp>
+            <trans>The boy is thinking about the girl</trans>
+        </sentence>
+        <sentence ref='friend-m' hint='about (o kim?)'>
+            <disp>Ona często myśli o swoim _____</disp>
+            <trans>She often thinks about her friend</trans>
+        </sentence>
+        <sentence ref='house' hint='at (loc preposition)'>
+            <disp>Tom powiedział, że był w _____ w noc popełnienia morderstwa.</disp>
+            <trans>Tom said he was at home on the night of the murder.</trans>
+        </sentence>
+        <sentence ref='afternoon' hint='in/after (loc preposition)'>
+            <disp>Damy wywiad po _____</disp>
+            <trans>We'll give an interview in the afternoon</trans>
+        </sentence>
+        <sentence ref='street' hint='on (loc preposition)'>
+            <disp>Ona mieszka przy _____ Chopina</disp>
+            <trans>She lives on Chopin Street</trans>
+        </sentence>
+        <sentence ref='table' hint='on (loc preposition)'>
+            <disp>Ona siedzi przy _____ i je</disp>
+            <trans>She sits at the table and eats</trans>
+        </sentence>      
+        <sentence ref='work' hint='after (loc preposition)'>
+            <disp>Po _____ poszła do kina</disp>
+            <trans>After work she went to the cinema</trans>
+        </sentence>   
+        <sentence ref='future' hint='in (loc preposition)'>
+            <disp>Chciałbym w _____ zostać lekarką</disp>
+            <trans>I would like to become a doctor in the future</trans>
+        </sentence>  
+    </loc>
+    <voc>
+        <sentence ref='boss' hint='title'>
+            <disp>Hej _____, co mamy robić?</disp>
+            <trans>Hey boss, what should we do?</trans>
+        </sentence>
+        <sentence ref='man' hint='title'>
+            <disp>Co robisz, _____</disp>
+            <trans>What are you doing, man?</trans>
+        </sentence>
+        <sentence ref='child' hint='title'>
+            <disp>Chodż na obiad, _____!</disp>
+            <trans>Come to dinner, child!</trans>
+        </sentence>
+    </voc>
+</sentences>
