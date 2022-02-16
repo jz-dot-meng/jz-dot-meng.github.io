@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/common/coding_navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/coding_maketen.css">
+</head>
+
+<body>
+    <header>
+        <h3><a href="/">@jz-dot-meng</a></h3>
+        <span>coding<b> :: learn by doing </b></span>
+        <nav id='navbar'></nav>
+    </header>
+
+    <div id='container'>
+        <h3>make 10</h3>
+        <p>using the 4 digits, create a mathematical expression that equals 10</p>
+        <p>score 7 or more and i'll <a href='https://carbonneutral.com.au/'>donate to plant a tree</a> on your behalf
+        </p>
+        <div id='gameelements' style='visibility: hidden;'>
+            <div id='remainingtime' class='details'>Remaining time:</div>
+            <div class='details'>
+                <div id='skips'>Skips:</div>
+                <div id='score'>Score:</div>
+            </div>
+            <div id="display"></div>
+        </div>
+        <div id='controls'>
+            <input id='userIn' type='text' placeholder="Type your expression here..." style='visibility:hidden' />
+            <button id='skip' onclick='skip()' style='visibility:hidden'>Skip</button>
+            <button id="newgame" onclick="newgame()">start game</button>
+            <button id='stats' onclick='openpopup()' style='visibility:hidden'>see statistics</button>
+        </div>
+        <div id='hints'></div>
+    </div>
+
+    <div id='popup' style='visibility:hidden'>
+        <div id='popup-nav'><a href='#' onclick='closepopup()'>x</a></div>
+        <div id='popup-finishedgame'>
+            <h4>Game over!</h4>
+            <p id='popup-score'>Score: </p>
+        </div>
+        <div id='popup-personalstats'>
+            <h4>Statistics</h4>
+            <p id='popup-gamesplayed'>Games played: </p>
+            <p id='popup-average'>Running average: </p>
+            <p id='popup-localtrees'>Trees planted: </p>
+        </div>
+        <div id='popup-globalstats'>
+            <h4>Community</h4>
+            <p>Total trees planted: </p>
+        </div>
+        <div id='popup-nextgame'>
+            <h4>Next game in:</h4>
+        </div>
+    </div>
+</body>
+<script src='/js/components/coding_navbar.js'></script>
+<script src='/js/coding_maketen.js'></script>
+
+</html>

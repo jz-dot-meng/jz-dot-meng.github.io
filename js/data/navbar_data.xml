@@ -5,6 +5,7 @@
         <page title='memory' link='/coding/memory.html'/>
         <page title='stroop effect' link='/coding/stroopeffect.html'/>
         <page title='polish cases' link='/coding/cases.html'/>
+        <page title='make 10' link='/coding/maketen.html'/>
     </dropdown>
     <dropdown name='breakdowns'>
         <page title='sha-256' link='/coding/hashfunctions.html'/>

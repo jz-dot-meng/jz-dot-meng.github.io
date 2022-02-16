@@ -1,0 +1,94 @@
+#newgame{
+    clear:both;
+    width: 50%;
+    display: block;
+}
+#stats{
+    clear:both;
+    width:50%;
+    display:block;
+}
+#skip{
+    clear:both;
+    display:block;
+    margin:0% 25%;
+    transform: translateX(-50%);
+}
+#display{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    font-size: xxx-large;
+    padding: 2em;
+}
+.details{
+    display:flex;
+    float:left;
+    width:50%;
+}
+#remainingtime{
+    justify-content: left;
+
+}
+#score{
+    text-align: right;
+
+    width:100%;
+}
+#skips{
+
+    text-align: right; 
+
+    width:100%;
+}
+
+#gameelements{
+    position:relative;
+    width:50%;
+}
+#userIn{
+    border:none;
+    width:50%;
+    height:40px;
+    font-size: 1.5em;
+    text-align: center;
+}
+#userIn:focus{
+    outline:solid 0.5px lightgray;
+    border-radius: 3px;
+}
+#userIn::placeholder{
+    color:lightgray;
+}
+
+.unused{
+    font-weight: normal;
+    font-size: xxx-large;
+    color:black;
+}
+.used{
+    font-weight: normal;
+    font-size: xxx-large;
+    color:lime
+}
+
+#popup{
+    position:fixed;
+    left:25%;
+    top:20%;
+    width:50%;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.975);
+    padding:10px
+}
+#popup-nav{
+    width:100%;
+    text-align: right;
+}
+#popup-personalstats
+#popup-finishedgame
+#popup-globalstats
+#popup-nextgame {
+    text-align: center;
+}
