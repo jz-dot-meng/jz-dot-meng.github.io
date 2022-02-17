@@ -48,7 +48,7 @@ async function newgame() {
         localStats.lastStartedGame = currentDate;
     }
 
-    // show elements
+    // show/hide elements
     document.getElementById('newgame').style.visibility = 'hidden';
     document.getElementById('gameelements').style.visibility = 'visible';
     document.getElementById('skip').style.visibility = 'visible';
@@ -86,21 +86,9 @@ function newtimer() {
             // hide elements
             userIn.style.visibility = 'hidden';
             document.getElementById('skip').style.visibility = 'hidden';
-            // if score over 7, send to server for validation;
+            // if score over 7, show winner 
             if (score >= 7) {
-                let data = JSON.stringify({ 'answers': answers })
-                const post = await fetch('http://localhost:5000/validateanswers', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: data
-                });
-                const response = post.json();
-                if (response.message === 'All correct!') {
-                    // increment tree cookie
-                    localStats.treesPlanted++;
-                }
+                document.getElementById('popup-winneradd').style.visibility = 'visible';
             }
             // set cookies
             localStats.scoreCount[score]++;
@@ -120,6 +108,25 @@ function newtimer() {
         }
         document.getElementById('remainingtime').innerHTML = 'Remaining time: ' + timer
     }, 1000)
+}
+
+const addWinner = async (name) => {
+    let data = JSON.stringify({ 'answers': answers, 'winner': name })
+    const post = await fetch('http://localhost:5000/validateanswers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data
+    });
+    const response = post.json();
+    if (response.message === 'All correct!') {
+        // increment tree cookie
+        localStats.treesPlanted++;
+    } else {
+        alert('An error occured and your answers + name were not successfully validated')
+    }
+
 }
 
 const nextNumber = () => {
