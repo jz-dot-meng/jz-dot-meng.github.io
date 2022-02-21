@@ -93,3 +93,13 @@
 #popup-nextgame {
     text-align: center;
 }
+
+#hints{
+    color: lightgray;
+    text-align: center;
+    width: 50%;
+}
+#hints td{
+    width:25%;
+    margin:0px;
+}
