@@ -25,7 +25,7 @@ let localStats;
 */
 
 const init = async () => {
-    let response = await fetch('http://localhost:5000/getglobaldata', {
+    let response = await fetch('https://jz-dot-meng-mk10.herokuapp.com/getglobaldata', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ async function newgame() {
     userIn.addEventListener('input', calculate);
 
     // fetch numbers
-    const response = await fetch('http://localhost:5000/getnumbers', {
+    const response = await fetch('https://jz-dot-meng-mk10.herokuapp.com/getnumbers', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -141,7 +141,7 @@ const addWinner = async () => {
     let name = document.getElementById('winnername').value;
     let data = JSON.stringify({ 'answers': answers, 'winner': name });
     console.log(data);
-    const post = await fetch('http://localhost:5000/validateanswers', {
+    const post = await fetch('https://jz-dot-meng-mk10.herokuapp.com/validateanswers', {
         method: 'POST',
         body: data,
         headers: {
