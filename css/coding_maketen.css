@@ -86,9 +86,10 @@
     width:100%;
     text-align: right;
 }
-#popup-personalstats
-#popup-finishedgame
-#popup-globalstats
+#popup-personalstats,
+#popup-finishedgame,
+#popup-winneradd,
+#popup-global,
 #popup-nextgame {
     text-align: center;
 }

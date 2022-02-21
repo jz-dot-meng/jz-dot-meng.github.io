@@ -7,13 +7,37 @@ let score;
 let skips;
 let userInput = '';
 let evaluate = 0;
+let leftRight = 0;
 let answers = [];
 
 // timer variables
 let timer = 90, timerInterval;
 
-// cookies
+// cookies and global data
+let allTreesPlanted;
+let nextGame;
 let localStats;
+
+/*
+    **********************************************
+    ----------------     Init   ------------------
+    **********************************************
+*/
+
+const init = async () => {
+    let response = await fetch('http://localhost:5000/getglobaldata', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    let data = await response.json();
+    console.log('globaldata', data)
+    allTreesPlanted = data.treesPlanted;
+    nextGame = Number(data.nextGame);
+    nextGameTimer(nextGame);
+}
+init();
 
 /*
     **********************************************
@@ -44,6 +68,7 @@ async function newgame() {
     } else {
         console.log('retrieved existing local storage')
         localStats = JSON.parse(cookies);
+        // check if last game played < 24hrs before nextgame
         localStats.gamesPlayed++;
         localStats.lastStartedGame = currentDate;
     }
@@ -88,7 +113,7 @@ function newtimer() {
             document.getElementById('skip').style.visibility = 'hidden';
             // if score over 7, show winner 
             if (score >= 7) {
-                document.getElementById('popup-winneradd').style.visibility = 'visible';
+                document.getElementById('popup-winneradd').style.display = 'block';
             }
             // set cookies
             localStats.scoreCount[score]++;
@@ -102,6 +127,8 @@ function newtimer() {
             document.getElementById('popup-gamesplayed').innerHTML = 'Games played: ' + localStats.gamesPlayed;
             document.getElementById('popup-average').innerHTML = 'Running average: ' + totalScore / localStats.gamesPlayed;
             document.getElementById('popup-localtrees').innerHTML = 'Trees planted: ' + localStats.treesPlanted;
+            document.getElementById('popup-globalstats').innerHTML = 'Total trees planted: ' + allTreesPlanted;
+            nextGameTimer(nextGame)
             // show post game tools
             document.getElementById('stats').style.visibility = 'visible';
             document.getElementById('popup').style.visibility = 'visible';
@@ -110,31 +137,36 @@ function newtimer() {
     }, 1000)
 }
 
-const addWinner = async (name) => {
-    let data = JSON.stringify({ 'answers': answers, 'winner': name })
+const addWinner = async () => {
+    let name = document.getElementById('winnername').value;
+    let data = JSON.stringify({ 'answers': answers, 'winner': name });
+    console.log(data);
     const post = await fetch('http://localhost:5000/validateanswers', {
         method: 'POST',
+        body: data,
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'text/plain',
         },
-        body: data
+    }).then(async (response) => {
+        const serverResp = await response.json();
+        if (serverResp.message === 'All correct!') {
+            // increment tree cookie
+            localStats.treesPlanted++;
+        } else {
+            alert('An error occured and your answers + name were not successfully validated\n' + serverResp.message)
+        }
     });
-    const response = post.json();
-    if (response.message === 'All correct!') {
-        // increment tree cookie
-        localStats.treesPlanted++;
-    } else {
-        alert('An error occured and your answers + name were not successfully validated')
-    }
 
 }
 
 const nextNumber = () => {
+    leftRight = 0;
     document.getElementById('display').innerHTML = //numberArr[currentInd]
         `<span class='unused' id='${currentInd}-${numberArr[currentInd][0]}-0'>${numberArr[currentInd][0]}</span>
     <span class='unused' id='${currentInd}-${numberArr[currentInd][1]}-1'>${numberArr[currentInd][1]}</span>
     <span class='unused' id='${currentInd}-${numberArr[currentInd][2]}-2'>${numberArr[currentInd][2]}</span>
     <span class='unused' id='${currentInd}-${numberArr[currentInd][3]}-3'>${numberArr[currentInd][3]}</span>`
+    userIn.focus();
 }
 
 const allowedSymbols = "%*()-+1/ "; // 1 for **1/n, or nth root
@@ -152,7 +184,7 @@ const calculate = (e) => {
     // validate
     let allowedCharacters = numberArr[currentInd] + allowedSymbols;
     for (let i = 0; i < currentInput.length; i++) {
-        if (allowedCharacters.indexOf(currentInput.charAt(currentInput.length - 1)) < 0) {
+        if (allowedCharacters.indexOf(currentInput.charAt(i)) < 0) {
             // latest character is invalid
             invalidInputReset();
             return;
@@ -248,7 +280,7 @@ const calculate = (e) => {
         }
         let expression = currentInput + ' = ' + evaluate;
         userIn.value = expression;
-        setCursor(userIn, (userIn.value.length - (3 + evaluate.toString().length)))
+        setCursor(userIn, (userIn.value.length - (3 + leftRight + evaluate.toString().length)))
     } else {
         userIn.value = userInput;
     }
@@ -259,7 +291,7 @@ const validate = () => {
     if (evaluate === 10 && document.getElementsByClassName('used').length === 4) {
         // increment score and ind
         let numberStr = typeof numberArr[currentInd] === 'string' ? numberArr[currentInd] : numberArr[currentInd].toString();
-        answers.push({ numberStr: userInput })
+        answers.push({ [numberStr]: userInput })
         score++;
         currentInd++;
         // reset necessary values
@@ -287,6 +319,7 @@ const skip = () => {
         // display new number
         document.getElementById('display').innerHTML = '';
         nextNumber();
+
     }
 }
 
@@ -312,8 +345,30 @@ const invalidInputReset = () => {
     } else {
         userIn.value = userInput;
     }
-    setCursor(userIn, (userIn.value.length - (3 + evaluate.toString().length)))
+    setCursor(userIn, (userIn.value.length - (3 + leftRight + evaluate.toString().length)))
 }
+
+// special left/right keypress event listener
+document.addEventListener('keydown', (e) => {
+    // check userIn is active element / focused
+    console.log('is focused?', userIn === document.activeElement)
+    if (userIn === document.activeElement) {
+        let code = e.key;
+        if (code === 'ArrowLeft' || code === '37') {
+            // left
+            if (leftRight < userInput.length) {
+                leftRight++;
+                console.log('leftright:', leftRight)
+            }
+        } else if (code === 'ArrowRight' || code === '39') {
+            // right
+            if (leftRight > 0) {
+                leftRight--;
+                console.log('leftright:', leftRight)
+            }
+        }
+    }
+}, true)
 
 /*
     *************************************
@@ -357,6 +412,20 @@ const setCursor = (node, pos) => {
     return false;
 }
 
+const nextGameTimer = (nextgame) => {
+    let timeToNextGame = Math.floor((nextgame - Date.now()) / 1000);
+    const countdown = () => {
+        timeToNextGame--;
+        let seconds = timeToNextGame % 60;
+        let minutes = Math.floor(timeToNextGame / 60) % 60;
+        let hours = Math.floor(timeToNextGame / (60 * 60));
+        document.getElementById('popup-hrs').innerHTML = hours + ' h ';
+        document.getElementById('popup-min').innerHTML = minutes + ' m ';
+        document.getElementById('popup-sec').innerHTML = seconds + ' s';
+    }
+    setInterval(countdown, 1000);
+}
+
 /* 
     *************************************
     --------    POPUP LOGIC    ----------
@@ -367,6 +436,6 @@ const closepopup = () => {
     document.getElementById('popup').style.visibility = 'hidden'
 }
 
-const open = () => {
+const openpopup = () => {
     document.getElementById('popup').style.visibility = 'visible'
 }
