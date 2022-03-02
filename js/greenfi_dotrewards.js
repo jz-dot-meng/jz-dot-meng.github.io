@@ -109,7 +109,7 @@ async function retrieveRewards() {
         loader1.setAttribute("id", "loaderOne");
         loader1.setAttribute("class", 'loader');
         document.getElementById('right').appendChild(loader1);
-        let response = await fetch('https://rocky-beyond-27768.herokuapp.com/testpolkadot/rewards/' + address.value + "&currency=" + currency);
+        let response = await fetch('https://jz-dot-meng-wbapi.herokuapp.com/testpolkadot/rewards/' + address.value + "&currency=" + currency);
         if (response.ok) {
             let json = await response.json();
             if (!Object.keys(json).length) {
@@ -146,7 +146,7 @@ async function retrieveRewards() {
                 let avgApy;
                 let lastApy;
                 // get coin balance
-                let wallet = await fetch("https://rocky-beyond-27768.herokuapp.com/testpolkadot/address/" + address.value)
+                let wallet = await fetch("https://jz-dot-meng-wbapi.herokuapp.com/testpolkadot/address/" + address.value)
                 if (wallet.ok) {
                     let jsonB = await wallet.json();
                     balance = jsonB['Balance'] / Math.pow(10, 10);
