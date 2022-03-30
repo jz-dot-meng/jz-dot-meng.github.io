@@ -141,7 +141,7 @@ function tezoscreator(address, loader1, loader2, value, amount) {
         // add event listener
         loader1.style.display = "block";
         loader2.style.display = "block";
-        let response = await fetch("https://rocky-beyond-27768.herokuapp.com/testtezos/address/" + address.value)
+        let response = await fetch("https://jz-dot-meng-wbapi.herokuapp.com/testtezos/address/" + address.value)
         if (response.ok) {
             let json = await response.json();
             if (!Object.keys(json).length) {
@@ -170,7 +170,7 @@ function algocreator(address, loader1, loader2, value, amount) {
         // add event listener
         loader1.style.display = "block";
         loader2.style.display = "block";
-        let response = await fetch("https://rocky-beyond-27768.herokuapp.com/testalgorand/address/" + address.value)
+        let response = await fetch("https://jz-dot-meng-wbapi.herokuapp.com/testalgorand/address/" + address.value)
         if (response.ok) {
             let json = await response.json();
             if (!Object.keys(json).length) {
@@ -198,7 +198,7 @@ function xlmcreator(address, loader1, loader2, value, amount) {
     return async function () {
         loader1.style.display = "block";
         loader2.style.display = "block";
-        let response = await fetch("https://rocky-beyond-27768.herokuapp.com/teststellar/address/" + address.value);
+        let response = await fetch("https://jz-dot-meng-wbapi.herokuapp.com/teststellar/address/" + address.value);
         if (response.ok) {
             let json = await response.json();
             if (!Object.keys(json).length) {
@@ -273,7 +273,7 @@ function dotcreator(address, loader1, loader2, value, amount) {
     return async function () {
         loader1.style.display = "block";
         loader2.style.display = "block";
-        let response = await fetch("https://rocky-beyond-27768.herokuapp.com/testpolkadot/address/" + address.value)
+        let response = await fetch("https://jz-dot-meng-wbapi.herokuapp.com/testpolkadot/address/" + address.value)
         if (response.ok) {
             let json = await response.json();
             if (!Object.keys(json).length) {

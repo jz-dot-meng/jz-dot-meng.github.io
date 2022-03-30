@@ -77,6 +77,7 @@ async function newgame() {
     document.getElementById('newgame').style.visibility = 'hidden';
     document.getElementById('gameelements').style.visibility = 'visible';
     document.getElementById('skip').style.visibility = 'visible';
+    document.getElementById('hints').style.visibility = 'visible';
     userIn.style.visibility = 'visible';
     userIn.focus();
     userIn.addEventListener('input', calculate);
