@@ -1,0 +1,70 @@
+#container {
+    overflow: hidden;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #FF7F50;
+    width: 10px;
+    height: 10px;
+    margin: auto;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+  
+/* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+div{
+    margin:auto;
+}
+
+button{
+    position:relative;
+    left:50%;
+    transform: translate(-50%, 0%);
+}
+
+
+.info-flex {
+    display:flex;
+    flex-direction: row;
+}
+.left, .right {
+    flex: 1
+}
+
+table {
+    font-size: 0.6rem;
+}
+
+#carousel-top {
+    --current-display: 0;
+    width:300%;
+    display:flex;
+    flex-direction: row;
+    overflow: hidden;
+    transition: transform 0.8s;
+    transform: translateX(calc(-33.33% * var(--current-display)))
+}
+#carousel-bottom {
+    --current-display: 0;
+    width:300%;
+    display:flex;
+    flex-direction: row;
+    overflow: hidden;
+    transition: transform 0.8s;
+    transform: translateX(calc(-33.33% * var(--current-display)))
+}
+.carousel-item {
+    width: 33%;
+}

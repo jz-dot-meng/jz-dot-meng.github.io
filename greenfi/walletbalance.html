@@ -3,8 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/greenfi_walletbalance.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/main.css">
+    <link rel="stylesheet"
+          type="text/css"
+          href="/css/greenfi_walletbalance.css">
 </head>
 
 <body>
@@ -15,21 +19,26 @@
             <ul>
                 <li><a href="/greenfi/index.html">dca calculator</a></li>
                 <li><a href="/greenfi/walletbalance.html">wallet balance</a></li>
-                <li><a href="/greenfi/stakingrewards.html">polkadot rewards</a></li>
+                <li><a href="/greenfi/stakingrewards.html">staking rewards</a></li>
             </ul>
         </nav>
     </header>
 
     <div id="container">
-        <div id="chartstyle" style="position:relative;width:400px;height:400px;">
+        <div id="chartstyle"
+             style="position:relative;width:400px;height:400px;">
             <canvas id="piechart"></canvas>
         </div>
         <div>
-            <p>Display currency: <a href="#" id='aud' onclick="changeAUD()">AUD</a> <a href="#" id='usd'
-                    onclick="changeUSD()">USD</a></p>
+            <p>Display currency: <a href="#"
+                   id='aud'
+                   onclick="changeAUD()">AUD</a> <a href="#"
+                   id='usd'
+                   onclick="changeUSD()">USD</a></p>
         </div>
         <div>
-            <table id="assetTable" style="visibility:hidden;">
+            <table id="assetTable"
+                   style="visibility:hidden;">
                 <tr>
                     <th>Blockchain</th>
                     <th>Address</th>
@@ -38,15 +47,16 @@
                 </tr>
             </table>
         </div>
-        <button id="addAsset" onclick="addAddress()">Add wallet address</button>
+        <button id="addAsset"
+                onclick="addAddress()">Add wallet address</button>
     </div>
     </br>
     </br>
     <footer>
         <xx-small>
             <p> In development: Node.js Express server currently interfacing with <a
-                    href="https://github.com/polkadot-js/api/">@polkadot/api</a> and <a
-                    href="https://github.com/stellar/js-stellar-sdk">js-stellar-sdk</a>, as well as Algorand and Tezos
+                   href="https://github.com/polkadot-js/api/">@polkadot/api</a> and <a
+                   href="https://github.com/stellar/js-stellar-sdk">js-stellar-sdk</a>, as well as Algorand and Tezos
                 endpoint APIs, deployed on Heroku</p>
             <p> Hopefully, future integration of more blockchain APIs coming soon!</p>
 
