@@ -206,7 +206,7 @@ async function retrieveDotRewards(staking) {
     try {
         staking.loader.style.display = 'block';
         let response = await fetch('https://jz-dot-meng-wbapi.herokuapp.com/testpolkadot/rewards/' + address.value + "&currency=" + currency);
-        if (response.ok) {
+        if (response.status == 200) {
             let json = await response.json();
             if (!Object.keys(json).length) {
                 // ie if json is empty, indicating an error
@@ -264,6 +264,8 @@ async function retrieveDotRewards(staking) {
                     document.getElementById(`${this.ticker.toLowerCase()}-apyLast`).innerText = lastApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
                 }
             }
+        } else {
+            throw new Error(response.error);
         }
     } catch (err) {
         staking.loader.style.display = 'none';
@@ -273,9 +275,165 @@ async function retrieveDotRewards(staking) {
 }
 async function retreiveYXlmRewards(staking) {
     staking.reset()
+    const address = document.getElementById(`${staking.ticker.toLowerCase()}-address`);
+    // get dot price
+    let latestprice = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=stellar&vs_currencies=" + currency)
+    if (latestprice.ok) {
+        let priceJson = await latestprice.json();
+        latestprice = priceJson['stellar'][currency];
+    }
+    try {
+        staking.loader.style.display = 'block';
+        let response = await fetch('https://jz-dot-meng-wbapi.herokuapp.com/teststellar/rewards/' + address.value + "&currency=" + currency);
+        if (response.status == 200) {
+            let json = await response.json();
+            if (!Object.keys(json).length) {
+                // ie if json is empty, indicating an error
+                address.value = "";
+            } else if (typeof json["Rewards"][0] == 'string') {
+                // ie has a single string that says not a staking address
+                document.getElementById(`${staking.ticker.toLowerCase()}-error`).innerHTML = "<p>Not a staking address - no staking rewards found</p>";
+                address.value = "";
+            } else {
+                for (let i = 0; i < json["Rewards"].length; i++) {
+                    staking.data.dates.push(json["Rewards"][i]['reward_date']);
+                    staking.data.amount.push(Number(json["Rewards"][i]['reward_amount']));
+                    staking.data.fiat.push(json["Rewards"][i]['fiat_conversion']);
+                    staking.data.totalFiat += Number(json["Rewards"][i]['reward_amount']) * latestprice;
+                    staking.data.totalCoin += Number(json["Rewards"][i]['reward_amount']);
+                    staking.data.cumulativeFiat.push(staking.data.totalFiat);
+                }
+                staking.dataChart.data.labels = staking.data.dates;
+                staking.dataChart.data.datasets[0]['data'] = staking.data.amount;
+                staking.dataChart.data.datasets[1]['data'] = staking.data.cumulativeFiat;
+                staking.dataChart.update();
+                if (document.getElementById('dlcsv') == undefined) {
+                    let csv = document.createElement("button");
+                    csv.setAttribute("id", "dlcsv");
+                    csv.innerHTML = "generate and download csv";
+                    csv.setAttribute('onclick', "generatecsv()");
+                    document.getElementById("container").appendChild(csv);
+                }
+                // calculate avg, estimated apy
+                let avgCoin = staking.data.totalCoin / staking.data.dates.length;
+                let avgFiat = staking.data.totalFiat / staking.data.dates.length;
+                let balance;
+                let avgApy;
+                let lastApy;
+                // get coin balance
+                let wallet = await fetch("https://jz-dot-meng-wbapi.herokuapp.com/teststellar/address/" + address.value)
+                if (wallet.ok) {
+                    let jsonB = await wallet.json();
+                    let index;
+                    for (let i = 0; i < jsonB['Balances'].length; i++) {
+                        if (jsonB['Balances'][i]['Asset_code'] == 'yXLM') index = i;
+                    }
+                    balance = jsonB['Balances'][index]['Balance'];
+                    avgApy = Math.pow((1 + (avgCoin / balance)), 365) - 1;
+                    lastApy = Math.pow((1 + (json['Rewards'][0]['reward_amount'] / balance)), 365) - 1;
+                }
+                if (balance == undefined) {
+                    // What is this for again??
+                    // loader1.style.display = "none";
+                    //document.getElementById('r2').style.visibility = "visible";
+                    //document.getElementById("avgDaily").innerText = avgCoin.toFixed(5) + " DOT, " + new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase(), minimumFractionDigits: 4 }).format(avgFiat);
+                } else {
+                    staking.loader.style.display = "none";
+                    staking.tableStyle.style.visibility = 'visible'
+                    document.getElementById(`${this.ticker.toLowerCase()}-walletBal`).innerText = `${balance} ${staking.ticker}`;
+                    document.getElementById(`${this.ticker.toLowerCase()}-totalRewards`).innerText = `${staking.data.totalCoin} ${staking.ticker}`;
+                    document.getElementById(`${this.ticker.toLowerCase()}-avgDaily`).innerText = `${avgCoin.toFixed(5)} ${staking.ticker} ${new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase(), minimumFractionDigits: 4 }).format(avgFiat)}`;
+                    document.getElementById(`${this.ticker.toLowerCase()}-apyAvg`).innerText = avgApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
+                    document.getElementById(`${this.ticker.toLowerCase()}-apyLast`).innerText = lastApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
+                }
+            }
+        } else {
+            throw new Error(response.error);
+        }
+    } catch (err) {
+        staking.loader.style.display = 'none';
+        document.getElementById(`${staking.ticker.toLowerCase()}-error`).innerHTML = `<p>${err}</p>`
+        address.value = "";
+    }
 }
 async function retrieveXtzRewards(staking) {
     staking.reset()
+    const address = document.getElementById(`${staking.ticker.toLowerCase()}-address`);
+    // get dot price
+    let latestprice = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=tezos&vs_currencies=" + currency)
+    if (latestprice.ok) {
+        let priceJson = await latestprice.json();
+        latestprice = priceJson['tezos'][currency];
+    }
+    try {
+        staking.loader.style.display = 'block';
+        let response = await fetch('https://jz-dot-meng-wbapi.herokuapp.com/testtezos/rewards/' + address.value + "&currency=" + currency);
+        if (response.status == 200) {
+            let json = await response.json();
+            if (!Object.keys(json).length) {
+                // ie if json is empty, indicating an error
+                address.value = "";
+            } else if (typeof json["Rewards"][0] == 'string') {
+                // ie has a single string that says not a staking address
+                document.getElementById(`${staking.ticker.toLowerCase()}-error`).innerHTML = "<p>Not a staking address - no staking rewards found</p>";
+                address.value = "";
+            } else {
+                for (let i = 0; i < json["Rewards"].length; i++) {
+                    staking.data.dates.push(json["Rewards"][i]['reward_date']);
+                    staking.data.amount.push(Number(json["Rewards"][i]['reward_amount']));
+                    staking.data.fiat.push(json["Rewards"][i]['fiat_conversion']);
+                    staking.data.totalFiat += Number(json["Rewards"][i]['reward_amount']) * latestprice;
+                    staking.data.totalCoin += Number(json["Rewards"][i]['reward_amount']);
+                    staking.data.cumulativeFiat.push(staking.data.totalFiat);
+                }
+                staking.dataChart.data.labels = staking.data.dates;
+                staking.dataChart.data.datasets[0]['data'] = staking.data.amount;
+                staking.dataChart.data.datasets[1]['data'] = staking.data.cumulativeFiat;
+                staking.dataChart.update();
+                if (document.getElementById('dlcsv') == undefined) {
+                    let csv = document.createElement("button");
+                    csv.setAttribute("id", "dlcsv");
+                    csv.innerHTML = "generate and download csv";
+                    csv.setAttribute('onclick', "generatecsv()");
+                    document.getElementById("container").appendChild(csv);
+                }
+                // calculate avg, estimated apy
+                let avgCoin = staking.data.totalCoin / staking.data.dates.length;
+                let avgFiat = staking.data.totalFiat / staking.data.dates.length;
+                let balance;
+                let avgApy;
+                let lastApy;
+                // get coin balance
+                let wallet = await fetch("https://jz-dot-meng-wbapi.herokuapp.com/testtezos/address/" + address.value)
+                if (wallet.ok) {
+                    let jsonB = await wallet.json();
+                    balance = jsonB['Balance'];
+                    avgApy = Math.pow((1 + (avgCoin / balance)), 365) - 1;
+                    lastApy = Math.pow((1 + (json['Rewards'][0]['reward_amount'] / balance)), 365) - 1;
+                }
+                if (balance == undefined) {
+                    // What is this for again??
+                    // loader1.style.display = "none";
+                    //document.getElementById('r2').style.visibility = "visible";
+                    //document.getElementById("avgDaily").innerText = avgCoin.toFixed(5) + " DOT, " + new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase(), minimumFractionDigits: 4 }).format(avgFiat);
+                } else {
+                    staking.loader.style.display = "none";
+                    staking.tableStyle.style.visibility = 'visible'
+                    document.getElementById(`${this.ticker.toLowerCase()}-walletBal`).innerText = `${balance} ${staking.ticker}`;
+                    document.getElementById(`${this.ticker.toLowerCase()}-totalRewards`).innerText = `${staking.data.totalCoin} ${staking.ticker}`;
+                    document.getElementById(`${this.ticker.toLowerCase()}-avgDaily`).innerText = `${avgCoin.toFixed(5)} ${staking.ticker} ${new Intl.NumberFormat('en-US', { style: 'currency', currency: currency.toUpperCase(), minimumFractionDigits: 4 }).format(avgFiat)}`;
+                    document.getElementById(`${this.ticker.toLowerCase()}-apyAvg`).innerText = avgApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
+                    document.getElementById(`${this.ticker.toLowerCase()}-apyLast`).innerText = lastApy.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 4 });
+                }
+            }
+        } else {
+            throw new Error(response.error);
+        }
+    } catch (err) {
+        staking.loader.style.display = 'none';
+        document.getElementById(`${staking.ticker.toLowerCase()}-error`).innerHTML = `<p>${err}</p>`
+        address.value = "";
+    }
 }
 
 
