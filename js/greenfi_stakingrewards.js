@@ -168,6 +168,9 @@ class Staking {
     reset = () => {
         this.tableStyle.style.visibility = 'hidden';
         this.errorMessage.innerHTML = '';
+        this.dataChart.data.labels = [];
+        this.dataChart.data.datasets[0].data = [];
+        this.dataChart.data.datasets[1].data = [];
     }
 }
 
@@ -435,18 +438,20 @@ async function retrieveXtzRewards(staking) {
         address.value = "";
     }
 }
-
+Date().to
 
 function generatecsv() {
-    let str = ',';
+    const strArr = [];
     for (let i = 0; i < stakingObjects.length; i++) {
-        str = 'Date, Reward ' + stakingObjects[i].ticker + ', ' + currency.toUpperCase() + ' Fiat conversion\n';
+        if (stakingObjects[i].data.amount.length == 0 || stakingObjects[i].data.fiat.length == 0) continue;
+        let str = 'Date, Reward ' + stakingObjects[i].ticker + ', ' + currency.toUpperCase() + ' Fiat conversion\n';
         for (let j = 0; j < stakingObjects[i].data.dates.length; j++) {
-            str += stakingObjects[i].data.dates[j] + ',' + stakingObjects[i].data.amount[j] + ',' + stakingObjects[i].data.fiat[j] + '\n';
+            str += new Date(stakingObjects[i].data.dates[j]).toLocaleDateString() + ',' + stakingObjects[i].data.amount[j] + ',' + stakingObjects[i].data.fiat[j] + '\n';
         }
+        strArr.push(str);
     }
     let downloadElement = document.createElement('a');
-    downloadElement.href = "data:text/csv;charset=utf-8" + encodeURI(str);
+    downloadElement.href = "data:text/csv;charset=utf-8," + encodeURI(strArr.join('\n\n'));
     downloadElement.target = "_blank"; // sets/retrieves window/frame AT WHICH to target content
     downloadElement.download = Date.now() + "-stakingRewards.csv";
     downloadElement.click();
