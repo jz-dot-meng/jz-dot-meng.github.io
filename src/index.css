@@ -36,3 +36,27 @@ body {
 .landing section div {
     margin: 1em 0;
 }
+
+.landing-footer {
+    border-top: 1px solid #d5d5d5;
+}
+
+.landing-footer div a {
+    font-weight: bold;
+}
+
+.landing-footer div {
+    font-size: 0.75em;
+    margin: 1.5em 0 !important;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: #FF7F50;
+}
+
+a:hover {
+    text-decoration: underline;
+}

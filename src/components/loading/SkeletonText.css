@@ -1,0 +1,27 @@
+.skeleton {
+    display: inline;
+    color: transparent;
+    background: rgba(0, 0, 0, 0.1);
+    background: #FF7F50;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+@keyframes loading {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.skeleton::before {
+    width: fit-content;
+    content: '';
+    background: linear-gradient(90deg, transparent 0%, #ffc0a9 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: loading 1s infinite;
+    z-index: 1;
+}
+
+.skeleton:empty::before {
+    content: var(--textContent);
+}
