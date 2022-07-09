@@ -9,47 +9,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.landing,
-.landing-anim {
-    margin: 0 4em;
-}
-
-.landing-anim {
-    margin-top: 4em;
-    width: calc(100% - 8em);
-    height: 60vh;
-}
-
-.landing section h1 {
+h1 {
     font-size: 2em;
     margin-top: 0px;
 }
 
-.landing section h4 {
-    margin-bottom: 1em;
-}
-
-.landing section h1 span {
+h1 span {
     font-size: 0.5em;
 }
-
-.landing section div {
-    margin: 1em 0;
-}
-
-.landing-footer {
-    border-top: 1px solid #d5d5d5;
-}
-
-.landing-footer div a {
-    font-weight: bold;
-}
-
-.landing-footer div {
-    font-size: 0.75em;
-    margin: 1.5em 0 !important;
-}
-
 
 
 a {

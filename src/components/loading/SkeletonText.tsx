@@ -6,7 +6,7 @@ type SkeletonTextProp = {
     href?: string,
 }
 
-export const SkeletonText = ({ ...props }) => {
+export const SkeletonText: React.FunctionComponent<SkeletonTextProp> = ({ ...props }) => {
     const { textLength, href } = props;
 
     const skeletonRef = useRef<HTMLDivElement>(null)

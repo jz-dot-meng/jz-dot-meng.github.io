@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ParticleField } from '../components/canvas-animations/ParticleField';
 import { SkeletonText } from '../components/loading/SkeletonText';
 
@@ -6,12 +7,12 @@ import { SkeletonText } from '../components/loading/SkeletonText';
 import { ULlinkType, ULlinks } from '../components/navigation/ULlinks';
 
 //styling
+import './Landing.css'
 import '../index.css'
 
 function Landing() {
 
     const [latestCommit, setLatestCommit] = useState('')
-    const [latestCommitUrl, setLatestCommitUrl] = useState('')
 
     useEffect(() => {
         async function getLatestCommit() {
@@ -25,7 +26,6 @@ function Landing() {
                 const json = await response.json();
                 let shaSlice = json['object']['sha'].slice(0, 6)
                 setLatestCommit(shaSlice);
-                setLatestCommitUrl(json['object']['url'])
             } catch (err) {
                 console.warn(err)
             }
@@ -63,7 +63,7 @@ function Landing() {
                 </section>
                 <section>
                     <div>Software developer, occasional sound engineer and music producer</div>
-                    <div>Avid home cook, enthusiatic about green/impact investing and other small ways to make a difference</div>
+                    <div>Avid home cook, enthusiatic about green/impact investing, <Link to='/WalletBalance'>personal finance</Link> and other small ways to make a difference</div>
                 </section>
                 <section className='landing-footer'>
                     <div>{latestCommit ?
