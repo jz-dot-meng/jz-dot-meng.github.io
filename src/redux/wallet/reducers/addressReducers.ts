@@ -38,7 +38,7 @@ export const addressReducer = createReducer(initialState, (builder) => {
                 state.balances.fiat[action.payload.blockchain].splice(balanceIndex, 1)
                 // remove from rewards
                 if (state.rewards[action.payload.address] !== undefined) {
-                    state.rewards[action.payload.address] = undefined
+                    delete state.rewards[action.payload.address]
                 }
             }
         )

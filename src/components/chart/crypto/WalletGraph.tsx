@@ -92,6 +92,7 @@ export const WalletGraph: React.FunctionComponent<WalletGraphType> = ({ ...props
                     ]
                 }}
                 options={{
+                    maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
                             callbacks: {

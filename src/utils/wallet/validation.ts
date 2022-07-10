@@ -9,13 +9,12 @@ import { fetchAllRewardData } from "./rewards";
  */
 export const validateAddress = async (blockchain: string, address: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-        const url = `https://jz-dot-meng-wbapi.herokuapp.com/${blockchain.toLowerCase()}/address/${address}`
+        const url = `${process.env.REACT_APP_WALLET_API}/${blockchain.toLowerCase()}/address/${address}`
         fetch(url, {
             method: 'GET'
         }).then(async (response) => {
             if (response.status === 200) {
                 const data = await response.json();
-                console.log(data)
                 fetchAndSetAllWalletData(blockchain, address, data);
                 fetchAllRewardData(blockchain, address)
                 resolve(true)

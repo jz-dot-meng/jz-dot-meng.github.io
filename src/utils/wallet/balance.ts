@@ -10,9 +10,9 @@ import { BlockchainFactory } from "../blockchain/blockchainFactory"
  * @param data 
  */
 export const fetchAndSetAllWalletData = (blockchain: string, address: string, data: any) => {
-    console.log('setting balance...')
+    console.log(`setting balance for ${address}...`)
     const tokenBalance = setBalance(blockchain, address, data);
-    console.log('fetching fiat...')
+    console.log(`fetching fiat balance for ${address}...`)
     fetchFiatBalance(blockchain, address, tokenBalance)
 }
 
@@ -35,7 +35,7 @@ export const setBalance = (blockchain: string, address: string, data: any): Toke
 export const fetchFiatBalance = async (blockchain: string, address: string, tokenBalance: TokenBalancePayload) => {
     const tokenPrices = tokenBalance.map((item: { [token: string]: number }): Promise<{ [token: string]: number }> => {
         return new Promise((resolve, reject) => {
-            console.log('token item', item)
+            // console.log('token item', item)
             let tokenTicker = Object.keys(item)[0];
             // check if ticker exists in tokenConversion
             const conversionToken = checkIfConversionExists(tokenTicker)
@@ -45,7 +45,7 @@ export const fetchFiatBalance = async (blockchain: string, address: string, toke
                     const currency = state.crypto.currencyCoversion.currency;
                     store.dispatch(addCurrentPrice({ tokenName: blockchain, currency, data: { [tokenTicker]: price } }))
                     const fiatValueOfTokens = price * item[Object.keys(item)[0]]
-                    console.log('fiat value', fiatValueOfTokens)
+                    // console.log('fiat value', fiatValueOfTokens)
                     resolve({ [tokenTicker]: fiatValueOfTokens })
                 }).catch(err => {
                     resolve({ [tokenTicker]: NaN })
@@ -53,7 +53,7 @@ export const fetchFiatBalance = async (blockchain: string, address: string, toke
             } else {
                 fetchFiatToken(conversionToken.toToken).then((price: number) => {
                     const fiatValueOfTokens = price * item[Object.keys(item)[0]] * conversionToken.conversion;
-                    console.log('fiat value', fiatValueOfTokens)
+                    // console.log('fiat value', fiatValueOfTokens)
                     resolve({ [tokenTicker]: fiatValueOfTokens })
                 }).catch(err => {
                     resolve({ [tokenTicker]: NaN })
@@ -63,7 +63,7 @@ export const fetchFiatBalance = async (blockchain: string, address: string, toke
     })
     Promise.all(tokenPrices).then((fiatTokenPrices: TokenBalancePayload) => {
         const walletFiat: WalletTokenPayload = [{ [address]: fiatTokenPrices }]
-        console.log('walletFiat', walletFiat)
+        // console.log('walletFiat', walletFiat)
         store.dispatch(setWalletFiatBalance({ blockchain, walletFiat }))
     })
 }
@@ -82,7 +82,7 @@ export const fetchFiatToken = async (token: string): Promise<number> => {
     const state = store.getState();
     const currency = state.crypto.currencyCoversion.currency;
     return new Promise(async (resolve, reject) => {
-        const url = `https://jz-dot-meng-wbapi.herokuapp.com/price&token=${token}&currency=${currency}`
+        const url = `${process.env.REACT_APP_WALLET_API}/price&token=${token}&currency=${currency}`
         try {
             let price: number = NaN;
             const resp = await fetch(url, {
@@ -91,11 +91,11 @@ export const fetchFiatToken = async (token: string): Promise<number> => {
             if (resp.ok) {
                 const data = await resp.json();
                 price = data[token.toLowerCase()][currency];
-                console.log('token fiat price fetch ok', { data, price })
+                // console.log('token fiat price fetch ok', { data, price })
                 resolve(price);
             } else {
                 const err = await resp.json()
-                console.warn('Price fetch did not return status 200', err)
+                console.warn('Price fetch not successful', err)
                 reject(price)
             }
         } catch (err) {
