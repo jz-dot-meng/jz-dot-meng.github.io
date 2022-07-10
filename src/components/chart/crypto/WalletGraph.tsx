@@ -11,6 +11,7 @@ import {
     Tooltip,
     TooltipItem,
     BarController,
+    LineController,
 } from 'chart.js';
 import { useSelector } from 'react-redux';
 import { ReduxRootState } from '../../../redux/wallet/store';
@@ -24,6 +25,7 @@ type WalletGraphType = {
 ChartJS.register(LinearScale,
     CategoryScale,
     BarController,
+    LineController,
     BarElement,
     PointElement,
     LineElement,
