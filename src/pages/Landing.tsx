@@ -1,18 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ParticleField } from '../components/canvas-animations/ParticleField';
 import { SkeletonText } from '../components/loading/SkeletonText';
 
 //components
-import { ULlinkType, ULlinks } from '../components/navigation/ULlinks';
+import { ULHorizontalLinkType, ULHorizontalLinks } from '../components/navigation/ULlinks';
 
 //styling
 import './Landing.css'
 import '../index.css'
+import { CliffordAttractor } from '../components/canvas-animations/CliffordAttractor';
+import { LeftRightSelect } from '../components/common/selections/LeftRightSelect';
 
 function Landing() {
 
-    const [latestCommit, setLatestCommit] = useState('')
+    const [latestCommit, setLatestCommit] = useState<string>('')
+
+    const animations = [
+        'Particle field',
+        'Clifford Attractor'
+    ]
+
+    const [selectedAnim, setSelectedAnim] = useState<number>(0)
+    const [component, setComponent] = useState<ReactNode | null>(null)
+
+    useEffect(() => {
+        switch (selectedAnim) {
+            case 0:
+                setComponent(<ParticleField />)
+                break;
+            case 1:
+            default:
+                setComponent(<CliffordAttractor />);
+        }
+    }, [selectedAnim])
 
     useEffect(() => {
         async function getLatestCommit() {
@@ -33,7 +54,7 @@ function Landing() {
         getLatestCommit()
     }, [])
 
-    const links: ULlinkType[] = [
+    const links: ULHorizontalLinkType[] = [
         {
             url: 'https://www.linkedin.com/in/jeffrey-zhang-133221196/',
             name: 'LinkedIn'
@@ -48,17 +69,25 @@ function Landing() {
         }
     ]
 
+    const handleSelectionChange = (newSelection: number) => {
+        console.log('newSelection', newSelection)
+        setSelectedAnim(newSelection);
+    }
+
     return (
         <>
             <div className='landing-anim'>
-                <ParticleField></ParticleField>
+                {component}
+                <div className='landing-anim-selector'>
+                    <LeftRightSelect options={animations} selection={selectedAnim} onChange={handleSelectionChange} />
+                </div>
             </div>
             <div className='landing'>
                 <section>
                     <h4>@jz-dot-meng</h4>
                     <h1>meng<span> :: an online alias for jeff zhang</span></h1>
                     <div>
-                        <ULlinks linkMap={links}></ULlinks>
+                        <ULHorizontalLinks linkMap={links}></ULHorizontalLinks>
                     </div>
                 </section>
                 <section>

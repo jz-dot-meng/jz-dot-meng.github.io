@@ -4,9 +4,22 @@
 }
 
 .landing-anim {
+    position: relative;
     margin-top: 4em;
     width: calc(100% - 8em);
     height: 60vh;
+}
+
+.landing-anim-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.landing-anim-selector {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .landing section h4 {

@@ -36,7 +36,9 @@ function WalletBalance() {
                 tokensPerAddr.forEach(tokens => {
                     tokens.forEach(token => {
                         const fiatVal = Object.values(token)[0];
-                        sum += fiatVal;
+                        if (fiatVal) {
+                            sum += fiatVal;
+                        }
                     })
                 })
             })

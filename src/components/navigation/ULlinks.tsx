@@ -3,20 +3,20 @@ import React from "react"
 //styling
 import './ULlinks.css'
 
-export type ULlinkType = {
+export type ULHorizontalLinkType = {
     url: string,
     name: string
 }
 
-type ULlinkProps = {
-    linkMap: ULlinkType[]
+type ULHorizontalLinkProps = {
+    linkMap: ULHorizontalLinkType[]
 }
 
-export const ULlinks: React.FunctionComponent<ULlinkProps> = ({ ...props }) => {
+export const ULHorizontalLinks: React.FunctionComponent<ULHorizontalLinkProps> = ({ ...props }) => {
     const { linkMap } = props;
     return (
         <ul className="ullink-ul">
-            {linkMap.map((link: ULlinkType, index) => (
+            {linkMap.map((link: ULHorizontalLinkType, index) => (
                 <li key={index}><a href={link.url}>{link.name}</a></li>
             ))}
         </ul>
