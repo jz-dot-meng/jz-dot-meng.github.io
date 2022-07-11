@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL + '/'}>
             <Routes>
                 <Route path='/' element={<Landing />} />
                 <Route path='/walletbalance' element={<WalletBalance />} />
