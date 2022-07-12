@@ -132,6 +132,6 @@ export const CliffordAttractor: React.FunctionComponent = ({ ...props }) => {
 
 
     return (
-        <canvas ref={canvasRef} onClick={reinit}></canvas>
+        <canvas style={{ cursor: 'pointer' }} ref={canvasRef} onClick={reinit}></canvas>
     )
 }

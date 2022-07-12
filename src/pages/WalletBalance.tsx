@@ -82,7 +82,7 @@ function WalletBalance() {
         <>
             <div className='balance-header'>
                 <h4><Link to='/'>@jz-dot-meng</Link></h4>
-                <h1>Wallet Balance<span> :: a one-stop shop for various blockchains</span></h1>
+                <h1>wallet balance<span> :: a one-stop shop for various blockchains</span></h1>
             </div>
             <div className='balance-body'>
                 <div className='balance-body-upper'>

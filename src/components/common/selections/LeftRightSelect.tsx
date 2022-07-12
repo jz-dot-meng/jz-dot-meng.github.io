@@ -11,13 +11,17 @@ export const LeftRightSelect: React.FunctionComponent<LeftRightSelectProps> = ({
 
     const [currentSelection, setCurrentSelection] = useState<number>(0)
 
+    /**
+     * initialise
+     */
     useEffect(() => {
         setCurrentSelection(selection)
-        console.log('initialise', currentSelection)
     }, [])
 
+    /**
+     * Handle left arrow click
+     */
     const leftSelect = () => {
-        // console.log('prior to setting', currentSelection)
         let newSelection: number;
         if (currentSelection === 0) {
             newSelection = options.length - 1
@@ -29,8 +33,10 @@ export const LeftRightSelect: React.FunctionComponent<LeftRightSelectProps> = ({
         onChange(newSelection)
     }
 
+    /**
+     * Handle right arrow click
+     */
     const rightSelect = () => {
-        // console.log('prior to setting', currentSelection)
         let newSelection: number;
         if (currentSelection === options.length - 1) {
             newSelection = 0;

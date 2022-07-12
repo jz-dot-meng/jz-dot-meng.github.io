@@ -1,3 +1,6 @@
+//styling
+import './DefaultButton.css'
+
 
 type DefaultButtonProps = {
     content: string,
@@ -10,18 +13,13 @@ export const DefaultButton: React.FunctionComponent<DefaultButtonProps> = ({ ...
 
     return (
         <button
+            className='defaultButton-style'
             style={{
-                border: 'none',
-                borderRadius: '4px',
                 width: width ? width : 50,
                 height: 30,
                 marginLeft: 5,
-                color: 'white',
-                backgroundColor: '#FF7F50',
-                alignSelf: 'center',
-                cursor: 'pointer'
             }}
             onClick={onClick}
-        >{content}</button>
+        > {content}</button >
     )
 }
