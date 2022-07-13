@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import Landing from './pages/Landing';
+import { Memory } from './pages/Memory';
 import { StroopEffect } from './pages/StroopEffect';
 import WalletBalance from './pages/WalletBalance';
 import { store } from './redux/wallet/store';
@@ -14,13 +15,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <Provider store={store}>
-        <BrowserRouter basename={process.env.PUBLIC_URL + '/'}>
+        <HashRouter basename={process.env.PUBLIC_URL + '/'}>
             <Routes>
                 <Route path='/' element={<Landing />} />
                 <Route path='/walletbalance' element={<WalletBalance />} />
                 <Route path='/stroop' element={<StroopEffect />} />
+                {/* <Route path='/memory' element={<Memory />} /> */}
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     </Provider>
 );
 

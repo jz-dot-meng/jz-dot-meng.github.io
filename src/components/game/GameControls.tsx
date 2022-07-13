@@ -25,7 +25,7 @@ export const GameControls: React.FunctionComponent<GameControlsProps> = ({ ...pr
     const [controlArray, setControlArray] = useState<any[] | undefined>([])
 
     useEffect(() => {
-        console.log('state change for game control')
+        // console.log('state change for game control')
         switch (state) {
             case 'Initial':
                 setControlArray(controls.Initial);

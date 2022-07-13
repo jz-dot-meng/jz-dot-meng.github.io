@@ -89,7 +89,7 @@ export const StroopEffect = () => {
     }
 
     const startGame = () => {
-        console.log('startgame')
+        // console.log('startgame')
         setTime(45)
         setScore(0)
         nextCard();
@@ -99,7 +99,7 @@ export const StroopEffect = () => {
     }
 
     const gameOver = () => {
-        console.log('gameover')
+        // console.log('gameover')
         setTime(time => time = 0);
         setGameState('GameOver')
         setChoice('reset')
@@ -107,7 +107,7 @@ export const StroopEffect = () => {
 
     function countdownFunc() {
         if (time <= 0 && gameState === 'PlayGame') {
-            console.log('countdown gameover')
+            // console.log('countdown gameover')
             setGameState('GameOver');
         } else {
             setTime(time => Number((time - 0.1).toFixed(3)))
