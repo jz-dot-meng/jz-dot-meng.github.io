@@ -9,14 +9,14 @@ built using React.js with Typescript/HTML/CSS
 ## Other dependencies/SDKs used:
 
 ### Charting:
-*    Chart.js
+*    [react-chart-js](https://github.com/reactchartjs/react-chartjs-2)
 
 ### Backend services:
 *    express.js
 *    node-cache
 
 ### Crypto/Blockchain:
-*    (API) [https://github.com/polkadot-js/api/](@polkadot/api)
-*    (API) [https://github.com/algorand/js-algorand-sdk](algosdk)
-*    (API) [https://github.com/stellar/js-stellar-sdk](stellar-sdk)
+*    (API) [@polkadot/api](https://github.com/polkadot-js/api/)
+*    (API) [algosdk](https://github.com/algorand/js-algorand-sdk)
+*    (API) [stellar-sdk](https://github.com/stellar/js-stellar-sdk)
 
