@@ -9,12 +9,14 @@
     margin-right: 2em;
 }
 
-.ullink-ul li a {
+.ullink-ul li a,
+.link {
     text-decoration: none;
     color: #FF7F50;
     font-weight: 900;
 }
 
-.ullink-ul li a:hover {
+.ullink-ul li a:hover,
+link:hover {
     text-decoration: underline;
 }

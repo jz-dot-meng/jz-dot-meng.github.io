@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { GameStates, GameTemplate } from "../components/game/GameTemplate"
 import { Stroop } from "../components/game/interfaces/Stroop"
+import { ULHorizontalInternalLinks } from "../components/navigation/ULInternalLinks"
+import { gamesLinkMap } from "../constants"
 
 //styling
 import "./StroopEffect.css"
@@ -179,6 +181,7 @@ export const StroopEffect = () => {
             <div className='stroop-header'>
                 <h4><Link to='/'>@jz-dot-meng</Link></h4>
                 <h1>stroop effect<span> :: reaction delay between congruent and incongruent stimuli</span></h1>
+                <ULHorizontalInternalLinks linkMap={gamesLinkMap} />
             </div>
             <div className='stroop-body'>
                 <p>match the text of the 'meaning' word to the colour of the 'colour' word</p>

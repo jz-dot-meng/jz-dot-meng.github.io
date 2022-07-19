@@ -20,7 +20,7 @@ root.render(
                 <Route path='/' element={<Landing />} />
                 <Route path='/walletbalance' element={<WalletBalance />} />
                 <Route path='/stroop' element={<StroopEffect />} />
-                {/* <Route path='/memory' element={<Memory />} /> */}
+                <Route path='/memory' element={<Memory />} />
             </Routes>
         </HashRouter>
     </Provider>

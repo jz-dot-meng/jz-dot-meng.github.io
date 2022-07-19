@@ -1,3 +1,5 @@
+import { ULHorizontalLinkType } from "../components/navigation/ULlinks"
+
 // Crypto
 export const ADD_WALLET_ADDRESS = 'ADD_WALLET_ADDRESS'
 export const REMOVE_WALLET_ADDRESS = 'REMOVE_WALLET_ADDRESS'
@@ -39,3 +41,8 @@ export const demoAddresses = {
         'LCXJNFMEU4ZD56KQD2COKQZVZRUWZDT2UWCRXAWZVLEMFMIXRQXFR5NOOE',
     ]
 }
+
+export const gamesLinkMap: ULHorizontalLinkType[] = [
+    { url: '/memory', name: 'Memory' },
+    { url: '/stroop', name: 'Stroop Effect' }
+]
