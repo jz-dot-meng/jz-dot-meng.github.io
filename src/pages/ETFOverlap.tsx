@@ -41,7 +41,7 @@ export const ETFOverlap = ({ ...props }) => {
         <>
             <div className='etf-header'>
                 <h4><Link to='/'>@jz-dot-meng</Link></h4>
-                <h1>ETF overlap<span> :: build an ETF portfolio and see the fund overlaps</span></h1>
+                <h1>ETF overlap<span> :: build a thematic ETF portfolio and see the fund overlaps</span></h1>
             </div>
             <div className='etf-body'>
                 <div className='etf-body-upper'>
