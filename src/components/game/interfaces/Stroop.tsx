@@ -1,7 +1,6 @@
-//styling
-import { useEffect } from 'react'
 import { GameCard } from '../../common/game/GameCard'
 import { GameStates } from '../GameTemplate'
+//styling
 import './Stroop.css'
 
 type StroopType = {

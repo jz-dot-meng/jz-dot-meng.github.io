@@ -20,6 +20,7 @@ export const AddEtfs: React.FunctionComponent<AddEtfsProps> = ({ ...props }) => 
     const { etfs, toggleIsLoading } = props
 
     const remainingPortfolioWeight = useSelector((state: ReduxRootState) => state.equities.etfOverlap.remainingPortfolioWeight)
+    const portfolio = useSelector((state: ReduxRootState) => state.equities.etfOverlap.portfolio)
 
     const dispatch = useDispatch();
 
@@ -49,15 +50,15 @@ export const AddEtfs: React.FunctionComponent<AddEtfsProps> = ({ ...props }) => 
     }
 
     const submitHandler = async () => {
-        if (selectedWeighting == undefined) {
+        if (selectedWeighting === undefined) {
             return
         }
         toggleIsLoading(true)
         try {
-            dispatch(subtractFromRemainingPortfolioWeight(selectedWeighting))
+            changeRemainingPortfolioWeight(selectedEtf, selectedWeighting)
             dispatch(addEtfToPortfolio({ [selectedEtf]: selectedWeighting }));
             const data = await fetchHoldings(selectedEtf)
-            if (data == undefined) {
+            if (data === undefined) {
                 throw Error('Something went wrong...')
             }
             toggleIsLoading(false)
@@ -68,6 +69,17 @@ export const AddEtfs: React.FunctionComponent<AddEtfsProps> = ({ ...props }) => 
             setErrorMessage(err)
             setShowError(true);
             toggleIsLoading(false)
+        }
+    }
+
+    const changeRemainingPortfolioWeight = (selectedEtf: string, selectedWeighting: number) => {
+        if (portfolio[selectedEtf] !== undefined) {
+            const existingWeight = portfolio[selectedEtf];
+            // if existingWeight<selectedWeight, will subtract the difference from the remaining portfolio weight
+            // else will 'add back' to the remaining portfolio weight by subtracting a negative number
+            dispatch(subtractFromRemainingPortfolioWeight(selectedWeighting - existingWeight))
+        } else {
+            dispatch(subtractFromRemainingPortfolioWeight(selectedWeighting))
         }
     }
 

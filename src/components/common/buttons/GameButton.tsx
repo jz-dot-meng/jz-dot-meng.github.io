@@ -4,23 +4,12 @@ import DOMPurify from 'dompurify'
 //styling
 import './GameButton.css'
 
-interface IDOMPurifyWindow extends Window {
-    DOMPurify: typeof DOMPurify;
-}
-
 type GameButtonType = {
     buttonText: string,
     onClick: () => void
 }
 
 export const GameButton: React.FunctionComponent<GameButtonType> = ({ ...props }) => {
-    // const window = new JSDOM('').window;
-    // const DOMPurify = createDOMPurify(window);
-
-    const purify =
-        ((window as unknown) as IDOMPurifyWindow)?.DOMPurify || DOMPurify;
-
-
 
     const { buttonText, onClick } = props
 

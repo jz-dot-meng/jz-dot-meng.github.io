@@ -6,7 +6,7 @@ interface HistoricPriceState {
     current: any
 }
 
-const initialState = {
+const initialState: HistoricPriceState = {
     historic: {} as HistoricPricePayload,
     current: {} as any
 }

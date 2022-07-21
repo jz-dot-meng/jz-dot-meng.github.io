@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { CryptoAddressPayload, addWalletAddress, removeWalletAddress, CryptoBalancePayload, setWalletBalance, setWalletFiatBalance, addRewardHistory, WalletRewardPayload } from "../actions/addressActions"
+import { CryptoAddressPayload, addWalletAddress, removeWalletAddress, CryptoBalancePayload, setWalletBalance, setWalletFiatBalance, addRewardHistory } from "../actions/addressActions"
 
 interface AddressState {
     addresses: CryptoAddressPayload[];

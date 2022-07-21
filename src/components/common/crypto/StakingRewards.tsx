@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
-import { ReduxRootState, store } from "../../../redux/store"
+import { ReduxRootState } from "../../../redux/store"
 import { Tabs } from "../../navigation/Tabs";
 import { StakingRewardsTabContent } from "./StakingRewardsTabContent";
 
