@@ -33,6 +33,7 @@ export const CliffordAttractor: React.FunctionComponent = ({ ...props }) => {
         })
     }, [])
 
+
     function init(canvas: HTMLCanvasElement) {
         canvas.style.width = "100%";
         canvas.style.height = "100%";

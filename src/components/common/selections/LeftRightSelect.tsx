@@ -2,12 +2,13 @@ import { useEffect, useState } from "react"
 
 type LeftRightSelectProps = {
     options: string[],
-    selection: number
+    selection: number,
+    style?: any,
     onChange: (newSelection: number) => void
 }
 
 export const LeftRightSelect: React.FunctionComponent<LeftRightSelectProps> = ({ ...props }) => {
-    const { options, selection, onChange } = props
+    const { options, selection, style, onChange } = props
 
     const [currentSelection, setCurrentSelection] = useState<number>(0)
 
@@ -50,7 +51,7 @@ export const LeftRightSelect: React.FunctionComponent<LeftRightSelectProps> = ({
 
     return (
         <>
-            <div style={{
+            <div style={style ? style : {
                 color: 'rgb(140,140,140)',
                 width: '100%',
                 display: 'flex',

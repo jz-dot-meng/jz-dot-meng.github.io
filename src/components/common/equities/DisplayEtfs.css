@@ -1,20 +1,20 @@
-.displayAddress-container {
+.displayEtfs-container {
     width: 100%;
     margin: 1em 0;
     position: relative;
 }
 
-.displayAddress-table {
+.displayEtfs-table {
     width: 100%;
 }
 
-.displayAddress-table tr {
+.displayEtfs-table tr {
     width: 33%;
     height: 2.5em;
     text-align: center;
 }
 
-.displayAddress-loadingState {
+.displayEtfs-loadingState {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -26,7 +26,7 @@
     display: flex;
 }
 
-.displayAddress-spinner {
+.displayEtfs-spinner {
     border: 8px solid #f3f3f3;
     border-radius: 50%;
     border-top: 8px solid #FF7F50;

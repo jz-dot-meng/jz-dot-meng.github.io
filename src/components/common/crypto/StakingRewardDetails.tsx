@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TokenBalancePayload } from '../../../redux/wallet/actions/addressActions';
-import { ReduxRootState } from '../../../redux/wallet/store';
+import { ReduxRootState } from '../../../redux/store';
 import { getRewardTickerFromBlockchain } from '../../../utils/blockchain/string';
 import { calculateApyFromRewardAndTotal } from '../../../utils/finance/interest';
 import './StakingRewardDetails.css'

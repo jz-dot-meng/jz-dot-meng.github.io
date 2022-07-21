@@ -11,6 +11,14 @@ export const ADD_REWARD_HISTORY = 'ADD_REWARD_HISTORY'
 export const ADD_HISTORIC_PRICES = 'ADD_HISTORIC_PRICES'
 export const ADD_CURRENT_PRICE = 'ADD_CURRENT_PRICE'
 
+//Equities
+export const SUBTRACT_FROM_REMAINING_PORTFOLIO_WEIGHT = 'SUBTRACT_FROM_REMAINING_PORTFOLIO_WEIGHT'
+export const ADD_TO_REMAINING_PORTFOLIO_WEIGHT = "ADD_TO_REMAINING_PORTFOLIO_WEIGHT"
+export const ADD_ETF_TO_PORTFOLIO = "ADD_ETF_TO_PORTFOLIO";
+export const REMOVE_ETF_FROM_PORTFOLIO = 'REMOVE_ETF_FROM_PORTFOLIO'
+export const ADD_ETF_HOLDINGS = "ADD_ETF_HOLDINGS";
+export const SET_STOCK_OVERLAP = "SET_STOCK_OVERLAP"
+
 export const demoAddresses = {
     'Polkadot': [
         '13Lzu5zu91j3mqiGp1MnqzdP3wXQpiwxgJAvvvjQ5shkDLFq',
@@ -46,3 +54,4 @@ export const gamesLinkMap: ULHorizontalLinkType[] = [
     { url: '/memory', name: 'Memory' },
     { url: '/stroop', name: 'Stroop Effect' }
 ]
+

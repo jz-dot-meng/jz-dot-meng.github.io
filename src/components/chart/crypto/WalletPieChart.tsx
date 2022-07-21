@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { Doughnut } from "react-chartjs-2"
 
 //types and interfaces
-import { ReduxRootState } from "../../../redux/wallet/store"
+import { ReduxRootState } from "../../../redux/store"
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, TooltipItem } from 'chart.js';
 import { addEllipses } from "../../../utils/wallet/string"

@@ -6,12 +6,12 @@ import { ErrorDialog } from "../../dialog/ErrorDialog";
 import { DefaultButton } from "../buttons/DefaultButton";
 
 
-type AddWalletAddressType = {
+type AddWalletAddressProps = {
     blockchains: string[]
     toggleIsLoading: any;
 }
 
-export const AddWalletAddress: React.FunctionComponent<AddWalletAddressType> = ({ ...props }) => {
+export const AddWalletAddress: React.FunctionComponent<AddWalletAddressProps> = ({ ...props }) => {
     const { blockchains, toggleIsLoading } = props;
 
     const [selectedChain, setSelectedChain] = useState<string>(blockchains[0]);

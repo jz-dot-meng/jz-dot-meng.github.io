@@ -14,7 +14,7 @@ import {
     LineController,
 } from 'chart.js';
 import { useSelector } from 'react-redux';
-import { ReduxRootState } from '../../../redux/wallet/store';
+import { ReduxRootState } from '../../../redux/store';
 
 
 type WalletGraphType = {

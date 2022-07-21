@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
+import { ETFOverlap } from './pages/ETFOverlap';
 import Landing from './pages/Landing';
 import { Memory } from './pages/Memory';
 import { StroopEffect } from './pages/StroopEffect';
 import WalletBalance from './pages/WalletBalance';
-import { store } from './redux/wallet/store';
+import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -21,6 +22,7 @@ root.render(
                 <Route path='/walletbalance' element={<WalletBalance />} />
                 <Route path='/stroop' element={<StroopEffect />} />
                 <Route path='/memory' element={<Memory />} />
+                <Route path='/etfoverlap' element={<ETFOverlap />} />
             </Routes>
         </HashRouter>
     </Provider>

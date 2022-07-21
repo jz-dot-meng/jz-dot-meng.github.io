@@ -114,7 +114,7 @@ function Landing() {
                 </section>
                 <section>
                     <div><Link to='/stroop'>Software developer</Link>, occasional sound engineer and music producer</div>
-                    <div>Avid home cook, enthusiatic about green/impact investing, <Link to='/WalletBalance'>personal finance</Link> and other small ways to make a difference</div>
+                    <div>Avid home cook, enthusiatic about <Link to='/etfoverlap'>green/impact investing</Link>, <Link to='/WalletBalance'>personal finance</Link> and other small ways to make a difference</div>
                 </section>
                 <section className='landing-footer'>
                     <div>{latestCommit ?

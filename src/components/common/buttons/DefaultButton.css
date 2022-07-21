@@ -6,3 +6,8 @@
     align-self: center;
     cursor: pointer
 }
+
+.defaultButton-style-disabled {
+    background-color: #FF7F5080;
+    pointer-events: none;
+}

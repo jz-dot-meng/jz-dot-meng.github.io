@@ -1,14 +1,24 @@
-.balance-header {
+.balance-header,
+.etf-header {
     margin: 1em 4em;
 }
 
-.balance-body {
+.balance-body,
+.etf-body {
     margin: 0 4em;
     display: flex;
     flex-direction: column;
 }
 
-.balance-body-upper {
+.etf-footer {
+    padding: 1.5em;
+    border-top: 1px solid #d5d5d5;
+    font-size: 0.75em;
+    margin: 1.5em;
+}
+
+.balance-body-upper,
+.etf-body-upper {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(5, minmax(200px, 1fr));
@@ -23,7 +33,8 @@
 */
 
 
-.balance-body-lower section {
+.balance-body-lower section,
+.etf-body-lower section {
     height: 100%;
 }
 
@@ -45,7 +56,9 @@
 }
 
 @media screen and (max-width:900px) {
-    .balance-body-upper {
+
+    .balance-body-upper,
+    .etf-body-upper {
         display: flex;
         flex-direction: column;
     }

@@ -1,6 +1,6 @@
 import { TokenBalancePayload } from "../../redux/wallet/actions/addressActions"
 import { addTokenConversion } from "../../redux/wallet/actions/currencyActions"
-import { store } from "../../redux/wallet/store"
+import { store } from "../../redux/store"
 
 export class BlockchainFactory {
     static chain(blockchain: string) {

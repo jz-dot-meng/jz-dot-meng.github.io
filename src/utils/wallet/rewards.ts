@@ -1,6 +1,6 @@
 import { addRewardHistory } from "../../redux/wallet/actions/addressActions";
 import { addHistoricPrices } from "../../redux/wallet/actions/tokenPriceActions";
-import { store } from "../../redux/wallet/store";
+import { store } from "../../redux/store";
 
 export const fetchAllRewardData = (blockchain: string, address: string) => {
     console.log(`fetching reward data for ${address}...`)

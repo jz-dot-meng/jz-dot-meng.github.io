@@ -1,6 +1,6 @@
 import { setWalletBalance, setWalletFiatBalance, TokenBalancePayload, WalletTokenPayload } from "../../redux/wallet/actions/addressActions";
 import { addCurrentPrice } from "../../redux/wallet/actions/tokenPriceActions";
-import { store } from "../../redux/wallet/store"
+import { store } from "../../redux/store"
 import { BlockchainFactory } from "../blockchain/blockchainFactory"
 
 /**

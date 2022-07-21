@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { CryptoAddressPayload, removeWalletAddress } from "../../../redux/wallet/actions/addressActions";
-import { ReduxRootState } from "../../../redux/wallet/store"
+import { ReduxRootState } from "../../../redux/store"
 import { addEllipses } from "../../../utils/wallet/string";
 import { DefaultButton } from "../buttons/DefaultButton";
 

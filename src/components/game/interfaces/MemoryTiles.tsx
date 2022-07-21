@@ -66,7 +66,7 @@ export const MemoryTiles: React.FunctionComponent<MemoryTilesType> = ({ ...props
             const copy = selectionSplicer.slice()
             copy.push(...levelSelection.splice(indexInSelection, 1));
             setSelectionSplicer(copy)
-            if (levelSelection.length == 0) {
+            if (levelSelection.length === 0) {
                 handleAllCorrectTilesSelected(copy)
             }
         }

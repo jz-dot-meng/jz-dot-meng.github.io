@@ -1,7 +1,7 @@
 
-//styling
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ReduxRootState, store } from '../redux/store'
 import { Link } from 'react-router-dom'
 import { WalletPieChart } from '../components/chart/crypto/WalletPieChart'
 import { DefaultButton } from '../components/common/buttons/DefaultButton'
@@ -9,11 +9,11 @@ import { AddWalletAddress } from '../components/common/crypto/AddWalletAddress'
 import { DisplayAddresses } from '../components/common/crypto/DisplayAddresses'
 import { StakingRewards } from '../components/common/crypto/StakingRewards'
 import { demoAddresses } from '../constants'
-import '../index.css'
 import { addWalletAddress, removeWalletAddress } from '../redux/wallet/actions/addressActions'
-import { ReduxRootState, store } from '../redux/wallet/store'
 import { validateAddress } from '../utils/wallet/validation'
-import './WalletBalance.css'
+//styling
+import '../index.css'
+import './Global.css'
 
 
 function WalletBalance() {
