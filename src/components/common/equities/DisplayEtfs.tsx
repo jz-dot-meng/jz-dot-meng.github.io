@@ -1,9 +1,9 @@
-//styling
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeEtfFromPortfolio, TickerWeightingPayload } from '../../../redux/equities/actions/etfOverlapActions'
 import { ReduxRootState } from '../../../redux/store'
 import { DefaultButton } from '../buttons/DefaultButton'
+//styling
 import './DisplayEtfs.css'
 
 type DisplayEtfsProps = {

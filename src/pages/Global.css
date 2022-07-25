@@ -1,10 +1,12 @@
 .balance-header,
-.etf-header {
+.etf-header,
+.wheel-header {
     margin: 1em 4em;
 }
 
 .balance-body,
-.etf-body {
+.etf-body,
+.wheel-body {
     margin: 0 4em;
     display: flex;
     flex-direction: column;
@@ -18,7 +20,8 @@
 }
 
 .balance-body-upper,
-.etf-body-upper {
+.etf-body-upper,
+.wheel-body-upper {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(5, minmax(200px, 1fr));

@@ -18,6 +18,9 @@ export const ETFOverlap = ({ ...props }) => {
 
     const etfs = {
         'betashares': {
+            // 'DZZF': 'Ethical Diversified High Growth ETF',
+            // 'DGGF': 'Ethical Diversified Growth ETF',
+            // 'DBBF': 'Ethical Diversified Balanced ETF',
             'ETHI': 'Global Sustainability Leaders ETF',
             'FAIR': 'Australian Sustainability Leaders ETF',
             'TANN': 'Solar ETF',

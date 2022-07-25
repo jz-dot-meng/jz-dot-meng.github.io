@@ -8,6 +8,7 @@ import Landing from './pages/Landing';
 import { Memory } from './pages/Memory';
 import { StroopEffect } from './pages/StroopEffect';
 import WalletBalance from './pages/WalletBalance';
+import { WheelStrategy } from './pages/WheelStrategy';
 import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 

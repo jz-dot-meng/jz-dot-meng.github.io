@@ -7,7 +7,7 @@ import { ErrorDialog } from "../../dialog/ErrorDialog"
 import { DefaultButton } from "../buttons/DefaultButton"
 
 //styling
-import './AddEtfs.css'
+import './AddItem.css'
 
 type AddEtfsProps = {
     etfs: {
@@ -90,7 +90,7 @@ export const AddEtfs: React.FunctionComponent<AddEtfsProps> = ({ ...props }) => 
     return (
         <>
             <ErrorDialog open={showError} handleClose={errorCloseHandler} title={errorTitle} message={errorMessage} />
-            <div style={{ display: "flex", width: "100%" }}>
+            <div className="add-flexfullwidth">
                 <select
                     style={{
                         border: '1px solid #d5d5d5',
