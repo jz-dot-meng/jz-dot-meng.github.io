@@ -1,0 +1,22 @@
+.ullinkUl {
+    list-style-type: none;
+    font-size: 1.25em;
+    padding: 0px;
+}
+
+.ullinkUl li {
+    display: inline;
+    margin-right: 2em;
+}
+
+.ullinkUl li a,
+.link {
+    text-decoration: none;
+    color: #FF7F50;
+    font-weight: 900;
+}
+
+.ullinkUl li a:hover,
+.link:hover {
+    text-decoration: underline;
+}

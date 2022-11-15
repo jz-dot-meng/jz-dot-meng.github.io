@@ -1,0 +1,16 @@
+.defaultButtonStyle {
+    border: none;
+    border-radius: 4px;
+    color: white;
+    background-color: #FF7F50;
+    align-self: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer
+}
+
+.defaultButtonStyleDisabled {
+    background-color: #FF7F5080;
+    pointer-events: none;
+}   

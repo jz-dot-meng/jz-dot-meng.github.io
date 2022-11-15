@@ -1,6 +1,6 @@
+import { store } from "../../redux/store";
 import { addRewardHistory } from "../../redux/wallet/actions/addressActions";
 import { addHistoricPrices } from "../../redux/wallet/actions/tokenPriceActions";
-import { store } from "../../redux/store";
 
 export const fetchAllRewardData = (blockchain: string, address: string) => {
     console.log(`fetching reward data for ${address}...`)
@@ -18,7 +18,7 @@ export const fetchAllRewardData = (blockchain: string, address: string) => {
 }
 
 const checkAddressForRewards = async (blockchain: string, address: string): Promise<any> => {
-    const url = `${process.env.REACT_APP_WALLET_API}/${blockchain.toLowerCase()}/rewards/${address}`
+    const url = `/api/wallet/blockchain/${blockchain.toLowerCase()}/rewards?address=${address}`
     return fetch(url).then(async resp => {
         if (resp.status !== 200) {
             console.warn(resp)
@@ -51,7 +51,7 @@ const getHistoricPrices = async (token: string, startDate: string, endDate: stri
     const endDateParse = new Date(endDate);
     const endDateMs = Date.UTC(endDateParse.getFullYear(), endDateParse.getMonth(), endDateParse.getDay())
     // console.log({ startDate, startDateMs, endDate, endDateMs, token })
-    const url = `${process.env.REACT_APP_WALLET_API}/historic&token=${token}&currency=${currency}&start=${startDateMs / 1000}&end=${endDateMs / 1000}`
+    const url = `/api/wallet/token/historic?token=${token}&currency=${currency}&start=${startDateMs / 1000}&end=${endDateMs / 1000}`
     fetch(url).then(async resp => {
         const data = await resp.json();
         // console.log(data)

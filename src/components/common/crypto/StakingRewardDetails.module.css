@@ -1,0 +1,16 @@
+.rewardDetailsContainer {
+    margin: 1em;
+}
+
+.rewardDetailHeading,
+.rewardDetailData {
+    height: 2em;
+}
+
+.rewardDetailHeading {
+    font-size: 0.75em;
+}
+
+.rewardDetailData {
+    text-align: center;
+}

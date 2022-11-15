@@ -1,18 +1,25 @@
-import { Link } from "react-router-dom"
-import { ULHorizontalLinkType } from "./ULlinks"
+import Link from "next/link";
+import { ULHorizontalLinkType } from "./ULlinks";
+
+import styles from "./ULlinks.module.css";
 
 type ULHorizontalInternalLinksProps = {
-    linkMap: ULHorizontalLinkType[]
-}
+  linkMap: ULHorizontalLinkType[];
+};
 
-export const ULHorizontalInternalLinks: React.FunctionComponent<ULHorizontalInternalLinksProps> = ({ ...props }) => {
-    const { linkMap } = props
-    return (
-        <ul className="ullink-ul">
-            {linkMap.map((link: ULHorizontalLinkType, index) => (
-                <li key={index}><Link to={link.url} className='link'
-                >{link.name}</Link></li>
-            ))}
-        </ul>
-    )
-}
+export const ULHorizontalInternalLinks: React.FunctionComponent<
+  ULHorizontalInternalLinksProps
+> = ({ ...props }) => {
+  const { linkMap } = props;
+  return (
+    <ul className={styles.ullinkUl}>
+      {linkMap.map((link: ULHorizontalLinkType, index) => (
+        <li key={index}>
+          <Link href={link.url} className={styles.link}>
+            {link.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};

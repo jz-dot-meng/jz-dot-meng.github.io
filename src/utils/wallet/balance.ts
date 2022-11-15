@@ -1,7 +1,7 @@
+import { store } from "../../redux/store";
 import { setWalletBalance, setWalletFiatBalance, TokenBalancePayload, WalletTokenPayload } from "../../redux/wallet/actions/addressActions";
 import { addCurrentPrice } from "../../redux/wallet/actions/tokenPriceActions";
-import { store } from "../../redux/store"
-import { BlockchainFactory } from "../blockchain/blockchainFactory"
+import { BlockchainFactory } from "../blockchain/blockchainFactory";
 
 /**
  * Series of actions to take given a valid address + wallet balance returned from API
@@ -82,7 +82,7 @@ export const fetchFiatToken = async (token: string): Promise<number> => {
     const state = store.getState();
     const currency = state.crypto.currencyCoversion.currency;
     return new Promise(async (resolve, reject) => {
-        const url = `${process.env.REACT_APP_WALLET_API}/price&token=${token}&currency=${currency}`
+        const url = `/api/wallet/token/price?token=${token}&currency=${currency}`
         try {
             let price: number = NaN;
             const resp = await fetch(url, {

@@ -9,7 +9,7 @@ import { fetchAllRewardData } from "./rewards";
  */
 export const validateAddress = async (blockchain: string, address: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-        const url = `${process.env.REACT_APP_WALLET_API}/${blockchain.toLowerCase()}/address/${address}`
+        const url = `/api/wallet/blockchain/${blockchain.toLowerCase()}/address?address=${address}`
         fetch(url, {
             method: 'GET'
         }).then(async (response) => {

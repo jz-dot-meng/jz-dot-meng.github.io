@@ -1,0 +1,21 @@
+.gameContainer {
+    width: 50vw
+}
+
+.gameFlex {
+    display: flex
+}
+
+.gameFlex1 {
+    flex: 1
+}
+
+.gameFitC {
+    width: fit-content;
+}
+
+@media screen and (max-width:900px) {
+    .gameContainer {
+        width: 80vw
+    }
+}

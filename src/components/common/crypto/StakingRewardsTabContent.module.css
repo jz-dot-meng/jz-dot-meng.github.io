@@ -1,0 +1,19 @@
+.rewardsTabContentContainer {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.rewardsTabContentGraph {
+    grid-column: span 7;
+}
+
+.rewardsTabContentDetails {
+    grid-column: span 3;
+}
+
+@media screen and (max-width:900px) {
+    .rewardsTabContentContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}
