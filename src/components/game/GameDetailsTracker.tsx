@@ -45,7 +45,7 @@ export const GameDetailsTracker: React.FunctionComponent<
               justifyContent: details.justifyContent,
             }}
           >
-            <div className="game-fitC">{details.data}</div>
+            <div className={styles.gameFitC}>{details.data}</div>
           </div>
         ))}
       </div>

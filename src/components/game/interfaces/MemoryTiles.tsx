@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MemoryDisplayMode } from "../../../pages/memory";
 import { GameStates } from "../GameTemplate";
 
-import "./MemoryTiles.module.css";
+import styles from "./MemoryTiles.module.css";
 
 type MemoryTilesType = {
   state: keyof typeof GameStates;
@@ -90,7 +90,7 @@ export const MemoryTiles: React.FunctionComponent<MemoryTilesType> = ({
         style={{
           visibility: state !== "Initial" ? "visible" : "hidden",
         }}
-        className="memory-tilesContainer"
+        className={styles.memoryTilesContainer}
       >
         <div
           style={{
@@ -103,7 +103,7 @@ export const MemoryTiles: React.FunctionComponent<MemoryTilesType> = ({
             <button
               key={number}
               id={`tile-${number}`}
-              className={`memory-gametile 
+              className={`${styles.memoryGameTile} 
                                 ${
                                   display === "Memorise"
                                     ? levelSelection.indexOf(number) !== -1

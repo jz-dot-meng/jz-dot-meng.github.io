@@ -58,3 +58,12 @@ a:hover {
         opacity: 0
     }
 }
+
+
+.memory-correctSelection {
+    background-color: coral;
+}
+
+.memory-missingSelection {
+    background-color: crimson;
+}

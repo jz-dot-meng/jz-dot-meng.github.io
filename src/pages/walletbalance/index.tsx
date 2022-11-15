@@ -14,7 +14,7 @@ import {
 import { validateAddress } from "../../utils/wallet/validation";
 //styling
 import Link from "next/link";
-import styles from "../../styles/Financial.module.css";
+import styles from "../../styles/Home.module.css";
 
 const WalletBalance: React.FunctionComponent = () => {
   const fiatBalanceArr = useSelector(
@@ -83,7 +83,7 @@ const WalletBalance: React.FunctionComponent = () => {
 
   return (
     <>
-      <div className={styles.balanceHeader}>
+      <div className={styles.mainHeader}>
         <h4>
           <Link href="/">@jz-dot-meng</Link>
         </h4>
@@ -91,7 +91,7 @@ const WalletBalance: React.FunctionComponent = () => {
           wallet balance<span> :: a one-stop shop for various blockchains</span>
         </h1>
       </div>
-      <div className={styles.balanceBody}>
+      <div className={styles.mainBodyFlexCol}>
         <div className={styles.balanceBodyUpper}>
           <section className={styles.upperLeft}>
             <div

@@ -6,10 +6,10 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet="utf-8" />
-          <link rel="icon" href="%PUBLIC_URL%/icons/favicon.png" />
+          <link rel="icon" href="/icons/favicon.png" />
           <meta name="theme-color" content="#000000" />
           <meta name="description" content="a selection of personal projects" />
-          <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/favicon.png" />
+          <link rel="apple-touch-icon" href="/icons/favicon.png" />
           <meta property="og:url" content="https://jz-dot-meng.github.io" />
           <meta
             property="og:title"
@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
             property="og:description"
             content="a selection of personal projects"
           />
-          <meta property="og:image" content="%PUBLIC_URL%/icons/favicon.png" />
+          <meta property="og:image" content="/icons/favicon.png" />
           {/*
             Notice the use of %PUBLIC_URL% in the tags above.
             It will be replaced with the URL of the `public` folder during the build.

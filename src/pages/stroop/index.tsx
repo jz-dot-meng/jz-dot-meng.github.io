@@ -6,7 +6,7 @@ import { ULHorizontalInternalLinks } from "../../components/navigation/ULInterna
 import { gamesLinkMap } from "../../constants";
 
 //styling
-import styles from "../../styles/StroopEffect.module.css";
+import styles from "../../styles/Home.module.css";
 
 enum Choice {
   "match" = "match",
@@ -188,7 +188,7 @@ const StroopEffect: React.FunctionComponent = () => {
 
   return (
     <>
-      <div className={styles.stroopHeader}>
+      <div className={styles.mainHeader}>
         <h4>
           <Link href="/">@jz-dot-meng</Link>
         </h4>
@@ -201,7 +201,7 @@ const StroopEffect: React.FunctionComponent = () => {
         </h1>
         <ULHorizontalInternalLinks linkMap={gamesLinkMap} />
       </div>
-      <div className={styles.stroopBody}>
+      <div className={styles.mainBody}>
         <p>
           match the text of the 'meaning' word to the colour of the 'colour'
           word

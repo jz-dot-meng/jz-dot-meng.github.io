@@ -6,7 +6,7 @@ import { DisplayEtfs } from "../../components/common/equities/DisplayEtfs";
 import { PortfolioOverlap } from "../../components/common/equities/PortfolioOverlap";
 import { LeftRightSelect } from "../../components/common/selections/LeftRightSelect";
 
-import styles from "../../styles/Financial.module.css";
+import styles from "../../styles/Home.module.css";
 
 const ETFOverlap: React.FunctionComponent = ({ ...props }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,7 +41,7 @@ const ETFOverlap: React.FunctionComponent = ({ ...props }) => {
 
   return (
     <>
-      <div className={styles.etfHeader}>
+      <div className={styles.mainHeader}>
         <h4>
           <Link href="/">@jz-dot-meng</Link>
         </h4>
@@ -53,8 +53,8 @@ const ETFOverlap: React.FunctionComponent = ({ ...props }) => {
           </span>
         </h1>
       </div>
-      <div className={styles.etfBody}>
-        <div className={styles.etfBodyUpper}>
+      <div className={styles.mainBodyFlexCol}>
+        <div className={styles.flexBodyUpper}>
           <section className={styles.upperLeft}>
             <h4>ETF Portfolio</h4>
             <AddEtfs etfs={etfs} toggleIsLoading={toggleIsLoading} />
@@ -77,7 +77,7 @@ const ETFOverlap: React.FunctionComponent = ({ ...props }) => {
             </div>
           </section>
         </div>
-        <div className={styles.etfBodyLower}>
+        <div className={styles.flexBodyLower}>
           <h4>Holding overlaps</h4>
           <div>
             <PortfolioOverlap />

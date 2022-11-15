@@ -99,7 +99,7 @@ function Landing() {
   return (
     <div className={styles.container}>
       <div
-        className={styles.landingAnim}
+        className={`${styles.landingAnim} ${styles.mainBody}`}
         onMouseOver={handleMouseOverDisplay}
         onMouseLeave={handleMouseLeaveFade}
       >
@@ -112,7 +112,7 @@ function Landing() {
           />
         </div>
       </div>
-      <div className={styles.landing}>
+      <div className={`${styles.mainBody} ${styles.landing}`}>
         <section>
           <h4>@jz-dot-meng</h4>
           <h1>

@@ -6,7 +6,7 @@ import { ULHorizontalInternalLinks } from "../../components/navigation/ULInterna
 import { gamesLinkMap } from "../../constants";
 
 //styling
-import "../../styles/Memory.module.css";
+import styles from "../../styles/Home.module.css";
 
 export enum MemoryDisplayMode {
   "Memorise" = "Memorise",
@@ -113,7 +113,7 @@ const Memory: React.FunctionComponent<MemoryType> = ({ ...props }) => {
 
   return (
     <>
-      <div className="memory-header">
+      <div className={styles.mainHeader}>
         <h4>
           <Link href="/">@jz-dot-meng</Link>
         </h4>
@@ -122,7 +122,7 @@ const Memory: React.FunctionComponent<MemoryType> = ({ ...props }) => {
         </h1>
         <ULHorizontalInternalLinks linkMap={gamesLinkMap} />
       </div>
-      <div className="memory-body">
+      <div className={styles.mainHeader}>
         <p>select the tiles shown at the beginning of each level</p>
         <GameTemplate state={gameState} config={memoryConfig}>
           <MemoryTiles
