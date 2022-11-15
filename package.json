@@ -33,7 +33,8 @@
         "dev": "next dev",
         "start": "next start",
         "build": "next build",
-        "test": "react-scripts test"
+        "test": "react-scripts test",
+        "export": "next export"
     },
     "eslintConfig": {
         "extends": [
