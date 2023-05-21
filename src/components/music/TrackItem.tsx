@@ -1,7 +1,6 @@
 import { LiveIcon } from "@components/common/data/LiveIcon";
 import { getTimeElapsed } from "@utils/functions/datetime";
 import { LastFm } from "@utils/types/music";
-import Link from "next/link";
 import { useMemo } from "react";
 
 interface TrackItemProps {
