@@ -3,9 +3,21 @@ import Cors from "cors";
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
+const ALLOW_LIST = ["https://jz-dot-meng.vercel.app", "https://jz-dot-meng.github.io"];
 const cors = Cors({
 	methods: ["POST", "GET", "HEAD"],
-	origin: ["https://jz-dot-meng.vercel.app", "https://jz-dot-meng.github.io"],
+	origin: (requestOrigin, callback) => {
+		if (!requestOrigin) {
+			callback(new Error("No request origin, not allowed by CORS"));
+			return;
+		}
+		const allowListMatch = ALLOW_LIST.indexOf(requestOrigin);
+		if (allowListMatch === -1) {
+			callback(new Error("Not allow-listed by CORS"));
+		} else {
+			callback(null, true);
+		}
+	},
 });
 
 // Helper method to wait for a middleware to execute before continuing

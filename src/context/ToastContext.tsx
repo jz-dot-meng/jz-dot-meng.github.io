@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useContext } from "react";
 import { ToastContainer } from "react-toastify";
 
 interface ToastOverview {}
@@ -12,7 +12,7 @@ export const useToastContext = () => {
 	return toastContext;
 };
 
-export const ToastContextProvider = ({ children }: { children: React.ReactNode }) => {
+export const ToastContextProvider = ({ children }: { children: ReactNode }) => {
 	return (
 		<ToastContext.Provider value={{}}>
 			<ToastContainer

@@ -23,21 +23,28 @@ export module LastFm {
 		mbid: string;
 	}
 
-	export interface Track {
-		album: Album;
+	interface Base_Track {
 		artist: Artist;
-		date: {
-			"#text": string;
-			uts: string;
-		};
 		image: Image[];
 		mbid: string;
 		loved: "0" | "1";
 		name: string;
 		streamable: "0" | "1";
 		url: string;
+		album: Album;
 	}
 
+	type NowPlaying_Track = Base_Track & {
+		"@attr": { nowplaying: "true" };
+	};
+	type Historical_Track = Base_Track & {
+		date: {
+			"#text": string;
+			uts: string;
+		};
+	};
+
+	export type Track = NowPlaying_Track | Historical_Track;
 	export interface RecentTracks {
 		recenttracks: {
 			"@attr": attr;

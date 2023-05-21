@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContextProvider } from "context/ToastContext";
+import { MusicContextProvider } from "context/MusicContext";
 
 function JzMengApp({ Component, pageProps }: AppProps) {
 	/**
@@ -18,7 +19,9 @@ function JzMengApp({ Component, pageProps }: AppProps) {
 	}, []);
 	return (
 		<ToastContextProvider>
-			<Component {...pageProps} />
+			<MusicContextProvider>
+				<Component {...pageProps} />
+			</MusicContextProvider>
 		</ToastContextProvider>
 	);
 }
