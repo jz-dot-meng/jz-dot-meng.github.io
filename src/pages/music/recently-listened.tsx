@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const RecentlyListened: React.FunctionComponent = () => {
-	const isDev =
-		(typeof window !== "undefined" && window.location.href.includes("localhost:3000")) || true;
 	const [now] = useState<number>(Date.now());
 
 	const [latestTracks, setLastestTracks] = useState<LastFm.Track[]>([]);
 
 	useEffect(() => {
-		if (isDev) {
-			api<RecentTracksResponse>("/api/music/recentTracks").then((data) => {
+		// full call - github pages cannot call 'server' api
+		//  api<RecentTracksResponse>("/api/music/recentTracks").then(
+		api<RecentTracksResponse>("https://jz-dot-meng.vercel.app/api/music/recentTracks").then(
+			(data) => {
 				if (!data.success) {
 					// toast
 					toast.error(`Unable to fetch recent tracks: ${data.error}`);
@@ -22,22 +22,9 @@ const RecentlyListened: React.FunctionComponent = () => {
 				}
 				console.log({ data });
 				setLastestTracks(data.data.recenttracks.track);
-			});
-		} else {
-			// full call - github pages cannot call 'server' api
-			api<RecentTracksResponse>("https://jz-dot-meng.vercel.app/api/music/recentTracks").then(
-				(data) => {
-					if (!data.success) {
-						// toast
-						toast.error(`Unable to fetch recent tracks: ${data.error}`);
-						return;
-					}
-					console.log({ data });
-					setLastestTracks(data.data.recenttracks.track);
-				}
-			);
-		}
-	}, [isDev]);
+			}
+		);
+	}, []);
 	return (
 		<div className="flex h-full p-8">
 			<div className="flex flex-col gap-2 w-full">
