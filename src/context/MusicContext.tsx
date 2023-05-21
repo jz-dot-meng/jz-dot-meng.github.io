@@ -33,7 +33,6 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
 		const latestTrack = tracks[0];
 		if ("@attr" in latestTrack && latestTrack["@attr"].nowplaying === "true") {
 			setNowListening(latestTrack);
-			_displayNowListeningToast(latestTrack);
 			_startListener();
 		}
 	};
