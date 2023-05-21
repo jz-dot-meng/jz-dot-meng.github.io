@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { ParticleField } from "@components/canvas-animations/ParticleField";
-import { SkeletonText } from "@components/loading/SkeletonText";
+import Link from "next/link";
 
 //components
+import { ParticleField } from "@components/canvas-animations/ParticleField";
+import { SkeletonText } from "@components/loading/SkeletonText";
 import { ULHorizontalLinks } from "@components/navigation/ULLinks";
-
-//styling
-import Link from "next/link";
 import { CliffordAttractor } from "@components/canvas-animations/CliffordAttractor";
 import { LeftRightSelect } from "@components/common/selections/LeftRightSelect";
+
+//types
 import { ULHorizontalLinkType } from "@utils/types/navigation";
 
 function Landing() {
