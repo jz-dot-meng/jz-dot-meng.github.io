@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import { ToastContainer } from "react-toastify";
 
 export default class MyDocument extends Document {
 	render() {
@@ -27,7 +28,7 @@ export default class MyDocument extends Document {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<title>@jz-dot-meng</title>
 
-				<body className="bg-black-900 text-white h-screen">
+				<body className="bg-black-900 text-white h-screen overflow-hidden">
 					<Main />
 					<NextScript />
 				</body>

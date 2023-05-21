@@ -6,6 +6,7 @@ import { gamesLinkMap } from "../../../constants";
 
 //styling
 import { HorizontalLinks } from "@components/navigation/HorizontalLinks";
+import { GameDisplay } from "@utils/types/minigame";
 
 export enum MemoryDisplayMode {
 	"Memorise" = "Memorise",
@@ -101,35 +102,24 @@ const Memory: React.FunctionComponent = () => {
 		},
 	};
 
+	const display: GameDisplay = {
+		title: "memory game",
+		secondaryTitle: "how far can you get?",
+		rules: "select the tiles shown at the beginning of each level",
+	};
+
 	return (
-		<div className="flex justify-center items-center h-full p-8">
-			<div className="flex flex-col gap-4 w-4/5 md:w-1/2">
-				<div className="flex flex-col gap-4">
-					<h4>
-						<Link href="/">@jz-dot-meng</Link>
-					</h4>
-					<div className="flex items-start flex-col gap-1 md:items-end md:flex-row">
-						<h1>memory game</h1>
-						<span className="pb-2"> :: how far can you get?</span>
-					</div>
-					<HorizontalLinks linkMap={gamesLinkMap} isInternalLink={true} />
-				</div>
-				<div className="flex flex-col gap-4">
-					<p>select the tiles shown at the beginning of each level</p>
-					<GameTemplate state={gameState} config={memoryConfig}>
-						<MemoryTiles
-							state={gameState}
-							display={displayMode}
-							grid={MEMORY_LEVELS[level].dim}
-							levelSelection={levelSelectionIndices}
-							handleNextLevel={handleNextLevel}
-							handleGameOver={handleGameOver}
-							preventClick={() => setDisplayMode("Memorise")}
-						/>
-					</GameTemplate>
-				</div>
-			</div>
-		</div>
+		<GameTemplate state={gameState} display={display} config={memoryConfig}>
+			<MemoryTiles
+				state={gameState}
+				display={displayMode}
+				grid={MEMORY_LEVELS[level].dim}
+				levelSelection={levelSelectionIndices}
+				handleNextLevel={handleNextLevel}
+				handleGameOver={handleGameOver}
+				preventClick={() => setDisplayMode("Memorise")}
+			/>
+		</GameTemplate>
 	);
 };
 

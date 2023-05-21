@@ -1,6 +1,8 @@
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import "../styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContextProvider } from "context/ToastContext";
 
 function JzMengApp({ Component, pageProps }: AppProps) {
 	/**
@@ -14,7 +16,11 @@ function JzMengApp({ Component, pageProps }: AppProps) {
 			// console.debug = () => {};
 		}
 	}, []);
-	return <Component {...pageProps} />;
+	return (
+		<ToastContextProvider>
+			<Component {...pageProps} />
+		</ToastContextProvider>
+	);
 }
 
 export default JzMengApp;

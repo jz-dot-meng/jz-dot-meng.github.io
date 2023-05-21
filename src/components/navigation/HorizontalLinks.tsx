@@ -13,7 +13,7 @@ export const HorizontalLinks: React.FunctionComponent<HorizontalLinksProps> = ({
 			{linkMap.map((link: HorizontalLinkType, index) => (
 				<li
 					key={index}
-					className="text-lg inline pr-8 text-coral-300 font-bold no-underline"
+					className="text-lg inline pr-8 text-coral-400 font-bold no-underline"
 				>
 					{isInternalLink ? (
 						<Link href={link.url}>{link.name}</Link>

@@ -6,6 +6,7 @@ import { gamesLinkMap } from "../../../constants";
 import { HorizontalLinks } from "@components/navigation/HorizontalLinks";
 import { BehaviorSubject, Subscription, takeWhile, tap, timer } from "rxjs";
 import { useObservableState } from "utils/hooks/rxjs-hooks";
+import { GameDetails, GameDisplay } from "@utils/types/minigame";
 
 enum Choice {
 	"match" = "match",
@@ -196,29 +197,16 @@ const StroopEffect: React.FunctionComponent = () => {
 		},
 	};
 
+	const display: GameDisplay = {
+		title: "stroop effect",
+		secondaryTitle: "reaction delay between congruent and incongruent stimuli",
+		rules: `match the text of the 'meaning' word to the colour of the 'colour' word`,
+	};
+
 	return (
-		<div className="flex justify-center items-center h-full p-8">
-			<div className="flex flex-col gap-4  w-4/5 md:w-1/2">
-				<div className="flex flex-col gap-4">
-					<h4>
-						<Link href="/">@jz-dot-meng</Link>
-					</h4>
-					<div className="flex items-start flex-col gap-1 md:items-end md:flex-row">
-						<h1>stroop effect</h1>
-						<span className="pb-2">
-							:: reaction delay between congruent and incongruent stimuli
-						</span>
-					</div>
-					<HorizontalLinks linkMap={gamesLinkMap} isInternalLink={true} />
-				</div>
-				<div className="flex flex-col gap-4">
-					<p>match the text of the 'meaning' word to the colour of the 'colour' word</p>
-					<GameTemplate state={gameState} config={stroopConfig}>
-						<Stroop state={gameState} card1={card1} card2={card2} />
-					</GameTemplate>
-				</div>
-			</div>
-		</div>
+		<GameTemplate state={gameState} display={display} config={stroopConfig}>
+			<Stroop state={gameState} card1={card1} card2={card2} />
+		</GameTemplate>
 	);
 };
 

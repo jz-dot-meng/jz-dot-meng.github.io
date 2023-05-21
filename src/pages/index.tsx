@@ -108,12 +108,17 @@ function Landing() {
 				</section>
 				<section className="flex flex-col gap-2 text-sm">
 					<div>
-						<Link href="/minigame/memory">Software developer</Link>, occasional sound
-						engineer and music producer
+						<Link href="/minigame/memory">Software developer</Link>, occasional{" "}
+						<Link href={"/music/recently-listened"}>
+							sound engineer and music producer
+						</Link>
 					</div>
 					<div>
-						Avid home cook, learner of languages (and whatever happens to be of interest
-						to me in the moment!)
+						Avid home cook, learner of languages (and{" "}
+						<Link href={"/blog"}>
+							whatever happens to be of interest to me in the moment
+						</Link>
+						!)
 					</div>
 				</section>
 				<section className="border-t border-white-600 py-4 text-sm">

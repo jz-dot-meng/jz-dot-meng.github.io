@@ -3,6 +3,6 @@
 for all things related to music, food and code
 plus other miscellaneous projects i'm working on!
 
-built using Next.js in TypeScript
+UPDATE: built using Next.js in TypeScript
 
-check it out: [jz-dot-meng](https://jz-dot-meng.vercel.app)
+Check it out: [jz-dot-meng](https://jz-dot-meng.vercel.app)
