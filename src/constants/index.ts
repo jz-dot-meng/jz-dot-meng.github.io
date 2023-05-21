@@ -1,4 +1,4 @@
-import { ULHorizontalLinkType } from "@components/navigation/ULLinks";
+import { ULHorizontalLinkType } from "@utils/types/navigation";
 
 export const gamesLinkMap: ULHorizontalLinkType[] = [
 	{ url: "/minigame/memory", name: "Memory" },

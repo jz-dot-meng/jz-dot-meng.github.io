@@ -3,12 +3,13 @@ import { ParticleField } from "@components/canvas-animations/ParticleField";
 import { SkeletonText } from "@components/loading/SkeletonText";
 
 //components
-import { ULHorizontalLinks, ULHorizontalLinkType } from "@components/navigation/ULLinks";
+import { ULHorizontalLinks } from "@components/navigation/ULLinks";
 
 //styling
 import Link from "next/link";
-import { CliffordAttractor } from "../components/canvas-animations/CliffordAttractor";
-import { LeftRightSelect } from "../components/common/selections/LeftRightSelect";
+import { CliffordAttractor } from "@components/canvas-animations/CliffordAttractor";
+import { LeftRightSelect } from "@components/common/selections/LeftRightSelect";
+import { ULHorizontalLinkType } from "@utils/types/navigation";
 
 function Landing() {
 	const animations = ["Particle field", "Clifford Attractor"];

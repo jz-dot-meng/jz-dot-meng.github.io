@@ -22,7 +22,8 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths":{
-      "@components/*":["components/*"]
+      "@components/*":["components/*"],
+      "@utils/*":["utils/*"]
     }
   },
   "exclude": [

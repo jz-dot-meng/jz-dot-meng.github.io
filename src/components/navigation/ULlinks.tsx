@@ -1,9 +1,5 @@
 import Link from "next/link";
-
-export type ULHorizontalLinkType = {
-	url: string;
-	name: string;
-};
+import { ULHorizontalLinkType } from "@utils/types/navigation";
 
 type ULHorizontalInternalLinksProps = {
 	linkMap: ULHorizontalLinkType[];
