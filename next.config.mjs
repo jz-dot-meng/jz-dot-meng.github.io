@@ -4,12 +4,11 @@
 const isGithubActions = process.env.GITHUB_ACTIONS || false;
 
 let assetPrefix = "";
-let basePath = "";
+const basePath = "";
 
 if (isGithubActions) {
 	// trim off `<owner>/`
 	assetPrefix = `./`;
-	basePath = `/`;
 }
 
 const nextConfig = {
