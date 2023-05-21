@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { GameStates, GameTemplate } from "@components/game/GameTemplate";
 import { Stroop } from "@components/game/interfaces/Stroop";
 import { gamesLinkMap } from "../../../constants";
-import { ULHorizontalLinks } from "@components/navigation/ULLinks";
+import { HorizontalLinks } from "@components/navigation/HorizontalLinks";
 import { BehaviorSubject, Subscription, takeWhile, tap, timer } from "rxjs";
 import { useObservableState } from "utils/hooks/rxjs-hooks";
 
@@ -209,7 +209,7 @@ const StroopEffect: React.FunctionComponent = () => {
 							:: reaction delay between congruent and incongruent stimuli
 						</span>
 					</div>
-					<ULHorizontalLinks linkMap={gamesLinkMap} isInternalLink={true} />
+					<HorizontalLinks linkMap={gamesLinkMap} isInternalLink={true} />
 				</div>
 				<div className="flex flex-col gap-4">
 					<p>match the text of the 'meaning' word to the colour of the 'colour' word</p>

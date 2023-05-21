@@ -5,7 +5,7 @@ import { MemoryTiles } from "@components/game/interfaces/MemoryTiles";
 import { gamesLinkMap } from "../../../constants";
 
 //styling
-import { ULHorizontalLinks } from "@components/navigation/ULLinks";
+import { HorizontalLinks } from "@components/navigation/HorizontalLinks";
 
 export enum MemoryDisplayMode {
 	"Memorise" = "Memorise",
@@ -112,7 +112,7 @@ const Memory: React.FunctionComponent = () => {
 						<h1>memory game</h1>
 						<span className="pb-2"> :: how far can you get?</span>
 					</div>
-					<ULHorizontalLinks linkMap={gamesLinkMap} isInternalLink={true} />
+					<HorizontalLinks linkMap={gamesLinkMap} isInternalLink={true} />
 				</div>
 				<div className="flex flex-col gap-4">
 					<p>select the tiles shown at the beginning of each level</p>

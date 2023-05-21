@@ -4,12 +4,12 @@ import Link from "next/link";
 //components
 import { ParticleField } from "@components/canvas-animations/ParticleField";
 import { SkeletonText } from "@components/loading/SkeletonText";
-import { ULHorizontalLinks } from "@components/navigation/ULLinks";
 import { CliffordAttractor } from "@components/canvas-animations/CliffordAttractor";
 import { LeftRightSelect } from "@components/common/selections/LeftRightSelect";
+import { HorizontalLinks } from "@components/navigation/HorizontalLinks";
 
 //types
-import { ULHorizontalLinkType } from "@utils/types/navigation";
+import { HorizontalLinkType } from "@utils/types/navigation";
 
 function Landing() {
 	const animations = ["Particle field", "Clifford Attractor"];
@@ -49,7 +49,7 @@ function Landing() {
 		setTimeout(() => setDynamicFade("fadeout-5sec"), 1000);
 	}, []);
 
-	const links: ULHorizontalLinkType[] = [
+	const links: HorizontalLinkType[] = [
 		{
 			url: "https://github.com/jz-dot-meng",
 			name: "Github",
@@ -103,7 +103,7 @@ function Landing() {
 					<h4>@jz-dot-meng</h4>
 					<h1 className="font-display font-bold">jz.meng</h1>
 					<div>
-						<ULHorizontalLinks linkMap={links}></ULHorizontalLinks>
+						<HorizontalLinks linkMap={links} />
 					</div>
 				</section>
 				<section className="flex flex-col gap-2 text-sm">

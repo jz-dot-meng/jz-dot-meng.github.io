@@ -1,4 +1,4 @@
-export type ULHorizontalLinkType = {
+export type HorizontalLinkType = {
 	url: string;
 	name: string;
 };
