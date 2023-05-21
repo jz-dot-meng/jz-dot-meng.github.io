@@ -1,28 +1,19 @@
-import DOMPurify from "dompurify";
-
 //styling
-import styles from "./GameButton.module.css";
 
 type GameButtonType = {
-  buttonText: string;
-  onClick: () => void;
+	buttonText: string;
+	onClick: () => void;
 };
 
-export const GameButton: React.FunctionComponent<GameButtonType> = ({
-  ...props
-}) => {
-  const { buttonText, onClick } = props;
+export const GameButton: React.FunctionComponent<GameButtonType> = ({ ...props }) => {
+	const { buttonText, onClick } = props;
 
-  const sanitizeData = (text: string) => {
-    return { __html: DOMPurify.sanitize(text) };
-  };
-
-  return (
-    <button
-      className={styles.gameButtonStyle}
-      onClick={onClick}
-      // currently set by me, but find better way to sanitize and display
-      dangerouslySetInnerHTML={sanitizeData(buttonText)}
-    ></button>
-  );
+	return (
+		<button
+			className={`flex-1 p-1 rounded-md cursor-pointer text-white bg-grey-600`}
+			onClick={onClick}
+		>
+			{buttonText}
+		</button>
+	);
 };

@@ -1,157 +1,138 @@
-import { ReactNode, useEffect, useState } from "react";
-import { ParticleField } from "../components/canvas-animations/ParticleField";
-import { SkeletonText } from "../components/loading/SkeletonText";
+import { useEffect, useState } from "react";
+import { ParticleField } from "@components/canvas-animations/ParticleField";
+import { SkeletonText } from "@components/loading/SkeletonText";
 
 //components
-import {
-  ULHorizontalLinks,
-  ULHorizontalLinkType,
-} from "../components/navigation/ULlinks";
+import { ULHorizontalLinks, ULHorizontalLinkType } from "@components/navigation/ULLinks";
 
 //styling
 import Link from "next/link";
 import { CliffordAttractor } from "../components/canvas-animations/CliffordAttractor";
 import { LeftRightSelect } from "../components/common/selections/LeftRightSelect";
-import styles from "../styles/Home.module.css";
 
 function Landing() {
-  const animations = ["Particle field", "Clifford Attractor"];
+	const animations = ["Particle field", "Clifford Attractor"];
 
-  const [latestCommit, setLatestCommit] = useState<string>("");
+	const [latestCommit, setLatestCommit] = useState<string>("");
 
-  const [selectedAnim, setSelectedAnim] = useState<number>(0);
-  const [component, setComponent] = useState<ReactNode | null>(null);
+	const [selectedAnim, setSelectedAnim] = useState<number>(0);
 
-  const [dynamicFade, setDynamicFade] = useState<string>("");
+	const [dynamicFade, setDynamicFade] = useState<string>("");
 
-  /**
-   * On initial load
-   */
-  useEffect(() => {
-    /**
-     * Get github latest branch commit to jz-dot-meng.github.io
-     */
-    async function getLatestCommit() {
-      try {
-        const response = await fetch(
-          "https://api.github.com/repos/jz-dot-meng/jz-dot-meng.github.io/git/refs/heads/main",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const json = await response.json();
-        let shaSlice = json["object"]["sha"].slice(0, 6);
-        setLatestCommit(shaSlice);
-      } catch (err) {
-        console.warn(err);
-      }
-    }
-    getLatestCommit();
-    setTimeout(() => setDynamicFade("fadeout-5sec"), 1000);
-  }, []);
+	/**
+	 * On initial load
+	 */
+	useEffect(() => {
+		/**
+		 * Get github latest branch commit to jz-dot-meng.github.io
+		 */
+		async function getLatestCommit() {
+			try {
+				const response = await fetch(
+					"https://api.github.com/repos/jz-dot-meng/jz-dot-meng.github.io/git/refs/heads/main",
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+						},
+					}
+				);
+				const json = await response.json();
+				let shaSlice = json["object"]["sha"].slice(0, 6);
+				setLatestCommit(shaSlice);
+			} catch (err) {
+				console.warn(err);
+			}
+		}
+		getLatestCommit();
+		setTimeout(() => setDynamicFade("fadeout-5sec"), 1000);
+	}, []);
 
-  useEffect(() => {
-    switch (selectedAnim) {
-      case 0:
-        setComponent(<ParticleField />);
-        break;
-      case 1:
-      default:
-        setComponent(<CliffordAttractor />);
-    }
-  }, [selectedAnim]);
+	const links: ULHorizontalLinkType[] = [
+		{
+			url: "https://github.com/jz-dot-meng",
+			name: "Github",
+		},
+		{
+			url: "https://www.instagram.com/meng_beats/",
+			name: "Instagram",
+		},
+		{
+			url: "https://twitter.com/jz_dot_meng/",
+			name: "Twitter",
+		},
+	];
 
-  const links: ULHorizontalLinkType[] = [
-    {
-      url: "https://www.linkedin.com/in/jeffrey-zhang-133221196/",
-      name: "LinkedIn",
-    },
-    {
-      url: "https://github.com/jz-dot-meng",
-      name: "Github",
-    },
-    {
-      url: "https://www.instagram.com/meng_beats/",
-      name: "Instagram",
-    },
-  ];
+	const handleSelectionChange = (newSelection: number) => {
+		setSelectedAnim(newSelection);
+	};
 
-  const handleSelectionChange = (newSelection: number) => {
-    setSelectedAnim(newSelection);
-  };
+	/**
+	 * Handle mouse over canvas, show selection tool
+	 */
+	const handleMouseOverDisplay = () => {
+		setDynamicFade("");
+	};
+	/**
+	 * Handle mouse leave canvas, fade out selection tool
+	 */
+	const handleMouseLeaveFade = () => {
+		setDynamicFade("fadeout-5sec");
+	};
 
-  /**
-   * Handle mouse over canvas, show selection tool
-   */
-  const handleMouseOverDisplay = () => {
-    setDynamicFade("");
-  };
-  /**
-   * Handle mouse leave canvas, fade out selection tool
-   */
-  const handleMouseLeaveFade = () => {
-    setDynamicFade("fadeout-5sec");
-  };
-
-  return (
-    <div className={styles.container}>
-      <div
-        className={`${styles.landingAnim} ${styles.mainBody}`}
-        onMouseOver={handleMouseOverDisplay}
-        onMouseLeave={handleMouseLeaveFade}
-      >
-        {component}
-        <div className={`${styles.landingAnimSelector} ${dynamicFade}`}>
-          <LeftRightSelect
-            options={animations}
-            selection={selectedAnim}
-            onChange={handleSelectionChange}
-          />
-        </div>
-      </div>
-      <div className={`${styles.mainBody} ${styles.landing}`}>
-        <section>
-          <h4>@jz-dot-meng</h4>
-          <h1>
-            meng<span> :: an online alias for jeff zhang</span>
-          </h1>
-          <div>
-            <ULHorizontalLinks linkMap={links}></ULHorizontalLinks>
-          </div>
-        </section>
-        <section>
-          <div>
-            <Link href="/stroop">Software developer</Link>, occasional sound
-            engineer and music producer
-          </div>
-          <div>
-            Avid home cook, enthusiatic about{" "}
-            <Link href="/etfoverlap">green/impact investing</Link>,{" "}
-            <Link href="/walletbalance">personal finance</Link> and other small
-            ways to make a difference
-          </div>
-        </section>
-        <section className={styles.landingFooter}>
-          <div>
-            {latestCommit ? (
-              <a href="https://github.com/jz-dot-meng/jz-dot-meng.github.io">
-                {latestCommit}
-              </a>
-            ) : (
-              <SkeletonText
-                textLength={7}
-                href="https://github.com/jz-dot-meng/jz-dot-meng.github.io"
-              />
-            )}
-            <span> :: check out the latest branch commit </span>
-          </div>
-        </section>
-      </div>
-    </div>
-  );
+	return (
+		<div className="flex h-full flex-col gap-4 p-8">
+			<div
+				className={`relative h-3/5`}
+				onMouseOver={handleMouseOverDisplay}
+				onMouseLeave={handleMouseLeaveFade}
+			>
+				{selectedAnim === 0 && <ParticleField />}
+				{selectedAnim === 1 && <CliffordAttractor />}
+				<div className={`absolute right-0 bottom-0 ${dynamicFade}`}>
+					<LeftRightSelect
+						options={animations}
+						selection={selectedAnim}
+						onChange={handleSelectionChange}
+					/>
+				</div>
+			</div>
+			<div className="flex flex-col gap-4">
+				<section className="flex flex-col gap-2">
+					<h4>@jz-dot-meng</h4>
+					<h1 className="font-display font-bold">jz.meng</h1>
+					<div>
+						<ULHorizontalLinks linkMap={links}></ULHorizontalLinks>
+					</div>
+				</section>
+				<section className="flex flex-col gap-2 text-sm">
+					<div>
+						<Link href="/minigame/memory">Software developer</Link>, occasional sound
+						engineer and music producer
+					</div>
+					<div>
+						Avid home cook, learner of languages (and whatever happens to be of interest
+						to me in the moment!)
+					</div>
+				</section>
+				<section className="border-t border-white-600 py-4 text-sm">
+					<div>
+						{latestCommit ? (
+							<a href="https://github.com/jz-dot-meng/jz-dot-meng.github.io">
+								{latestCommit}
+							</a>
+						) : (
+							<SkeletonText
+								textLength={7}
+								href="https://github.com/jz-dot-meng/jz-dot-meng.github.io"
+							/>
+						)}
+						<span> :: check out the latest branch commit </span>
+					</div>
+				</section>
+			</div>
+		</div>
+	);
 }
 
 export default Landing;

@@ -1,28 +1,33 @@
-import React from "react";
-
-//styling
-import styles from "./ULlinks.module.css";
+import Link from "next/link";
 
 export type ULHorizontalLinkType = {
-  url: string;
-  name: string;
+	url: string;
+	name: string;
 };
 
-type ULHorizontalLinkProps = {
-  linkMap: ULHorizontalLinkType[];
+type ULHorizontalInternalLinksProps = {
+	linkMap: ULHorizontalLinkType[];
+	isInternalLink?: boolean;
 };
 
-export const ULHorizontalLinks: React.FunctionComponent<
-  ULHorizontalLinkProps
-> = ({ ...props }) => {
-  const { linkMap } = props;
-  return (
-    <ul className={styles.ullinkUl}>
-      {linkMap.map((link: ULHorizontalLinkType, index) => (
-        <li key={index}>
-          <a href={link.url}>{link.name}</a>
-        </li>
-      ))}
-    </ul>
-  );
+export const ULHorizontalLinks: React.FunctionComponent<ULHorizontalInternalLinksProps> = ({
+	...props
+}) => {
+	const { linkMap, isInternalLink = false } = props;
+	return (
+		<ul className="list-none">
+			{linkMap.map((link: ULHorizontalLinkType, index) => (
+				<li
+					key={index}
+					className="text-lg inline pr-8 text-coral-300 font-bold no-underline"
+				>
+					{isInternalLink ? (
+						<Link href={link.url}>{link.name}</Link>
+					) : (
+						<a href={link.url}>{link.name}</a>
+					)}
+				</li>
+			))}
+		</ul>
+	);
 };
