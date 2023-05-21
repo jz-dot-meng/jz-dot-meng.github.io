@@ -1,6 +1,3 @@
-//styling
-import styles from "./GameCard.module.css";
-
 type GameCardProps = {
 	cardTitle?: string;
 	cardTitleStyle?: any;
