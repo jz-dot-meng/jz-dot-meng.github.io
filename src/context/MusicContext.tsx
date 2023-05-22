@@ -38,18 +38,18 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
 	};
 
 	const _fetchRecentTracks = async () => {
-		return api<RecentTracksResponse>("/api/music/recentTracks").then(
-			// api<RecentTracksResponse>("https://jz-dot-meng.vercel.app/api/music/recentTracks").then(
-			(data) => {
-				if (!data.success) {
-					// toast
-					toast.error(`Unable to fetch recent tracks: ${data.error}`);
-					return undefined;
-				}
-				console.log({ data });
-				return data.data.recenttracks.track;
+		// return api<RecentTracksResponse>("/api/music/recentTracks").then(
+		return api<RecentTracksResponse>(
+			"https://jz-dot-meng.vercel.app/api/music/recentTracks"
+		).then((data) => {
+			if (!data.success) {
+				// toast
+				toast.error(`Unable to fetch recent tracks: ${data.error}`);
+				return undefined;
 			}
-		);
+			console.log({ data });
+			return data.data.recenttracks.track;
+		});
 	};
 
 	const _displayNowListeningToast = (track: LastFm.Track) => {
