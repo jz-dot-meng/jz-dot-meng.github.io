@@ -3,12 +3,16 @@ import Cors from "cors";
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
-const ALLOW_LIST = ["https://jz-dot-meng.vercel.app", "https://jz-dot-meng.github.io"];
+const ALLOW_LIST = [
+	"https://jz-dot-meng.vercel.app",
+	"https://jz-dot-meng.github.io",
+	"http://localhost:3000",
+];
 const cors = Cors({
 	methods: ["POST", "GET", "HEAD"],
 	origin: (requestOrigin, callback) => {
 		if (!requestOrigin) {
-			callback(new Error("No request origin, not allowed by CORS"));
+			callback(null, true);
 			return;
 		}
 		const allowListMatch = ALLOW_LIST.findIndex((allowedDomain) =>
@@ -28,19 +32,26 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: Function) 
 	return new Promise((resolve, reject) => {
 		fn(req, res, (result: any) => {
 			if (result instanceof Error) {
+				console.error(result);
 				return reject(result);
 			}
-
 			return resolve(result);
 		});
 	});
 }
 
-export default async function corsWrapper(handler: any) {
+export default function corsWrapper(handler: any) {
 	return async (req: NextApiRequest, res: NextApiResponse) => {
-		// Run the middleware
-		await runMiddleware(req, res, cors);
-		// Rest of the API logic
-		await handler(req, res);
+		try {
+			// Run the middleware
+			console.log(req.headers);
+			await runMiddleware(req, res, cors);
+			// Rest of the API logic
+			await handler(req, res);
+		} catch (err: any) {
+			const error = err.message ? err.message : JSON.stringify(err);
+			console.warn(`Error with the middleware: ${error}`);
+			return res.status(403).json({ success: false, error });
+		}
 	};
 }

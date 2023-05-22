@@ -1,7 +1,7 @@
 import { ErrorResponse } from "@utils/types/api";
 
 export const api = async <T>(url: string): Promise<T | ErrorResponse> => {
-	return fetch(url)
+	return fetch(url, { referrerPolicy: "strict-origin-when-cross-origin" })
 		.then(async (r) => {
 			if (!r.ok) {
 				let error: string = `${r.status} ${r.statusText}`;

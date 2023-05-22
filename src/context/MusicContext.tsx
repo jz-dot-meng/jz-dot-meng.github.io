@@ -1,12 +1,19 @@
 import { LiveIcon } from "@components/common/data/LiveIcon";
-import { LastFm, RecentTracksResponse } from "@utils/types/music";
+import {
+	LastFm,
+	RecentTracksResponse,
+	WeeklyArtistReponse,
+	WeeklyTrackReponse,
+} from "@utils/types/music";
 import { api } from "@utils/wrappers/api";
-import { ReactNode, createContext, useContext, useEffect, useRef, useState } from "react";
+import { ReactNode, createContext, use, useContext, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { BehaviorSubject, filter, from, map, switchMap, takeUntil, timer } from "rxjs";
 
 interface MusicOverview {
 	latestTracks: LastFm.Track[];
+	weeklyTracks: LastFm.Track_Rank[];
+	weeklyArtists: LastFm.Artist_Rank[];
 	init: () => Promise<void>;
 }
 const MusicContext = createContext<MusicOverview | undefined>(undefined);
@@ -21,34 +28,72 @@ export const useMusicContext = () => {
 
 export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
 	const [latestTracks, setLastestTracks] = useState<LastFm.Track[]>([]);
+	const [weeklyTracks, setWeeklyTracks] = useState<LastFm.Track_Rank[]>([]);
+	const [weeklyArtists, setWeeklyArtists] = useState<LastFm.Artist_Rank[]>([]);
 
 	const [nowListening, setNowListening] = useState<LastFm.Track>();
 	const [stop$] = useState<BehaviorSubject<boolean>>(new BehaviorSubject<boolean>(false));
 
 	const init = async () => {
-		const tracks = await _fetchRecentTracks();
-		// check first track for now listening
-		if (!tracks) return;
-		setLastestTracks(tracks);
-		const latestTrack = tracks[0];
-		if ("@attr" in latestTrack && latestTrack["@attr"].nowplaying === "true") {
-			setNowListening(latestTrack);
-			_startListener();
-		}
+		_fetchRecentTracks().then((tracks) => {
+			// check first track for now listening
+			if (!tracks) return;
+			setLastestTracks(tracks);
+			const latestTrack = tracks[0];
+			if ("@attr" in latestTrack && latestTrack["@attr"].nowplaying === "true") {
+				setNowListening(latestTrack);
+				_startListener();
+			}
+		});
+		_fetchWeeklyTracks().then((weekly) => {
+			if (!weekly) return;
+			setWeeklyTracks(weekly.slice(0, 20));
+		});
+		_fetchWeeklyArtists().then((weekly) => {
+			if (!weekly) return;
+			setWeeklyArtists(weekly.slice(0, 20));
+		});
 	};
 
 	const _fetchRecentTracks = async () => {
-		// return api<RecentTracksResponse>("/api/music/recentTracks").then(
+		// return api<RecentTracksResponse>("/api/music/recentTracks").then((data) => {
 		return api<RecentTracksResponse>(
 			"https://jz-dot-meng.vercel.app/api/music/recentTracks"
 		).then((data) => {
 			if (!data.success) {
-				// toast
 				toast.error(`Unable to fetch recent tracks: ${data.error}`);
 				return undefined;
 			}
-			console.log({ data });
+			// console.log({ data });
 			return data.data.recenttracks.track;
+		});
+	};
+
+	const _fetchWeeklyTracks = async () => {
+		// return api<WeeklyTrackReponse>("/api/music/weeklyTop?type=tracks").then((data) => {
+		return api<WeeklyTrackReponse>(
+			"https://jz-dot-meng.vercel.app/api/music/weeklyTop?type=tracks"
+		).then((data) => {
+			if (!data.success) {
+				toast.error(`Unable to fetch top weekly tracks: ${data.error}`);
+				return undefined;
+			}
+			// console.log({ data });
+			return data.data.weeklytrackchart.track;
+		});
+	};
+
+	const _fetchWeeklyArtists = async () => {
+		// return api<WeeklyArtistReponse>("/api/music/weeklyTop?type=artists").then((data) => {
+		return api<WeeklyArtistReponse>(
+			"https://jz-dot-meng.vercel.app/api/music/weeklyTop?type=artists"
+		).then((data) => {
+			if (!data.success) {
+				toast.error(`Unable to fetch top weekly artists: ${data.error}`);
+				return undefined;
+			}
+			// console.log({ data });
+			return data.data.weeklyartistchart.artist;
 		});
 	};
 
@@ -67,7 +112,7 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
 					<div className="flex flex-col gap-2">
 						<div className="flex gap-2">
 							<LiveIcon />
-							<div className="text-xs text-grey-400">Now playing</div>
+							<div className="text-xs text-grey-400">Now listening to</div>
 						</div>
 						<div className="text-sm">{track.name}</div>
 						<div className="text-xs">{track.artist.name}</div>
@@ -82,7 +127,7 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
 		stop$.next(true);
 		setTimeout(() => {
 			stop$.next(false);
-			console.log("subscribing to now listening poller!");
+			// console.log("subscribing to now listening poller!");
 			timer(0, 60000)
 				.pipe(
 					takeUntil(stop$.pipe(filter((stop) => stop))),
@@ -94,10 +139,10 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
 						if ("@attr" in latestTrack && latestTrack["@attr"].nowplaying === "true") {
 							console.log({ latest: latestTrack.mbid, prev: nowListening?.mbid });
 							if (latestTrack.mbid === nowListening?.mbid) {
-								console.log("still listening to previous song");
+								// console.log("still listening to previous song");
 								return;
 							}
-							console.log("new listening to!");
+							// console.log("new listening to!");
 							_displayNowListeningToast(latestTrack);
 							setNowListening(latestTrack);
 						}
@@ -107,5 +152,9 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
 				.add(() => "unsubscribing");
 		}, 250);
 	};
-	return <MusicContext.Provider value={{ init, latestTracks }}>{children}</MusicContext.Provider>;
+	return (
+		<MusicContext.Provider value={{ init, latestTracks, weeklyArtists, weeklyTracks }}>
+			{children}
+		</MusicContext.Provider>
+	);
 };

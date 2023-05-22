@@ -1,5 +1,6 @@
 import { ErrorResponse } from "@utils/types/api";
 import { LastFm, RecentTracksResponse } from "@utils/types/music";
+import corsWrapper from "@utils/wrappers/cors";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getRecentTracks = async (): Promise<LastFm.RecentTracks> => {
@@ -11,15 +12,14 @@ const getRecentTracks = async (): Promise<LastFm.RecentTracks> => {
 	return data;
 };
 
-export default async (
-	req: NextApiRequest,
-	res: NextApiResponse<RecentTracksResponse | ErrorResponse>
-) => {
-	try {
-		const data = await getRecentTracks();
-		return res.status(200).json({ success: true, data });
-	} catch (err: any) {
-		const error = err.message ? err.message : JSON.stringify(err);
-		return res.status(500).json({ success: false, error });
+export default corsWrapper(
+	async (req: NextApiRequest, res: NextApiResponse<RecentTracksResponse | ErrorResponse>) => {
+		try {
+			const data = await getRecentTracks();
+			return res.status(200).json({ success: true, data });
+		} catch (err: any) {
+			const error = err.message ? err.message : JSON.stringify(err);
+			return res.status(500).json({ success: false, error });
+		}
 	}
-};
+);
