@@ -11,7 +11,9 @@ const cors = Cors({
 			callback(new Error("No request origin, not allowed by CORS"));
 			return;
 		}
-		const allowListMatch = ALLOW_LIST.indexOf(requestOrigin);
+		const allowListMatch = ALLOW_LIST.findIndex((allowedDomain) =>
+			requestOrigin.includes(allowedDomain)
+		);
 		if (allowListMatch === -1) {
 			callback(new Error("Not allow-listed by CORS"));
 		} else {
