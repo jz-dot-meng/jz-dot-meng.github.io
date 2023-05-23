@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+      "ban-ts-comment": "off",
+      "no-namespace": "off",
+      "no-unused-vars": "off",
+      "no-explicit-any": "off"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "next/core-web-vitals",
+      "plugin:prettier/recommended"
+  ]
+}

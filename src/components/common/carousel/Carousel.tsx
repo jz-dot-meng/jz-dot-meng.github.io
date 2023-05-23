@@ -1,5 +1,4 @@
 import { ReactNode, forwardRef, useEffect, useImperativeHandle, useMemo, useState } from "react";
-import { createQualifiedName } from "typescript";
 
 export type CarouselRef = {
 	next: () => void;
@@ -51,7 +50,7 @@ export const Carousel = forwardRef<CarouselRef, CarouselProps>(
 		};
 
 		const handleNext = () => {
-			if (isRepeating || currentIndex < length - itemsToShow) {
+			if (isRepeating || currentIndex < childrenLength - itemsToShow) {
 				// console.log("next: setting current state", currentIndex + 1);
 				setCurrentIndex((prevState) => prevState + 1);
 			}
