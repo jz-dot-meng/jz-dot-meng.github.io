@@ -49,16 +49,16 @@ export const WeeklyTop: React.FunctionComponent = () => {
 	return (
 		<div className="flex flex-col flex-1 gap-2 overflow-hidden">
 			<div className="flex border-b border-white p-2 text-sm">
-				<div className="pl-2 pr-4 cursor-pointer" onClick={() => prev()}>
+				<div className="pl-2 pr-2 md:pr-4 cursor-pointer" onClick={() => prev()}>
 					&lt;
 				</div>
-				<div className="flex-1 px-4">
+				<div className="flex-1 px-2 md:px-4">
 					<Carousel itemsToShow={1} childrenLength={2} ref={carouselRef1}>
 						<div className="flex-1 text-right">Top Tracks of the Week</div>
 						<div className="flex-1 text-right">Top Artists of the Week</div>
 					</Carousel>
 				</div>
-				<div className="pl-4 pr-2 cursor-pointer" onClick={() => next()}>
+				<div className="pl-2 md:pl-4 pr-2 cursor-pointer" onClick={() => next()}>
 					&gt;
 				</div>
 			</div>
