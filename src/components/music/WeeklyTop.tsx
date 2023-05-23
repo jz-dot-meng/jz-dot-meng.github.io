@@ -1,7 +1,8 @@
+import { Carousel, CarouselRef } from "@components/common/carousel/Carousel";
 import { LastFm } from "@utils/types/music";
 import { useMusicContext } from "context/MusicContext";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface CombinedTrackData {
 	track: LastFm.Track;
@@ -10,8 +11,6 @@ interface CombinedTrackData {
 
 export const WeeklyTop: React.FunctionComponent = () => {
 	const { weeklyTracks, weeklyArtists, latestTracks } = useMusicContext();
-
-	const [viewMode, setViewMode] = useState<"TOP_ARTISTS" | "TOP_TRACKS">("TOP_TRACKS");
 
 	// last fm's weekly tracks is missing a whole bunch of metadata
 	const [remappedTopTracks, setRemappedTopTracks] = useState<CombinedTrackData[]>([]);
@@ -35,30 +34,36 @@ export const WeeklyTop: React.FunctionComponent = () => {
 		setRemappedTopTracks(top);
 	}, [weeklyTracks, latestTracks]);
 
-	const scroll = (direction: "LEFT" | "RIGHT") => {
-		setViewMode(viewMode === "TOP_ARTISTS" ? "TOP_TRACKS" : "TOP_ARTISTS");
+	const carouselRef1 = useRef<CarouselRef>(null);
+	const carouselRef2 = useRef<CarouselRef>(null);
+
+	const prev = () => {
+		carouselRef1.current?.prev();
+		carouselRef2.current?.prev();
+	};
+	const next = () => {
+		carouselRef1.current?.next();
+		carouselRef2.current?.next();
 	};
 
 	return (
 		<div className="flex flex-col flex-1 gap-2 overflow-hidden">
-			<div className="flex border-b border-white justify-end p-2 text-sm">
-				<div className="pl-2 pr-4 cursor-pointer" onClick={() => scroll("LEFT")}>
+			<div className="flex border-b border-white p-2 text-sm">
+				<div className="pl-2 pr-4 cursor-pointer" onClick={() => prev()}>
 					&lt;
 				</div>
 				<div className="flex-1 px-4">
-					{viewMode === "TOP_TRACKS" && (
-						<div className="w-full text-right">Top Tracks of the Week</div>
-					)}
-					{viewMode === "TOP_ARTISTS" && (
-						<div className="w-full text-right">Top Artists of the Week</div>
-					)}
+					<Carousel itemsToShow={1} childrenLength={2} ref={carouselRef1}>
+						<div className="flex-1 text-right">Top Tracks of the Week</div>
+						<div className="flex-1 text-right">Top Artists of the Week</div>
+					</Carousel>
 				</div>
-				<div className="pl-4 pr-2 cursor-pointer" onClick={() => scroll("RIGHT")}>
+				<div className="pl-4 pr-2 cursor-pointer" onClick={() => next()}>
 					&gt;
 				</div>
 			</div>
 			<div className="flex flex-1 items-center overflow-hidden">
-				{viewMode === "TOP_TRACKS" && (
+				<Carousel itemsToShow={1} childrenLength={2} ref={carouselRef2}>
 					<div className="grid grid-rows-2 grid-cols-2 gap-2 flex-1">
 						{remappedTopTracks.map((data, index) => (
 							<Link
@@ -85,12 +90,13 @@ export const WeeklyTop: React.FunctionComponent = () => {
 							</Link>
 						))}
 					</div>
-				)}
-				{viewMode === "TOP_ARTISTS" && (
 					<div className="flex overflow-y-scroll h-full no-scrollbar flex-1">
 						<div className="flex flex-col gap-1 w-full">
 							{weeklyArtists.map((data, index) => (
-								<div className="flex w-full p-2 gap-4 items-center">
+								<div
+									className="flex w-full p-2 gap-4 items-center"
+									key={`${index}-${data.name}`}
+								>
 									<div className="w-6">{index + 1}.</div>
 									<Link
 										className="flex w-full items-center"
@@ -107,7 +113,7 @@ export const WeeklyTop: React.FunctionComponent = () => {
 							))}
 						</div>
 					</div>
-				)}
+				</Carousel>
 			</div>
 		</div>
 	);
