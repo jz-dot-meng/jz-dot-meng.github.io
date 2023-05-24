@@ -11,7 +11,7 @@
   /* Toastify */
   --toastify-color-light: #fff;
   --toastify-color-dark: #121212;
-  --toastify-color-info: #2e9998;
+  --toastify-color-info: #FF7F50;
   --toastify-color-success: #5a9919;
   --toastify-color-warning: #f1c40f;
   --toastify-color-error: #e02527;
@@ -46,7 +46,7 @@
     #5ac8fa,
     #007aff,
     #34aadc,
-    #5856d6,
+    #FF7F50,
     #ff2d55
   );
 
