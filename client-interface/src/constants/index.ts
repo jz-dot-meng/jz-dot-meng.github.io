@@ -1,0 +1,24 @@
+import { BlogData } from "../utils/types/blog";
+import { HorizontalLinkType } from "../utils/types/navigation";
+
+export const gamesLinkMap: HorizontalLinkType[] = [
+    { url: "/minigame/memory", name: "Memory" },
+    { url: "/minigame/stroop", name: "Stroop Effect" },
+];
+
+export const posts: Record<string, BlogData> = {
+    "exploring-digital-identities-a-plan": {
+        title: "exploring digital identities - a plan",
+        secondaryTitle: "creating an online social space",
+        description: "the start of a deep dive into cryptography",
+        firstDrafted: new Date(2023, 4, 25),
+        tags: ["project"],
+    },
+    "digital-identities-and-impermanence": {
+        title: "digital identities, and impermanence",
+        secondaryTitle: "a reflection, and new beginnings",
+        description: "a short post explaining the reasoning for this new project",
+        firstDrafted: new Date(2023, 4, 21), // remembering that month is zero indexed
+        tags: ["blogging"],
+    },
+};

@@ -16,6 +16,7 @@ jobs:
                   cache: npm
             - name: Build
               run: |
+                  cd client-interface
                   npm ci
                   npm run build
                   npm run export

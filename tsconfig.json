@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,12 +15,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src",
-    "paths":{
-      "@components/*":["components/*"],
-      "@utils/*":["utils/*"],
-      "@constants": ["constants"]
-    }
+    "composite": true
   },
   "exclude": [
     "node_modules"
