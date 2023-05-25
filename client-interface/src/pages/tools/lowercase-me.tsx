@@ -1,5 +1,5 @@
 import { ToolWrapper } from "@components/tools/ToolWrapper";
-import { BaseSyntheticEvent, useState } from "react";
+import React, { BaseSyntheticEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 const LowercaseMe: React.FunctionComponent = () => {

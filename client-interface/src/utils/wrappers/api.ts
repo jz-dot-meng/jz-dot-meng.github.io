@@ -4,7 +4,7 @@ export const api = async <T>(url: string): Promise<T | ErrorResponse> => {
     return fetch(url, { referrerPolicy: "strict-origin-when-cross-origin" })
         .then(async (r) => {
             if (!r.ok) {
-                let error: string = `${r.status} ${r.statusText}`;
+                let error = `${r.status} ${r.statusText}`;
                 try {
                     const parsed = (await r.json()) as ErrorResponse;
                     error = parsed.error;

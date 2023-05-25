@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+      "ban-ts-comment": "off",
+      "no-namespace": "off",
+      "no-unused-vars": "off",
+      "no-explicit-any": "off",
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/prefer-namespace-keyword": "off",
+      "@typescript-eslint/no-namespace":"off"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "next/core-web-vitals"
+      // "plugin:prettier/recommended"
+  ]
+}

@@ -1,6 +1,6 @@
 import { DevFooter } from "@components/navigation/DevFooter";
 import Link from "next/link";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 interface ToolWrapperProps {
     title: string;

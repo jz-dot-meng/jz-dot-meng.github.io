@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import { GameControls } from "./GameControls";
-import { GameDetailsTracker } from "./GameDetailsTracker";
-import Link from "next/link";
+import { DevFooter } from "@components/navigation/DevFooter";
 import { HorizontalLinks } from "@components/navigation/HorizontalLinks";
 import { gamesLinkMap } from "@constants";
 import { GameDetails, GameDisplay } from "@utils/types/minigame";
-import { DevFooter } from "@components/navigation/DevFooter";
+import Link from "next/link";
+import React, { ReactNode } from "react";
+import { GameControls } from "./GameControls";
+import { GameDetailsTracker } from "./GameDetailsTracker";
 
 export enum GameStates {
     "Initial" = "Initial",

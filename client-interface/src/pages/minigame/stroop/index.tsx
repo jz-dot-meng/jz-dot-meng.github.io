@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
 import { GameStates, GameTemplate } from "@components/game/GameTemplate";
 import { Stroop } from "@components/game/interfaces/Stroop";
-import { BehaviorSubject, Subscription, takeWhile, tap, timer } from "rxjs";
 import { useObservableState } from "@utils/hooks/rxjs-hooks";
 import { GameDisplay } from "@utils/types/minigame";
+import React, { useEffect, useRef, useState } from "react";
+import { BehaviorSubject, Subscription, takeWhile, timer } from "rxjs";
 
 enum Choice {
     "match" = "match",
@@ -38,7 +38,7 @@ const StroopEffect: React.FunctionComponent = () => {
 
     const nextCard = () => {
         // skew to roughly half match, half no match
-        let prob = Math.random();
+        const prob = Math.random();
         const mwi = Math.floor(Math.random() * (COLOUR_LIST.length - 0.1)); // temp variable to be able to quickly set to two states
         setMeaningWordIndex(mwi);
         // let colourStyleIndex
@@ -52,7 +52,7 @@ const StroopEffect: React.FunctionComponent = () => {
         }
         const cwi = Math.floor(Math.random() * (COLOUR_LIST.length - 0.1));
         // figure out which card to generate meaning/colour
-        let leftright = Math.random();
+        const leftright = Math.random();
         if (leftright < 0.5) {
             setCard1({
                 cardWord: COLOUR_LIST[mwi].word,

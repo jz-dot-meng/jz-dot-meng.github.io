@@ -1,6 +1,7 @@
 import { BlogWrapper } from "@components/blog/BlogWrapper";
 import { posts } from "@constants";
 import Link from "next/link";
+import React from "react";
 
 const post_230523: React.FunctionComponent = () => {
     const EXPLORING_DIGITAL_IDENTITIES = posts["exploring-digital-identities-a-plan"];

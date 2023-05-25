@@ -1,9 +1,9 @@
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
-import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContextProvider } from "../context/ToastContext";
 import { MusicContextProvider } from "../context/MusicContext";
+import { ToastContextProvider } from "../context/ToastContext";
+import "../styles/globals.css";
 
 function JzMengApp({ Component, pageProps }: AppProps) {
     /**
@@ -11,7 +11,9 @@ function JzMengApp({ Component, pageProps }: AppProps) {
      */
     useEffect(() => {
         if (process.env.NODE_ENV === "production") {
-            console.log = () => {};
+            console.log = () => {
+                /** */
+            };
             // console.warn = () => {};
             //   console.error = () => {}; // log all our errors for the world to see :o
             // console.debug = () => {};

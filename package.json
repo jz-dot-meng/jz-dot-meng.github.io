@@ -8,7 +8,8 @@
     },
     "scripts": {
         "lint": "npm run prettier --write .",
-        "ui:dev": "cd client-interface && next dev"
+        "ui:dev": "cd client-interface && next dev",
+        "ui:build": "cd client-interface && next build"
     },
     "devDependencies": {
         "@types/cors": "^2.8.13",

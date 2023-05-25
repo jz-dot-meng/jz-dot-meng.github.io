@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
 import { GameButton } from "@components/common/buttons/GameButton";
+import React, { useCallback, useEffect, useState } from "react";
 import { GameStates } from "./GameTemplate";
 
 type GameControlsProps = {

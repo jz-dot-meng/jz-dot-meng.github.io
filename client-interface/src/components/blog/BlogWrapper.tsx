@@ -1,6 +1,6 @@
 import { BlogData } from "@utils/types/blog";
 import Link from "next/link";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 interface BlogWrapperProps {
     data: BlogData;

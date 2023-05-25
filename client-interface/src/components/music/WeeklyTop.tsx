@@ -1,8 +1,8 @@
 import { Carousel, CarouselRef } from "@components/common/carousel/Carousel";
-import { LastFm } from "@utils/types/music";
 import { useMusicContext } from "@context/MusicContext";
+import { LastFm } from "@utils/types/music";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface CombinedTrackData {
     track: LastFm.Track;

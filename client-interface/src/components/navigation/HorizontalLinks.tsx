@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { HorizontalLinkType } from "@utils/types/navigation";
+import Link from "next/link";
+import React from "react";
 
 type HorizontalLinksProps = {
     linkMap: HorizontalLinkType[];

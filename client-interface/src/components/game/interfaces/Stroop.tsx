@@ -1,6 +1,6 @@
-import { GameCard } from "../../common/game/GameCard";
-import { GameStates } from "../GameTemplate";
-//styling
+import { GameCard } from "@components/common/game/GameCard";
+import { GameStates } from "@components/game/GameTemplate";
+import React from "react";
 
 type StroopType = {
     state: keyof typeof GameStates;

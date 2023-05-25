@@ -1,5 +1,6 @@
 import { posts } from "@constants";
 import Link from "next/link";
+import React from "react";
 
 const Blog: React.FunctionComponent = () => {
     const allPosts = Object.entries(posts).sort(([a, aData], [b, bData]) => {

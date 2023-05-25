@@ -39,7 +39,7 @@ function Landing() {
                     }
                 );
                 const json = await response.json();
-                let shaSlice = json["object"]["sha"].slice(0, 6);
+                const shaSlice = json["object"]["sha"].slice(0, 6);
                 setLatestCommit(shaSlice);
             } catch (err) {
                 console.warn(err);

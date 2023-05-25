@@ -1,4 +1,5 @@
 import { LiveIcon } from "@components/common/data/LiveIcon";
+import { ErrorResponse } from "@utils/types/api";
 import {
     LastFm,
     RecentTracksResponse,
@@ -69,7 +70,7 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
     const _fetchRecentTracks = async () => {
         return api<RecentTracksResponse>(`${baseUrl}/api/music/recentTracks`).then((data) => {
             if (!data.success) {
-                toast.error(`Unable to fetch recent tracks: ${data.error}`);
+                toast.error(`Unable to fetch recent tracks: ${(data as ErrorResponse).error}`);
                 return undefined;
             }
             // console.log({ data });
@@ -81,7 +82,9 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
         return api<WeeklyTrackReponse>(`${baseUrl}/api/music/weeklyTop?type=tracks`).then(
             (data) => {
                 if (!data.success) {
-                    toast.error(`Unable to fetch top weekly tracks: ${data.error}`);
+                    toast.error(
+                        `Unable to fetch top weekly tracks: ${(data as ErrorResponse).error}`
+                    );
                     return undefined;
                 }
                 // console.log({ data });
@@ -94,7 +97,9 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
         return api<WeeklyArtistReponse>(`${baseUrl}/api/music/weeklyTop?type=artists`).then(
             (data) => {
                 if (!data.success) {
-                    toast.error(`Unable to fetch top weekly artists: ${data.error}`);
+                    toast.error(
+                        `Unable to fetch top weekly artists: ${(data as ErrorResponse).error}`
+                    );
                     return undefined;
                 }
                 // console.log({ data });

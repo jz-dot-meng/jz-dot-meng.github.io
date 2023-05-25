@@ -2,10 +2,10 @@ import { TrackItem } from "@components/music/TrackItem";
 import { WeeklyTop } from "@components/music/WeeklyTop";
 import { useMusicContext } from "@context/MusicContext";
 import Link from "next/link";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const RecentlyListened: React.FunctionComponent = () => {
-    const { init, latestTracks, weeklyArtists, weeklyTracks } = useMusicContext();
+    const { init, latestTracks } = useMusicContext();
 
     useEffect(() => {
         init();

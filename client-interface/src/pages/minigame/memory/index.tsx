@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { GameStates, GameTemplate } from "@components/game/GameTemplate";
 import { MemoryTiles } from "@components/game/interfaces/MemoryTiles";
+import React, { useState } from "react";
 
 //styling
 import { GameDisplay } from "@utils/types/minigame";
@@ -61,7 +61,7 @@ const Memory: React.FunctionComponent = () => {
                 // doesn't have class already
             }
         }
-        let nextLevel = 1;
+        const nextLevel = 1;
         setLevel(nextLevel);
         setGameState("PlayGame");
         setDisplayMode("Memorise");

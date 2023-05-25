@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { MemoryDisplayMode } from "@pages/minigame/memory";
+import React, { useEffect, useState } from "react";
 import { GameStates } from "../GameTemplate";
 
 type MemoryTilesType = {
