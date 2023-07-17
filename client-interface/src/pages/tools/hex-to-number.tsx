@@ -19,7 +19,7 @@ const HexToNumber: React.FunctionComponent = () => {
             setError("not a valid hex value");
             return;
         }
-        setNumberVal(parsedNumber.toString());
+        setNumberVal(BigInt(unvalidatedHex).toString());
     };
 
     const handleNumberInput = (e: BaseSyntheticEvent) => {
