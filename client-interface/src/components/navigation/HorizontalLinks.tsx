@@ -10,7 +10,7 @@ type HorizontalLinksProps = {
 export const HorizontalLinks: React.FunctionComponent<HorizontalLinksProps> = ({ ...props }) => {
     const { linkMap, isInternalLink = false } = props;
     return (
-        <ul className="list-none">
+        <ul className="list-none flex flex-col md:flex-row">
             {linkMap.map((link: HorizontalLinkType, index) => (
                 <li
                     key={index}

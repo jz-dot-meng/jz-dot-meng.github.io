@@ -2,8 +2,13 @@ import { BlogData } from "../utils/types/blog";
 import { HorizontalLinkType } from "../utils/types/navigation";
 
 export const gamesLinkMap: HorizontalLinkType[] = [
-    { url: "/minigame/memory", name: "Memory" },
-    { url: "/minigame/stroop", name: "Stroop Effect" },
+    { url: "/minigame/memory", name: "memory" },
+    { url: "/minigame/stroop", name: "stroop effect" },
+];
+
+export const toolsLinkMap: HorizontalLinkType[] = [
+    { url: "/tools/lowercase-me", name: "lowercase me" },
+    { url: "/tools/hex-to-number", name: "hex to number" },
 ];
 
 export const posts: Record<string, BlogData> = {

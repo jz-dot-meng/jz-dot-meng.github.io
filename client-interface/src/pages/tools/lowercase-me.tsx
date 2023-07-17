@@ -14,7 +14,7 @@ const LowercaseMe: React.FunctionComponent = () => {
         }
     };
     return (
-        <ToolWrapper title="lowercase me" secondaryTitle="for all your hex needs">
+        <ToolWrapper title="lowercase me" secondaryTitle="for all your standardizing needs">
             <div>
                 <div className="flex flex-col flex-1 gap-1">
                     <p>paste in any text here:</p>
