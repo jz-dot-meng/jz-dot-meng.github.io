@@ -1,3 +1,4 @@
+import { errorParseToString } from "@utils/functions/object";
 import { ErrorResponse } from "@utils/types/api";
 import { LastFm, RecentTracksResponse } from "@utils/types/music";
 import corsWrapper from "@utils/wrappers/cors";
@@ -17,8 +18,8 @@ export default corsWrapper(
         try {
             const data = await getRecentTracks();
             return res.status(200).json({ success: true, data });
-        } catch (err: any) {
-            const error = err.message ? err.message : JSON.stringify(err);
+        } catch (err: unknown) {
+            const error = errorParseToString(err);
             return res.status(500).json({ success: false, error });
         }
     }

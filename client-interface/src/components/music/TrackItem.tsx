@@ -1,4 +1,4 @@
-import { getTimeElapsed } from "@utils/functions/datetime";
+import { formatTimeElapsed, getTimeElapsed } from "@utils/functions/datetime";
 import { LastFm } from "@utils/types/music";
 import React, { useMemo } from "react";
 import { LiveIcon } from "../common/data/LiveIcon";
@@ -31,17 +31,7 @@ export const TrackItem: React.FunctionComponent<TrackItemProps> = ({ track }) =>
                         <div>Now playing</div>
                     </>
                 ) : timeSincePlay ? (
-                    timeSincePlay.dayElapsed > 0 ? (
-                        `${timeSincePlay.dayElapsed} day${
-                            timeSincePlay.dayElapsed > 1 ? "s" : ""
-                        } ago`
-                    ) : timeSincePlay.hourElapsed > 0 ? (
-                        `${timeSincePlay.hourElapsed} hr${
-                            timeSincePlay.hourElapsed > 1 ? "s" : ""
-                        } ago`
-                    ) : (
-                        `${timeSincePlay.minElapsed} min ago`
-                    )
+                    `${formatTimeElapsed(timeSincePlay)}`
                 ) : (
                     ""
                 )}

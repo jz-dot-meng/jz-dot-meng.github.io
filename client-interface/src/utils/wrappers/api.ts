@@ -1,3 +1,4 @@
+import { errorParseToString } from "@utils/functions/object";
 import { ErrorResponse } from "@utils/types/api";
 
 export const api = async <T>(url: string): Promise<T | ErrorResponse> => {
@@ -16,7 +17,7 @@ export const api = async <T>(url: string): Promise<T | ErrorResponse> => {
             return r.json() as T;
         })
         .catch((err) => {
-            const error = err.message ? err.message : JSON.stringify(err);
+            const error = errorParseToString(err);
             return { success: false, error } as ErrorResponse;
         });
 };

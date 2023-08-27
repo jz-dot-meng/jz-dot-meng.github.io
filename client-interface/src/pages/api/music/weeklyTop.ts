@@ -1,3 +1,4 @@
+import { errorParseToString } from "@utils/functions/object";
 import { ErrorResponse } from "@utils/types/api";
 import { WeeklyArtistReponse, WeeklyTrackReponse } from "@utils/types/music";
 import corsWrapper from "@utils/wrappers/cors";
@@ -41,8 +42,8 @@ export default corsWrapper(
             }
             const data = await getWeekTop(type);
             return res.status(200).json(data);
-        } catch (err: any) {
-            const error = err.message ? err.message : JSON.stringify(err);
+        } catch (err: unknown) {
+            const error = errorParseToString(err);
             return res.status(500).json({ success: false, error });
         }
     }
