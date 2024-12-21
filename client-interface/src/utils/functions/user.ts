@@ -3,11 +3,13 @@ import { USER_PK_KEY } from "@utils/storage/constants";
 import { LocalStorage } from "@utils/storage/local-storage";
 import { Chain, UserLocalPrivateKey } from "@utils/types/user";
 import { encodeBase58, Wallet } from "ethers";
+import { base58ToUint8Array } from "./encoding";
 import {
     buildMessage,
-    fastSignMesage,
+    evmFastSignMesage,
     formatPartialABNFMessage,
     SignMessageParams,
+    svmFastSignMessage,
 } from "./message";
 
 export const PROOF_OF_OWNERSHIP_MESSAGE =
@@ -39,24 +41,28 @@ export class LocalUserManagement {
     }
 
     static signMessage(userData: UserLocalPrivateKey, messageParams: SignMessageParams) {
+        const abnfMsg = formatPartialABNFMessage(userData, messageParams);
+        const body = buildMessage(abnfMsg);
+        let signature: string;
         switch (userData.privateKeyType) {
             case "evm": {
-                const abnfMsg = formatPartialABNFMessage(userData, messageParams);
-                const body = buildMessage(abnfMsg);
-                const signature = fastSignMesage(new Wallet(userData.privateKey), body);
-                const token = Buffer.from(
-                    JSON.stringify({
-                        signature,
-                        body,
-                    }),
-                    "utf-8"
-                ).toString("base64");
-
-                return token;
+                signature = evmFastSignMesage(new Wallet(userData.privateKey), body);
+                break;
             }
             case "svm": {
-                throw "not yet implemented";
+                const pkBytes = base58ToUint8Array(userData.privateKey);
+                signature = svmFastSignMessage(Keypair.fromSecretKey(pkBytes), body);
+                break;
             }
         }
+        const token = Buffer.from(
+            JSON.stringify({
+                signature,
+                body,
+            }),
+            "utf-8"
+        ).toString("base64");
+
+        return token;
     }
 }

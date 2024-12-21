@@ -1,7 +1,9 @@
 import { Keypair } from "@solana/web3.js";
+import { sign } from "@solana/web3.js/src/utils/ed25519";
 import { UserLocalPrivateKey } from "@utils/types/user";
-import { concat, decodeBase58, keccak256, toUtf8Bytes, Wallet } from "ethers";
+import { concat, keccak256, toUtf8Bytes, Wallet } from "ethers";
 import { getDaysFromNow } from "./datetime";
+import { base58ToUint8Array, toHexString } from "./encoding";
 
 export interface SignMessageParams {
     statement: string;
@@ -42,13 +44,8 @@ export const formatPartialABNFMessage = (
                 return wallet.address;
             }
             case "svm": {
-                const pkInt = decodeBase58(userData.privateKey);
-                const hex = pkInt.toString(16);
-                const paddedHex = hex.length % 2 === 0 ? hex : "0" + hex; // Ensure even number of hex digits
-                const byteArray = new Uint8Array(
-                    paddedHex.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
-                );
-                return Keypair.fromSecretKey(byteArray).publicKey.toBase58();
+                const pkBytes = base58ToUint8Array(userData.privateKey);
+                return Keypair.fromSecretKey(pkBytes).publicKey.toBase58();
             }
         }
     })();
@@ -81,9 +78,9 @@ export const formatPartialABNFMessage = (
 
 export const buildMessage = (abnf: PartialABNFMessage) => {
     const message: string[] = [];
-    message.push(`${abnf.address}`);
-    message.push("");
     message.push(`${abnf.statement}`);
+    message.push("");
+    message.push(`${abnf.address}`);
     message.push("");
 
     const paramLabels = {
@@ -108,9 +105,9 @@ export type MessageSections = string[][];
 export const parseBody = (lines: string[]) => {
     const sections = splitSections(lines);
 
-    const address = sections[0][0];
+    const statement = sections[0];
 
-    const statement = sections[1];
+    const address = sections[1][0];
 
     const details = sections[sections.length - 1];
 
@@ -167,20 +164,38 @@ const splitSections = (lines: string[]): MessageSections => {
     return sections;
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                     EVM                                    */
-/* -------------------------------------------------------------------------- */
-
 // we don't want to prepend the message with "\\x19Ethereum Signed Message:\\n"
-export const customHashMessage = (message: string) => {
+// also this can be shared between EVM and SVM
+export const customHashMessage = (message: string, omit0x: boolean = false) => {
     let msg: Uint8Array;
     if (typeof message === "string") {
         msg = toUtf8Bytes(message);
     }
-    return keccak256(concat([toUtf8Bytes(String(msg.length)), msg]));
+    const hashed = keccak256(concat([toUtf8Bytes(String(msg.length)), msg]));
+    return omit0x ? hashed.slice(2) : hashed;
 };
 
-export const fastSignMesage = (wallet: Wallet, message: string) => {
+/* -------------------------------------------------------------------------- */
+/*                                     EVM                                    */
+/* -------------------------------------------------------------------------- */
+
+export const evmFastSignMesage = (wallet: Wallet, message: string) => {
     const signature = wallet.signingKey.sign(customHashMessage(message)).serialized;
     return signature;
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                     SVM                                    */
+/* -------------------------------------------------------------------------- */
+
+export const svmFastSignMessage = (wallet: Keypair, message: string) => {
+    const signatureBytes = sign(customHashMessage(message, true), wallet.secretKey);
+    if (signatureBytes.length !== 64) {
+        throw "sig byte len not 64";
+    }
+    const signature = toHexString(signatureBytes);
+    if (signature.length !== 128) {
+        throw "sig str len not 128";
+    }
+    return `0x${signature}`;
 };

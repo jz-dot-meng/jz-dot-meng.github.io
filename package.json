@@ -21,7 +21,6 @@
         "prettier": "^2.8.8"
     },
     "workspaces": [
-        "client-interface",
-        "firebase-api"
+        "client-interface"
     ]
 }
