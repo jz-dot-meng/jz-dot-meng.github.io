@@ -18,3 +18,16 @@ export interface BlockTimestampResponse extends SuccessResponse {
         blockTimestamp: number;
     };
 }
+
+// https://github.com/ethereum/ercs/blob/master/ERCS/erc-4361.md
+export interface SignBody {
+    expiration_time: Date;
+    issued_at: Date;
+    not_before?: Date;
+    statement?: string;
+    nonce?: number;
+    request_id?: string;
+    domain?: string;
+    uri?: string;
+    chain_id?: number;
+}

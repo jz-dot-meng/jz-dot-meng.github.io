@@ -3,7 +3,8 @@ import Link from "next/link";
 import React from "react";
 
 const Blog: React.FunctionComponent = () => {
-    const allPosts = Object.entries(posts).sort(([a, aData], [b, bData]) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const allPosts = Object.entries(posts).sort(([_a, aData], [_b, bData]) => {
         const dateA = aData.firstDrafted.getDate();
         const dateB = bData.firstDrafted.getDate();
         // return the latest post first
@@ -21,9 +22,9 @@ const Blog: React.FunctionComponent = () => {
                 </div>
             </div>
             <div className="flex flex-col gap-4 overflow-y-scroll no-scrollbar">
-                {allPosts.map(([slug, postData], index) => (
+                {allPosts.map(([slug, postData]) => (
                     <Link
-                        className="flex flex-col py-12 justify-center"
+                        className="flex flex-col py-4 justify-center"
                         href={`/blog/post/${slug}`}
                         key={slug}
                     >

@@ -113,6 +113,7 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
             return (
                 <div className="flex gap-2 items-center">
                     <div className="h-fit">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={track.image[3]["#text"]}
                             width={50}

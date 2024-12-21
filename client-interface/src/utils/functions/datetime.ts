@@ -19,6 +19,11 @@ export const getTimeElapsed = (now: number, time: number) => {
     };
 };
 
+export const getDaysFromNow = (days: number): Date => {
+    const daysInMs = days * 24 * 60 * 60 * 1000;
+    return new Date(Date.now() + daysInMs);
+};
+
 export type TimeElapsed = ReturnType<typeof getTimeElapsed>;
 
 const getDaysAgo = (days: number) => `${days} day${days > 1 ? "s" : ""}`;

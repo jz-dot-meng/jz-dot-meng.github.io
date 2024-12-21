@@ -31,10 +31,10 @@ const cors = Cors({
 function runMiddleware(
     req: NextApiRequest,
     res: NextApiResponse,
-    fn: (req: NextApiRequest, res: NextApiResponse, resolve: (result: any) => void) => void
+    fn: (req: NextApiRequest, res: NextApiResponse, resolve: (result: unknown) => void) => void
 ) {
     return new Promise((resolve, reject) => {
-        fn(req, res, (result: any) => {
+        fn(req, res, (result: unknown) => {
             if (result instanceof Error) {
                 console.error(result);
                 return reject(result);
@@ -44,7 +44,9 @@ function runMiddleware(
     });
 }
 
-export default function corsWrapper(handler: any) {
+export default function corsWrapper(
+    handler: (req: NextApiRequest, res: NextApiResponse) => Promise<unknown>
+) {
     return async (req: NextApiRequest, res: NextApiResponse) => {
         try {
             // Run the middleware
@@ -52,8 +54,11 @@ export default function corsWrapper(handler: any) {
             await runMiddleware(req, res, cors);
             // Rest of the API logic
             await handler(req, res);
-        } catch (err: any) {
-            const error = err.message ? err.message : JSON.stringify(err);
+        } catch (err: unknown) {
+            let error: string;
+            if (typeof err === "string") error = err;
+            if (err instanceof Error) error = err.message;
+            else error = JSON.stringify(err, Object.getOwnPropertyNames(err));
             console.warn(`Error with the middleware: ${error}`);
             return res.status(403).json({ success: false, error });
         }

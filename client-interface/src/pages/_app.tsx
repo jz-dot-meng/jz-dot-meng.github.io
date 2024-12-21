@@ -1,3 +1,4 @@
+import { UserContextProvider } from "@context/UserContext";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,11 +21,13 @@ function JzMengApp({ Component, pageProps }: AppProps) {
         }
     }, []);
     return (
-        <ToastContextProvider>
-            <MusicContextProvider>
-                <Component {...pageProps} />
-            </MusicContextProvider>
-        </ToastContextProvider>
+        <UserContextProvider>
+            <ToastContextProvider>
+                <MusicContextProvider>
+                    <Component {...pageProps} />
+                </MusicContextProvider>
+            </ToastContextProvider>
+        </UserContextProvider>
     );
 }
 
