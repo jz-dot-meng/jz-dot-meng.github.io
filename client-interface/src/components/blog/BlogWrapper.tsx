@@ -1,3 +1,4 @@
+import { Header } from "@components/common/header/Header";
 import { BlogData } from "@utils/types/blog";
 import Link from "next/link";
 import React, { ReactNode } from "react";
@@ -11,9 +12,7 @@ export const BlogWrapper: React.FunctionComponent<BlogWrapperProps> = ({ data, c
         <div className="flex justify-center h-full p-8 overflow-y-scroll no-scrollbar">
             <div className="flex flex-col gap-2">
                 <section className="flex flex-col gap-4">
-                    <h4>
-                        <Link href="/">@jz-dot-meng</Link>
-                    </h4>
+                    <Header />
                     <div className="flex items-start flex-col gap-1 md:items-end md:flex-row">
                         <h1>{data.title}</h1>
                         {data.secondaryTitle && (

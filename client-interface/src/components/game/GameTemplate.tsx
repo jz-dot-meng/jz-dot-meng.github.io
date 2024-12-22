@@ -1,8 +1,8 @@
+import { Header } from "@components/common/header/Header";
 import { DevFooter } from "@components/navigation/DevFooter";
 import { HorizontalLinks } from "@components/navigation/HorizontalLinks";
 import { gamesLinkMap } from "@constants";
 import { GameDetails, GameDisplay } from "@utils/types/minigame";
-import Link from "next/link";
 import React, { ReactNode } from "react";
 import { GameControls } from "./GameControls";
 import { GameDetailsTracker } from "./GameDetailsTracker";
@@ -38,9 +38,7 @@ export const GameTemplate: React.FunctionComponent<GameTemplateProps> = ({ ...pr
         <div className="flex justify-center flex-col items-center h-full overflow-hidden p-6 md:p-8">
             <div className="flex flex-col gap-4 w-11/12 md:w-1/2 overflow-scroll no-scrollbar">
                 <div className="flex flex-col gap-2 md:gap-4">
-                    <h4>
-                        <Link href="/">@jz-dot-meng</Link>
-                    </h4>
+                    <Header />
                     <div className="flex items-start flex-col gap-1 md:items-end md:flex-row">
                         <h1>{display.title}</h1>
                         <span className="pb-2"> :: {display.secondaryTitle}</span>

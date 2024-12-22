@@ -23,7 +23,7 @@ const handleGetUserDetails = async (data: PartialABNFMessage): Promise<UserRemot
     console.log(`received hash for key ${data.statement}`);
     const response: UserRemoteInfo = {
         name: data.address.slice(-5),
-        pfp: new Identicon(data.address).toString(),
+        pfp: `data:image/svg+xml;base64,${new Identicon(data.address).toString()}`,
     };
 
     for (const [key, value] of Object.entries(match || {})) {

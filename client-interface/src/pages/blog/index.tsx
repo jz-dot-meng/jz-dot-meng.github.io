@@ -1,3 +1,4 @@
+import { Header } from "@components/common/header/Header";
 import { posts } from "@constants";
 import Link from "next/link";
 import React from "react";
@@ -13,9 +14,7 @@ const Blog: React.FunctionComponent = () => {
     return (
         <div className="flex h-full flex-col gap-2 p-8 overflow-hidden">
             <div className="flex flex-col gap-4">
-                <h4>
-                    <Link href="/">@jz-dot-meng</Link>
-                </h4>
+                <Header />
                 <div className="flex items-start flex-col gap-1 md:items-end md:flex-row">
                     <h1>blogs</h1>
                     <span className="pb-2"> :: a collection of thoughts</span>
