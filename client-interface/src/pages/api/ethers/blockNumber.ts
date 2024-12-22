@@ -2,12 +2,13 @@ import { errorParseToString } from "@utils/functions/object";
 import { ErrorResponse } from "@utils/types/api";
 import { DefiLlama, NearestBlockResponse } from "@utils/types/ethers";
 import corsWrapper from "@utils/wrappers/cors";
+import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getNearestBlock = async (unixTimestamp: string): Promise<DefiLlama.NearestBlock> => {
     console.log("fetching from defiLlama");
-    const resp = await fetch(`https://coins.llama.fi/block/ethereum/${unixTimestamp}`);
-    const data = await resp.json();
+    const resp = await axios.get(`https://coins.llama.fi/block/ethereum/${unixTimestamp}`);
+    const data = resp.data;
     console.log(data);
     return data;
 };

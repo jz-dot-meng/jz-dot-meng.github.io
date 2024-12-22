@@ -18,12 +18,22 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-    "paths":{
-      "@components/*":["src/components/*"],
-      "@utils/*":["src/utils/*"],
-      "@constants": ["src/constants"],
-      "@context/*":["src/context/*"],
-      "@pages/*":["src/pages/*"]
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@constants": [
+        "src/constants"
+      ],
+      "@context/*": [
+        "src/context/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ]
     },
   },
   "include": [

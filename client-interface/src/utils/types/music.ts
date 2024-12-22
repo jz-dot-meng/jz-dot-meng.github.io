@@ -1,6 +1,6 @@
 import { SuccessResponse } from "./api";
 
-export module LastFm {
+export namespace LastFm {
     interface attr_tracks {
         user: string;
         totalPages: string;

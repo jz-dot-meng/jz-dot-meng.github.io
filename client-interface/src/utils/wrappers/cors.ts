@@ -6,7 +6,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const ALLOW_LIST = [
     "https://jz-dot-meng.vercel.app",
     "https://jz-dot-meng.github.io",
-    // "http://localhost:3000",
+    "http://localhost:3000",
 ];
 const cors = Cors({
     methods: ["POST", "GET", "HEAD"],

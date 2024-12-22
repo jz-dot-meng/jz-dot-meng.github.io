@@ -11,7 +11,7 @@ const getBlockTimestamp = async (blockNo: string): Promise<{ blockTimestamp: num
     console.log("getting timestamp for block", blockNo);
     const blockDetails = await HTTP_PROVIDER.getBlock(`0x${Number(blockNo).toString(16)}`);
     return {
-        blockTimestamp: blockDetails.timestamp,
+        blockTimestamp: blockDetails?.timestamp || 0,
     };
 };
 

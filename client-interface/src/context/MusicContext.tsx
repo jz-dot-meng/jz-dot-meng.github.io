@@ -7,7 +7,7 @@ import {
     WeeklyTrackReponse,
 } from "@utils/types/music";
 import { api } from "@utils/wrappers/api";
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { BehaviorSubject, filter, from, map, switchMap, takeUntil, timer } from "rxjs";
 
@@ -17,34 +17,27 @@ interface MusicOverview {
     weeklyArtists: LastFm.Artist_Rank[];
     init: () => Promise<void>;
 }
-const MusicContext = createContext<MusicOverview | undefined>(undefined);
+const MusicContext = createContext<MusicOverview | null>(null);
 
 export const useMusicContext = () => {
     const musicContext = useContext(MusicContext);
-    if (musicContext === undefined) {
+    if (musicContext === null) {
         throw new Error("MusicContext not defined");
     }
     return musicContext;
 };
 
-export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
+export const MusicContextProvider = ({
+    children,
+}: {
+    children: React.ReactElement | React.ReactNode;
+}) => {
     const [latestTracks, setLastestTracks] = useState<LastFm.Track[]>([]);
     const [weeklyTracks, setWeeklyTracks] = useState<LastFm.Track_Rank[]>([]);
     const [weeklyArtists, setWeeklyArtists] = useState<LastFm.Artist_Rank[]>([]);
 
     const [nowListening, setNowListening] = useState<LastFm.Track>();
     const [stop$] = useState<BehaviorSubject<boolean>>(new BehaviorSubject<boolean>(false));
-
-    const [baseUrl, setBaseUrl] = useState<string>("");
-
-    useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
-            // console.log("is dev!");
-            setBaseUrl("");
-        } else {
-            setBaseUrl("https://jz-dot-meng.vercel.app");
-        }
-    }, []);
 
     const init = async () => {
         _fetchRecentTracks().then((tracks) => {
@@ -68,7 +61,7 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const _fetchRecentTracks = async () => {
-        return api<RecentTracksResponse>(`${baseUrl}/api/music/recentTracks`).then((data) => {
+        return api<RecentTracksResponse>(`/api/music/recentTracks`).then((data) => {
             if (!data.success) {
                 toast.error(`Unable to fetch recent tracks: ${(data as ErrorResponse).error}`);
                 return undefined;
@@ -79,33 +72,25 @@ export const MusicContextProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const _fetchWeeklyTracks = async () => {
-        return api<WeeklyTrackReponse>(`${baseUrl}/api/music/weeklyTop?type=tracks`).then(
-            (data) => {
-                if (!data.success) {
-                    toast.error(
-                        `Unable to fetch top weekly tracks: ${(data as ErrorResponse).error}`
-                    );
-                    return undefined;
-                }
-                // console.log({ data });
-                return data.data.weeklytrackchart.track;
+        return api<WeeklyTrackReponse>(`/api/music/weeklyTop?type=tracks`).then((data) => {
+            if (!data.success) {
+                toast.error(`Unable to fetch top weekly tracks: ${(data as ErrorResponse).error}`);
+                return undefined;
             }
-        );
+            // console.log({ data });
+            return data.data.weeklytrackchart.track;
+        });
     };
 
     const _fetchWeeklyArtists = async () => {
-        return api<WeeklyArtistReponse>(`${baseUrl}/api/music/weeklyTop?type=artists`).then(
-            (data) => {
-                if (!data.success) {
-                    toast.error(
-                        `Unable to fetch top weekly artists: ${(data as ErrorResponse).error}`
-                    );
-                    return undefined;
-                }
-                // console.log({ data });
-                return data.data.weeklyartistchart.artist;
+        return api<WeeklyArtistReponse>(`/api/music/weeklyTop?type=artists`).then((data) => {
+            if (!data.success) {
+                toast.error(`Unable to fetch top weekly artists: ${(data as ErrorResponse).error}`);
+                return undefined;
             }
-        );
+            // console.log({ data });
+            return data.data.weeklyartistchart.artist;
+        });
     };
 
     const _displayNowListeningToast = (track: LastFm.Track) => {

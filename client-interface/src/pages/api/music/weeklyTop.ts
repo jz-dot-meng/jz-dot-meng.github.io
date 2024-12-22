@@ -2,23 +2,24 @@ import { errorParseToString } from "@utils/functions/object";
 import { ErrorResponse } from "@utils/types/api";
 import { WeeklyArtistReponse, WeeklyTrackReponse } from "@utils/types/music";
 import corsWrapper from "@utils/wrappers/cors";
+import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getWeekTop = async (type: string): Promise<WeeklyTrackReponse | WeeklyArtistReponse> => {
     switch (type) {
         case "tracks": {
-            const resp = await fetch(
+            const resp = await axios.get(
                 `https://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user=mengbeats&api_key=${process.env.LAST_FM_API_KEY}&format=json`
             );
-            const data = await resp.json();
+            const data = resp.data;
             console.log(data);
             return { success: true, data };
         }
         case "artists": {
-            const resp = await fetch(
+            const resp = await axios.get(
                 `https://ws.audioscrobbler.com/2.0/?method=user.getweeklyartistchart&user=mengbeats&api_key=${process.env.LAST_FM_API_KEY}&format=json`
             );
-            const data = await resp.json();
+            const data = resp.data;
             console.log(data);
             return { success: true, data };
         }

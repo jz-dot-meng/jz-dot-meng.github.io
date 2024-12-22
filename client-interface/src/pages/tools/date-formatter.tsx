@@ -6,8 +6,6 @@ import { api } from "@utils/wrappers/api";
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 
 const DateFormatter: React.FunctionComponent = () => {
-    const baseUrl = process.env.NODE_ENV === "development" ? "" : "https://jz-dot-meng.vercel.app";
-
     const [unixMsVal, setUnixMsVal] = useState<number>();
     const [unixVal, setUnixVal] = useState<number>();
     const [isoString, setIsoString] = useState<string>();
@@ -20,9 +18,7 @@ const DateFormatter: React.FunctionComponent = () => {
     const [fetchError, setFetchError] = useState<string>();
 
     const _fetchNearestBlock = async (unix: number) => {
-        return api<NearestBlockResponse>(
-            `${baseUrl}/api/ethers/blockNumber?timestamp=${unix}`
-        ).then((r) => {
+        return api<NearestBlockResponse>(`/api/ethers/blockNumber?timestamp=${unix}`).then((r) => {
             if ("error" in r) {
                 setFetchError(r.error);
                 return;
@@ -33,18 +29,18 @@ const DateFormatter: React.FunctionComponent = () => {
     };
 
     const _fetchBlockTimestamp = async (blockNo: number) => {
-        return api<BlockTimestampResponse>(
-            `${baseUrl}/api/ethers/blockTimestamp?blockNo=${blockNo}`
-        ).then((r) => {
-            if ("error" in r) {
-                setFetchError(r.error);
-                return;
+        return api<BlockTimestampResponse>(`/api/ethers/blockTimestamp?blockNo=${blockNo}`).then(
+            (r) => {
+                if ("error" in r) {
+                    setFetchError(r.error);
+                    return;
+                }
+                setFetchError(undefined);
+                const timestamp = r.data.blockTimestamp;
+                const newDate = new Date(timestamp * 1000);
+                setValidDate(newDate, true);
             }
-            setFetchError(undefined);
-            const timestamp = r.data.blockTimestamp;
-            const newDate = new Date(timestamp * 1000);
-            setValidDate(newDate, true);
-        });
+        );
     };
 
     const setValidDate = async (date: Date, skipBlockNumFetch = false) => {

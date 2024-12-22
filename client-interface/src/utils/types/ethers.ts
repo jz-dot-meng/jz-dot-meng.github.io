@@ -1,6 +1,6 @@
 import { SuccessResponse } from "./api";
 
-export module DefiLlama {
+export namespace DefiLlama {
     export interface NearestBlock {
         height: number;
         timestamp: number;

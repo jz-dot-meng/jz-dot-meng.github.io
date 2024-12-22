@@ -1,13 +1,13 @@
+//! Based off the internal logic of https://github.com/bytesbay/web3-token
 import { Keypair } from "@solana/web3.js";
-import { sign } from "@solana/web3.js/src/utils/ed25519";
 import { UserLocalPrivateKey } from "@utils/types/user";
 import { concat, keccak256, toUtf8Bytes, Wallet } from "ethers";
 import { getDaysFromNow } from "./datetime";
-import { base58ToUint8Array, toHexString } from "./encoding";
+import { base58ToUint8Array, sign, toHexString } from "./encoding";
 
 export interface SignMessageParams {
     statement: string;
-    expiresInDays: number;
+    expiresInDays?: number;
 }
 
 // partial ABNF message, because we're not actually rendering it for the user
@@ -24,6 +24,20 @@ export interface PartialABNFMessage {
     requestId?: string;
     resources?: string[];
 }
+
+export const ABNFLabels: Record<keyof PartialABNFMessage, string> = {
+    address: "Address",
+    statement: "Statement",
+    uri: "URI",
+    version: "Version",
+    chainId: "Chain ID",
+    nonce: "Nonce",
+    issuedAt: "Issued At",
+    expirationTime: "Expiration Time",
+    notBefore: "Not Before",
+    requestId: "Request ID",
+    resources: "Resources",
+};
 
 // erc4361 rfc3986, cannot have line feed
 export const validateMessage = (message: string) => {
@@ -59,7 +73,7 @@ export const formatPartialABNFMessage = (
             }
         }
     })();
-    const expirationTime = getDaysFromNow(params.expiresInDays);
+    const expirationTime = params.expiresInDays ? getDaysFromNow(params.expiresInDays) : undefined;
     const uri = "https://jz-dot-meng.vercel.app";
     const nonce = parseInt(String(Math.random() * 99999999));
 
@@ -83,18 +97,13 @@ export const buildMessage = (abnf: PartialABNFMessage) => {
     message.push(`${abnf.address}`);
     message.push("");
 
-    const paramLabels = {
-        URI: abnf.uri,
-        "Chain ID": abnf.chainId,
-        Nonce: abnf.nonce,
-        "Issued At": abnf.issuedAt.toISOString(),
-        "Expiration Time": abnf.expirationTime.toISOString(),
-        "Not Before": abnf.notBefore ? abnf.notBefore.toISOString() : undefined,
-        "Request ID": abnf.requestId,
-    };
-    for (const label in paramLabels) {
-        if (paramLabels[label] !== undefined) {
-            message.push(`${label}: ${paramLabels[label]}`);
+    for (const key of Object.keys(abnf) as (keyof PartialABNFMessage)[]) {
+        const value = abnf[key];
+        if (value == undefined) continue;
+        if (value instanceof Date) {
+            message.push(`${ABNFLabels[key]}: ${value.toISOString()}`);
+        } else {
+            message.push(`${ABNFLabels[key]}: ${value.toString()}`);
         }
     }
 
@@ -164,13 +173,40 @@ const splitSections = (lines: string[]): MessageSections => {
     return sections;
 };
 
+export const extractBodyAndSignature = (token: string): { body: string; signature: string } => {
+    if (!token || !token.length) {
+        throw new Error("Token required.");
+    }
+
+    const base64_decoded = Buffer.from(token, "base64").toString("utf-8");
+
+    if (!base64_decoded || !base64_decoded.length) {
+        throw new Error("Token malformed (must be base64 encoded)");
+    }
+
+    let body: string, signature: string;
+
+    try {
+        ({ body, signature } = JSON.parse(base64_decoded));
+    } catch (error) {
+        throw new Error("Token malformed (unparsable JSON)");
+    }
+
+    if (!body || !body.length) {
+        throw new Error("Token malformed (empty message)");
+    }
+
+    if (!signature || !signature.length) {
+        throw new Error("Token malformed (empty signature)");
+    }
+
+    return { body, signature };
+};
+
 // we don't want to prepend the message with "\\x19Ethereum Signed Message:\\n"
 // also this can be shared between EVM and SVM
-export const customHashMessage = (message: string, omit0x: boolean = false) => {
-    let msg: Uint8Array;
-    if (typeof message === "string") {
-        msg = toUtf8Bytes(message);
-    }
+export const customHashMessage = (message: string, omit0x = false) => {
+    const msg: Uint8Array = toUtf8Bytes(message);
     const hashed = keccak256(concat([toUtf8Bytes(String(msg.length)), msg]));
     return omit0x ? hashed.slice(2) : hashed;
 };

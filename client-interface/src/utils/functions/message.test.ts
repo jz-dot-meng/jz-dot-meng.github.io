@@ -1,8 +1,7 @@
 import { Keypair } from "@solana/web3.js";
 import { encodeBase58, Wallet } from "ethers";
 import { describe, expect, test } from "vitest";
-import { LocalUserManagement } from "./user";
-import { UserValidator } from "./validator";
+import { LocalUserManagement, UserValidator } from "./user";
 
 describe("decrypt", () => {
     test("encodes and decrypts a evm signed message correctly", () => {
