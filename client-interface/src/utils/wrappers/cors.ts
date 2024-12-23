@@ -3,11 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
-const ALLOW_LIST = [
-    "https://jz-dot-meng.vercel.app",
-    "https://jz-dot-meng.github.io",
-    "http://localhost:3000",
-];
+const ALLOW_LIST = ["https://jz-dot-meng.vercel.app", "https://jz-dot-meng.github.io"];
+if (process.env.NODE_ENV === "development") {
+    ALLOW_LIST.push("http://localhost:3000");
+}
+
 const cors = Cors({
     methods: ["POST", "GET", "HEAD"],
     origin: (requestOrigin, callback) => {

@@ -19,7 +19,6 @@ jobs:
                   cd client-interface
                   npm ci
                   npm run build
-                  npm run export
                   touch out/.nojekyll
             - name: Deploy
               uses: JamesIves/github-pages-deploy-action@v4

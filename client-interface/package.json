@@ -30,8 +30,7 @@
         "start": "next start",
         "build": "next build",
         "lint": "next lint",
-        "test": "vitest",
-        "export": "next export"
+        "test": "vitest"
     },
     "eslintConfig": {
         "extends": [

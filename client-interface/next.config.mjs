@@ -7,13 +7,14 @@ let assetPrefix = "";
 const basePath = "";
 
 if (isGithubActions) {
-	// trim off `<owner>/`
-	assetPrefix = `./`;
+    // trim off `<owner>/`
+    assetPrefix = `./`;
 }
 
 const nextConfig = {
-	assetPrefix: assetPrefix,
-	basePath: basePath,
+    assetPrefix: assetPrefix,
+    basePath: basePath,
+    output: "export",
 };
 
 export default nextConfig;
