@@ -1,16 +1,20 @@
-import { Keypair } from "@solana/web3.js";
-import { base58ToUint8Array } from "@utils/functions/encoding";
 import { errorParseToString } from "@utils/functions/object";
-import { LocalUserManagement } from "@utils/functions/user";
-import { makeUserDetailsKey } from "@utils/storage/utils";
+import {
+    extractUserLocalData,
+    extractUserRemoteData,
+    getUserAddress,
+    LocalUserManagement,
+} from "@utils/functions/user";
+import { makeUserDetailsKey, makeUserDetailsKeyWithWriteData } from "@utils/storage/utils";
 import { ErrorResponse } from "@utils/types/api";
 import { User, UserRemoteInfoReponse } from "@utils/types/user";
 import { api } from "@utils/wrappers/api";
-import { Wallet } from "ethers";
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 interface UserOverview {
     user: User | undefined;
+    updateUser: (updatedUser: User) => Promise<void>;
 }
 
 const UserContext = createContext<UserOverview | null>(null);
@@ -31,7 +35,7 @@ export const UserContextProvider = ({
     const [user, setUser] = useState<User | undefined>(undefined);
 
     const getCachedUserPrivateKey = () => {
-        let userLocalPrivateKey = LocalUserManagement.getUserPrivateKey();
+        let userLocalPrivateKey = LocalUserManagement.getCachedUserLocalInfo();
         if (!userLocalPrivateKey) {
             console.log("no pk found, creating new user pk");
             userLocalPrivateKey = LocalUserManagement.createUserPrivateKey("evm");
@@ -47,16 +51,7 @@ export const UserContextProvider = ({
         if (!partialUser) {
             return;
         }
-        const address = (() => {
-            switch (partialUser.privateKeyType) {
-                case "evm":
-                    return new Wallet(partialUser.privateKey).address;
-                case "svm":
-                    return Keypair.fromSecretKey(
-                        base58ToUint8Array(partialUser.privateKey)
-                    ).publicKey.toBase58();
-            }
-        })();
+        const address = getUserAddress(partialUser);
         const messageKey = makeUserDetailsKey(address);
         const cachedUserData = LocalUserManagement.getCachedUserRemoteInfo();
         if (cachedUserData) {
@@ -65,11 +60,11 @@ export const UserContextProvider = ({
                 ...cachedUserData,
             };
         }
-        const signedMessage = LocalUserManagement.signMessage(partialUser, {
+        const token = LocalUserManagement.signMessage(partialUser, {
             statement: messageKey,
         });
         const data = {
-            token: signedMessage,
+            token,
             address,
             mode: partialUser.privateKeyType,
         };
@@ -99,6 +94,41 @@ export const UserContextProvider = ({
         setUser(fullUser);
     };
 
+    const updateUser = async (updatedUser: User) => {
+        const address = getUserAddress(updatedUser);
+        // change remote cache first
+        const userRemoteData = extractUserRemoteData(updatedUser);
+        const statement = makeUserDetailsKeyWithWriteData(address, userRemoteData.data);
+        const token = LocalUserManagement.signMessage(updatedUser, {
+            statement,
+        });
+        const data = {
+            token,
+            address,
+            mode: updatedUser.privateKeyType,
+        };
+        const response = await api<UserRemoteInfoReponse | ErrorResponse>(
+            "/api/user/update",
+            data
+        ).catch((err) => {
+            console.log(err);
+            return {
+                success: false as const,
+                error: errorParseToString(err),
+            } as ErrorResponse;
+        });
+        if (response.success === false) {
+            toast.error(`Unable to update profile: ${response.error}`);
+            return;
+        }
+        // store in local storage next
+        const userLocalData = extractUserLocalData(updatedUser);
+        LocalUserManagement.setUserLocalInfo(userLocalData);
+        LocalUserManagement.setUserRemoteInfo(userRemoteData.data);
+        // store in state
+        setUser(updatedUser);
+    };
+
     // get and validate user on load
     useEffect(() => {
         handleGetUserDetailsFlow();
@@ -108,6 +138,7 @@ export const UserContextProvider = ({
         <UserContext.Provider
             value={{
                 user,
+                updateUser,
             }}
         >
             {children}

@@ -12,6 +12,7 @@
         "cors": "^2.8.5",
         "ethers": "^6.13.4",
         "ioredis": "^5.4.2",
+        "lodash": "^4.17.21",
         "next": "^13.0.3",
         "node-cache": "^5.1.2",
         "postcss": "^8.4.23",
@@ -52,6 +53,7 @@
     },
     "devDependencies": {
         "@types/cors": "^2.8.13",
+        "@types/lodash": "^4.17.13",
         "@types/node": "^22.10.2",
         "@typescript-eslint/eslint-plugin": "^5.59.7",
         "@typescript-eslint/parser": "^5.59.7",

@@ -11,10 +11,10 @@ import { cache } from "../cache";
 
 const handleGetUserDetails = async (data: PartialABNFMessage): Promise<UserRemoteInfo> => {
     console.log("received abnf data", data);
-    // we've already validated that the address matches the sending address, now we just need to validate it's the correct command
+    // we've already validated that the address matches the sending address, now we just need to validate it's the correct key
     const check = makeUserDetailsKey(data.address);
     if (check !== data.statement) {
-        throw new Error(`Incorrect command, expected ${check}, received ${data.statement}`);
+        throw new Error(`Incorrect key, expected ${check}, received ${data.statement}`);
     }
     console.log(`getting hash for key ${data.statement}`);
     const match = await cache.hgetall(data.statement).catch((err) => {

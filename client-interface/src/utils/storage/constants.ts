@@ -11,4 +11,6 @@ export const USER_REMOTE_INFO = `${LOCAL_CACHE_PREFIX}user-remote-info`;
 /*                            REMOTE CACHED STORAGE                           */
 /* -------------------------------------------------------------------------- */
 
-export const REMOTE_CACHE_PREFIX = "jzmeng:";
+export const REMOTE_CACHE_PREFIX = "jzmeng";
+
+export const DATA_SEPARATOR = "::";

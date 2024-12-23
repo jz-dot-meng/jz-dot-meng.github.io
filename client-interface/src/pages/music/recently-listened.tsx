@@ -1,7 +1,7 @@
+import { Header } from "@components/common/header/Header";
 import { TrackItem } from "@components/music/TrackItem";
 import { WeeklyTop } from "@components/music/WeeklyTop";
 import { useMusicContext } from "@context/MusicContext";
-import Link from "next/link";
 import React, { useEffect } from "react";
 
 const RecentlyListened: React.FunctionComponent = () => {
@@ -14,9 +14,7 @@ const RecentlyListened: React.FunctionComponent = () => {
         <div className="flex h-full p-8 overflow-scroll md:overflow-hidden">
             <div className="flex flex-col gap-2 w-full">
                 <section className="flex flex-col gap-4">
-                    <h4>
-                        <Link href="/">@jz-dot-meng</Link>
-                    </h4>
+                    <Header />
                     <div className="flex items-start flex-col gap-1 md:items-end md:flex-row">
                         <h1>recently listened</h1>
                         <span className="pb-2"> :: deep dive into my music tastes</span>

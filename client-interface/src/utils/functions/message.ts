@@ -1,9 +1,10 @@
 //! Based off the internal logic of https://github.com/bytesbay/web3-token
 import { Keypair } from "@solana/web3.js";
-import { UserLocalPrivateKey } from "@utils/types/user";
+import { UserLocalInfo } from "@utils/types/user";
 import { concat, keccak256, toUtf8Bytes, Wallet } from "ethers";
 import { getDaysFromNow } from "./datetime";
-import { base58ToUint8Array, sign, toHexString } from "./encoding";
+import { sign, toHexString } from "./encoding";
+import { getUserAddress } from "./user";
 
 export interface SignMessageParams {
     statement: string;
@@ -47,22 +48,11 @@ export const validateMessage = (message: string) => {
 };
 
 export const formatPartialABNFMessage = (
-    userData: UserLocalPrivateKey,
+    userData: UserLocalInfo,
     params: SignMessageParams
 ): PartialABNFMessage => {
     validateMessage(params.statement);
-    const address = (() => {
-        switch (userData.privateKeyType) {
-            case "evm": {
-                const wallet = new Wallet(userData.privateKey);
-                return wallet.address;
-            }
-            case "svm": {
-                const pkBytes = base58ToUint8Array(userData.privateKey);
-                return Keypair.fromSecretKey(pkBytes).publicKey.toBase58();
-            }
-        }
-    })();
+    const address = getUserAddress(userData);
     const chainId = (() => {
         switch (userData.privateKeyType) {
             case "evm": {

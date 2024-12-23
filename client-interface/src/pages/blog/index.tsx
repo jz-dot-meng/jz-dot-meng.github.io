@@ -13,14 +13,14 @@ const Blog: React.FunctionComponent = () => {
     });
     return (
         <div className="flex h-full flex-col gap-2 p-8 overflow-hidden">
-            <div className="flex flex-col gap-4">
+            <section className="flex flex-col gap-4">
                 <Header />
                 <div className="flex items-start flex-col gap-1 md:items-end md:flex-row">
                     <h1>blogs</h1>
                     <span className="pb-2"> :: a collection of thoughts</span>
                 </div>
-            </div>
-            <div className="flex flex-col gap-4 overflow-y-scroll no-scrollbar">
+            </section>
+            <section className="flex flex-col gap-4 overflow-y-scroll no-scrollbar">
                 {allPosts.map(([slug, postData]) => (
                     <Link
                         className="flex flex-col py-4 justify-center"
@@ -34,7 +34,7 @@ const Blog: React.FunctionComponent = () => {
                         </p>
                     </Link>
                 ))}
-            </div>
+            </section>
         </div>
     );
 };
