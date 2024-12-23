@@ -3,10 +3,11 @@ import { Radio, RadioOption } from "@components/common/buttons/Radio";
 import { Header } from "@components/common/header/Header";
 import { useUserContext } from "@context/UserContext";
 import { Keypair } from "@solana/web3.js";
+import { base58ToUint8Array } from "@utils/functions/encoding";
 import { Identicon } from "@utils/functions/identicon";
 import { getUserAddress } from "@utils/functions/user";
 import { parseChainMode } from "@utils/functions/validator";
-import { User } from "@utils/types/user";
+import { Chain, User } from "@utils/types/user";
 import { encodeBase58, Wallet } from "ethers";
 import _ from "lodash";
 import Image from "next/image";
@@ -15,16 +16,21 @@ import { toast } from "react-toastify";
 
 const Profile: React.FunctionComponent = () => {
     const { user, updateUser } = useUserContext();
-
-    const [address, setAddress] = useState<string>("");
-    const [isUpdating, setIsUpdating] = useState(false);
-
     const [editedUser, setEditedUser] = useState<User | undefined>(user);
 
+    const [address, setAddress] = useState<string>("");
+    const [editedPk, setEditedPk] = useState<string>(editedUser?.privateKey || "");
+
+    const [isUpdatingRemote, setIsUpdatingRemote] = useState(false);
+    const [pkEditingUnlocked, setPkEditingUnlocked] = useState(false);
+
+    // every re-rerender these values will be set
     const vmOptions: RadioOption[] = [
         { display: "Ethereum", value: "evm" },
         { display: "Solana", value: "svm" },
+        { display: pkEditingUnlocked ? "🔓" : "🔒", value: "edit" },
     ];
+    const useDefaultName = editedUser && editedUser.name === getUserAddress(editedUser).slice(-5);
 
     /* -------------------------------------------------------------------------- */
     /*                                   COPYING                                  */
@@ -45,43 +51,42 @@ const Profile: React.FunctionComponent = () => {
     /* -------------------------------------------------------------------------- */
 
     const handleSelectPKType = (value: string) => {
+        if (value === "edit") {
+            setPkEditingUnlocked(true);
+            return;
+        }
+        setPkEditingUnlocked(false);
         const parsed = parseChainMode(value);
-        const useDefaultName = editedUser.name === getUserAddress(editedUser).slice(-5);
 
+        let privateKey: string;
+        let address: string;
         switch (parsed) {
             case "evm": {
                 const newWallet = Wallet.createRandom();
-                const privateKey = newWallet.privateKey;
-                setEditedUser({
-                    ...editedUser,
-                    privateKey,
-                    privateKeyType: parsed,
-                    name: useDefaultName ? newWallet.address.slice(-5) : editedUser.name,
-                    pfp: `data:image/svg+xml;base64,${new Identicon(newWallet.address).toString()}`,
-                });
+                privateKey = newWallet.privateKey;
+                address = newWallet.address;
                 break;
             }
             case "svm": {
                 const newWallet = Keypair.generate();
-                const privateKey = encodeBase58(newWallet.secretKey);
-                setEditedUser({
-                    ...editedUser,
-                    privateKey,
-                    privateKeyType: parsed,
-                    name: useDefaultName
-                        ? newWallet.publicKey.toBase58().slice(-5)
-                        : editedUser.name,
-                    pfp: `data:image/svg+xml;base64,${new Identicon(
-                        newWallet.publicKey.toBase58()
-                    ).toString()}`,
-                });
+                privateKey = encodeBase58(newWallet.secretKey);
+                address = newWallet.publicKey.toBase58();
                 break;
             }
         }
+        setEditedUser({
+            ...editedUser,
+            privateKey,
+            privateKeyType: parsed,
+            name: useDefaultName ? address.slice(-5) : editedUser.name,
+            pfp: `data:image/svg+xml;base64,${new Identicon(address).toString()}`,
+        });
+        setEditedPk(privateKey);
     };
 
     const restoreOriginal = () => {
         setEditedUser(user);
+        setEditedPk(user.privateKey);
     };
 
     const handleSetEditedName = (value: string) => {
@@ -89,6 +94,39 @@ const Profile: React.FunctionComponent = () => {
             ...editedUser,
             name: value,
         });
+    };
+
+    const handleEditPk = (value: string) => {
+        const privateKey = value;
+        let privateKeyType: Chain | undefined = undefined;
+        let address: string;
+        try {
+            const wallet = new Wallet(privateKey);
+            privateKeyType = "evm";
+            address = wallet.address;
+        } catch (err) {
+            console.log("not a valid evm pk");
+        }
+        if (!privateKeyType) {
+            try {
+                const wallet = Keypair.fromSecretKey(base58ToUint8Array(privateKey));
+                privateKeyType = "svm";
+                address = wallet.publicKey.toBase58();
+            } catch (err) {
+                console.log("not a valid svm pk");
+            }
+        }
+        setEditedPk(privateKey);
+        if (privateKeyType) {
+            setEditedUser({
+                ...editedUser,
+                privateKey,
+                privateKeyType,
+                name: useDefaultName ? address.slice(-5) : editedUser.name,
+                pfp: `data:image/svg+xml;base64,${new Identicon(address).toString()}`,
+            });
+            setPkEditingUnlocked(false);
+        }
     };
 
     const handleResetAnonName = () => {
@@ -99,17 +137,22 @@ const Profile: React.FunctionComponent = () => {
         });
     };
 
+    /* -------------------------------------------------------------------------- */
+    /*                                   UPDATE                                   */
+    /* -------------------------------------------------------------------------- */
+
     const handleUpdate = async () => {
-        setIsUpdating(() => true);
+        setIsUpdatingRemote(() => true);
         await updateUser(editedUser).catch((err) => {
             console.error({ msg: "unexpected error while updating profile", err });
             toast.error(`An unexpected error occurred while updating your profile!`);
         });
-        setIsUpdating(() => false);
+        setIsUpdatingRemote(() => false);
     };
 
     useEffect(() => {
         setEditedUser(user);
+        if (user) setEditedPk(user.privateKey);
     }, [user]);
 
     useEffect(() => {
@@ -144,9 +187,8 @@ const Profile: React.FunctionComponent = () => {
                         you return here you will not be able to retrieve the same profile, and a new
                         one will be generated for you. If you want to keep the same profile, or use
                         the same profile across multiple devices or browsers, feel free to export
-                        the private key, <s>and import it into your new browser/device</s> (this
-                        isn't supported yet). These private keys can be also imported as
-                        cryptocurrency wallets as well!
+                        the private key, and import it into your new browser/device. These private
+                        keys can be also imported as cryptocurrency wallets as well!
                     </p>
                 </section>
                 <section className="flex gap-4">
@@ -187,16 +229,22 @@ const Profile: React.FunctionComponent = () => {
                                 <input
                                     type={"text"}
                                     onClick={(e) => {
+                                        if (pkEditingUnlocked) return;
                                         e.stopPropagation();
                                         copyPKToClipboard();
                                     }}
-                                    value={editedUser?.privateKey}
+                                    value={pkEditingUnlocked ? editedPk : editedUser?.privateKey}
+                                    onChange={(e) => handleEditPk(e.target.value)}
                                     className={`form-control w-full h-[42px] cursor-pointer text-white placeholder-grey-300 flex-4 bg-grey-800 rounded-md text-xs px-3 py-3 caret-coral-400 focus:ring-transparent border-grey-400 hover:border-coral-300 focus:border-coral-400 focus:ring-coral-400`}
                                 />
                                 <div className="flex-1 flex items-center">
                                     <Radio
                                         options={vmOptions}
-                                        selected={editedUser?.privateKeyType || ""}
+                                        selected={
+                                            pkEditingUnlocked
+                                                ? "edit"
+                                                : editedUser?.privateKeyType || ""
+                                        }
                                         select={handleSelectPKType}
                                     />
                                 </div>
@@ -228,8 +276,12 @@ const Profile: React.FunctionComponent = () => {
                         <div className="flex justify-center items-center gap-4 mt-4">
                             {/* <GameButton buttonText="Import Private Key" /> */}
                             <GameButton
-                                buttonText={isUpdating ? "Saving..." : "Save changes"}
-                                disabled={isUpdating || _.isEqual(user, editedUser)}
+                                buttonText={isUpdatingRemote ? "Saving..." : "Save changes"}
+                                disabled={
+                                    pkEditingUnlocked ||
+                                    isUpdatingRemote ||
+                                    _.isEqual(user, editedUser)
+                                }
                                 onClick={() => handleUpdate()}
                                 bgColor="bg-coral-600/80"
                             />
