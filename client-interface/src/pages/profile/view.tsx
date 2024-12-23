@@ -144,8 +144,8 @@ const Profile: React.FunctionComponent = () => {
                         you return here you will not be able to retrieve the same profile, and a new
                         one will be generated for you. If you want to keep the same profile, or use
                         the same profile across multiple devices or browsers, feel free to export
-                        the private key, <strike>and import it into your new browser/device</strike>{" "}
-                        (this isn't supported yet). These private keys can be also imported as
+                        the private key, <s>and import it into your new browser/device</s> (this
+                        isn't supported yet). These private keys can be also imported as
                         cryptocurrency wallets as well!
                     </p>
                 </section>
