@@ -4,6 +4,7 @@ import { debugRustPrettify } from "@utils/functions/string";
 import { BaseSyntheticEvent, useMemo, useState } from "react";
 
 const DateFormatter: React.FunctionComponent = () => {
+    const [errored, setErrored] = useState<boolean>(false);
     const [unvalidatedText, setUnvalidatedText] = useState<string>();
     const [prettifiedText, setPrettifiedText] = useState<string[]>();
     const [collapsedLines, setCollapsedLines] = useState<Record<number, boolean>>({});
@@ -18,6 +19,10 @@ const DateFormatter: React.FunctionComponent = () => {
         if (prettified.success) {
             setPrettifiedText(prettified.data);
             setCollapsedLines({}); // Reset collapse state on new input
+            setErrored(false);
+        } else if (prettified.success === false) {
+            setPrettifiedText([prettified.error]);
+            setErrored(true);
         }
     };
 
@@ -29,7 +34,7 @@ const DateFormatter: React.FunctionComponent = () => {
                         <textarea
                             rows={10}
                             onInput={handleTextInput}
-                            className={`form-control w-full resize-none text-white cursor-text placeholder-grey-300 flex-1 bg-grey-800 rounded-md text-xs px-3 py-3 caret-coral-400 focus:ring-transparent border-grey-400 hover:border-coral-300 focus:border-coral-400 focus:ring-coral-400`}
+                            className={`form-control w-full resize-none text-white cursor-text placeholder-grey-300 flex-1 bg-grey-800 rounded-md text-xs px-3 py-3 caret-coral-400 focus:ring-transparent border-grey-400 hover:border-coral-300 focus:border-coral-400 focus:ring-coral-400 no-scrollbar`}
                         ></textarea>
                     </div>
                     <div className="flex flex-1 flex-col gap-1 overflow-hidden">
@@ -82,12 +87,17 @@ const DateFormatter: React.FunctionComponent = () => {
                                         }
 
                                         linesToRender.push(
-                                            <div key={index} className="flex text-xs">
-                                                <span className="w-10 text-right text-grey-400 pr-2 select-none flex items-center">
+                                            <div
+                                                key={index}
+                                                className={`flex text-xs ${
+                                                    errored ? "text-red-400" : "text-grey-400"
+                                                }`}
+                                            >
+                                                <span className="w-10 text-right pr-2 select-none flex items-center">
                                                     {isBlockStart && endLine !== undefined ? (
                                                         <button
                                                             onClick={handleToggleCollapse}
-                                                            className="mr-1 text-[6px] text-grey-500 hover:text-white focus:outline-none"
+                                                            className="mr-1 text-[6px] hover:text-white focus:outline-none"
                                                         >
                                                             {isCollapsed ? "▶" : "▼"}
                                                         </button>
