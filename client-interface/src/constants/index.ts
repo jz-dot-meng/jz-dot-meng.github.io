@@ -9,7 +9,7 @@ export const gamesLinkMap: HorizontalLinkType[] = [
 export const toolsLinkMap: HorizontalLinkType[] = [
     { url: "/tools/lowercase-me", name: "lowercase me" },
     { url: "/tools/hex-to-number", name: "hex to number" },
-    { url: "/tools/date-formatter", name: "date formatter" },
+    { url: "/tools/rust-formatter", name: "rust formatter" },
 ];
 
 export const posts: Record<string, BlogData> = {
