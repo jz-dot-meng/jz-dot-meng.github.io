@@ -1,9 +1,9 @@
 //! Based off the internal logic of https://github.com/bytesbay/web3-token
 import { Keypair } from "@solana/web3.js";
-import { UserLocalInfo } from "@utils/types/user";
 import { concat, keccak256, toUtf8Bytes, Wallet } from "ethers";
-import { getDaysFromNow } from "./datetime";
-import { sign, toHexString } from "./encoding";
+import { getDaysFromNow } from "simple-tools";
+import { UserLocalInfo } from "../types/user";
+import { base58ToUint8Array, sign, toHexString } from "./encoding";
 import { getUserAddress } from "./user";
 
 export interface SignMessageParams {
@@ -49,7 +49,8 @@ export const validateMessage = (message: string) => {
 
 export const formatPartialABNFMessage = (
     userData: UserLocalInfo,
-    params: SignMessageParams
+    params: SignMessageParams,
+    uri: string = "https://jz-dot-meng.vercel.app"
 ): PartialABNFMessage => {
     validateMessage(params.statement);
     const address = getUserAddress(userData);
@@ -64,7 +65,6 @@ export const formatPartialABNFMessage = (
         }
     })();
     const expirationTime = params.expiresInDays ? getDaysFromNow(params.expiresInDays) : undefined;
-    const uri = "https://jz-dot-meng.vercel.app";
     const nonce = parseInt(String(Math.random() * 99999999));
 
     const message: PartialABNFMessage = {
@@ -224,4 +224,30 @@ export const svmFastSignMessage = (wallet: Keypair, message: string) => {
         throw "sig str len not 128";
     }
     return `0x${signature}`;
+};
+
+export const signMessage = (userData: UserLocalInfo, messageParams: SignMessageParams) => {
+    const abnfMsg = formatPartialABNFMessage(userData, messageParams);
+    const body = buildMessage(abnfMsg);
+    let signature: string;
+    switch (userData.privateKeyType) {
+        case "evm": {
+            signature = evmFastSignMesage(new Wallet(userData.privateKey), body);
+            break;
+        }
+        case "svm": {
+            const pkBytes = base58ToUint8Array(userData.privateKey);
+            signature = svmFastSignMessage(Keypair.fromSecretKey(pkBytes), body);
+            break;
+        }
+    }
+    const token = Buffer.from(
+        JSON.stringify({
+            signature,
+            body,
+        }),
+        "utf-8"
+    ).toString("base64");
+
+    return token;
 };

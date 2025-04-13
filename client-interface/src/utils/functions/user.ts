@@ -1,19 +1,18 @@
 import { Keypair } from "@solana/web3.js";
 import { USER_PK_KEY, USER_REMOTE_INFO } from "@utils/storage/constants";
 import { LocalStorage } from "@utils/storage/local-storage";
-import { Chain, User, UserLocalInfo, UserRemoteInfo } from "@utils/types/user";
-import { encodeBase58, Wallet } from "ethers";
-import { base58ToUint8Array } from "./encoding";
 import {
-    buildMessage,
-    evmFastSignMesage,
+    Chain,
+    evmValidateAddress,
     extractBodyAndSignature,
-    formatPartialABNFMessage,
+    getUserAddress,
     parseBody,
-    SignMessageParams,
-    svmFastSignMessage,
-} from "./message";
-import { evmValidateAddress, svmValidateAddress } from "./validator";
+    svmValidateAddress,
+    User,
+    UserLocalInfo,
+    UserRemoteInfo,
+} from "data-cache";
+import { encodeBase58, Wallet } from "ethers";
 
 export const PROOF_OF_OWNERSHIP_MESSAGE =
     "[jzmeng] the signing of this message proves that you own the private key associated with this account";
@@ -54,32 +53,6 @@ export class LocalUserManagement {
         LocalStorage.setItem(USER_PK_KEY, userLocalInfo);
         return userLocalInfo;
     }
-
-    static signMessage(userData: UserLocalInfo, messageParams: SignMessageParams) {
-        const abnfMsg = formatPartialABNFMessage(userData, messageParams);
-        const body = buildMessage(abnfMsg);
-        let signature: string;
-        switch (userData.privateKeyType) {
-            case "evm": {
-                signature = evmFastSignMesage(new Wallet(userData.privateKey), body);
-                break;
-            }
-            case "svm": {
-                const pkBytes = base58ToUint8Array(userData.privateKey);
-                signature = svmFastSignMessage(Keypair.fromSecretKey(pkBytes), body);
-                break;
-            }
-        }
-        const token = Buffer.from(
-            JSON.stringify({
-                signature,
-                body,
-            }),
-            "utf-8"
-        ).toString("base64");
-
-        return token;
-    }
 }
 
 export class UserValidator {
@@ -111,39 +84,18 @@ export class UserValidator {
     }
 }
 
-// other helper functions
-export const getUserAddress = (user: UserLocalInfo) => {
-    switch (user.privateKeyType) {
-        case "evm": {
-            return new Wallet(user.privateKey).address;
-        }
-        case "svm": {
-            return Keypair.fromSecretKey(base58ToUint8Array(user.privateKey)).publicKey.toBase58();
-        }
-    }
-};
-
-export const userRemoteKeys: Record<keyof UserRemoteInfo, boolean> = {
-    name: true,
-    pfp: true,
-};
-export const isUserRemoteInfoKey = (v: string): v is keyof UserRemoteInfo => {
-    const keys = Object.keys(userRemoteKeys);
-    return keys.includes(v);
-};
-
 export const extractUserRemoteData = (user: User): { data: UserRemoteInfo; isDefault: boolean } => {
     const address = getUserAddress(user);
     let isDefault = false;
-    if (!user.name || address.slice(-5) === user.name) {
+    if (!user.displayName || address.slice(-5) === user.displayName) {
         // is default user remote data (sliced name)
         isDefault = true;
     }
     return {
         isDefault,
         data: {
-            name: user.name,
-            pfp: user.pfp,
+            displayName: user.displayName,
+            pfpUrl: user.pfpUrl,
         },
     };
 };

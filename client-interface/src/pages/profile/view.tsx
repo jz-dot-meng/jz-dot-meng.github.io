@@ -3,11 +3,9 @@ import { Radio, RadioOption } from "@components/common/buttons/Radio";
 import { Header } from "@components/common/header/Header";
 import { useUserContext } from "@context/UserContext";
 import { Keypair } from "@solana/web3.js";
-import { base58ToUint8Array } from "@utils/functions/encoding";
 import { Identicon } from "@utils/functions/identicon";
-import { getUserAddress } from "@utils/functions/user";
 import { parseChainMode } from "@utils/functions/validator";
-import { Chain, User } from "@utils/types/user";
+import { base58ToUint8Array, Chain, getUserAddress, User } from "data-cache";
 import { encodeBase58, Wallet } from "ethers";
 import _ from "lodash";
 import Image from "next/image";
@@ -30,7 +28,8 @@ const Profile: React.FunctionComponent = () => {
         { display: "Solana", value: "svm" },
         { display: pkEditingUnlocked ? "🔓" : "🔒", value: "edit" },
     ];
-    const useDefaultName = editedUser && editedUser.name === getUserAddress(editedUser).slice(-5);
+    const useDefaultName =
+        editedUser && editedUser.displayName === getUserAddress(editedUser).slice(-5);
 
     /* -------------------------------------------------------------------------- */
     /*                                   COPYING                                  */
@@ -78,8 +77,8 @@ const Profile: React.FunctionComponent = () => {
             ...editedUser,
             privateKey,
             privateKeyType: parsed,
-            name: useDefaultName ? address.slice(-5) : editedUser.name,
-            pfp: `data:image/svg+xml;base64,${new Identicon(address).toString()}`,
+            displayName: useDefaultName ? address.slice(-5) : editedUser.displayName,
+            pfpUrl: `data:image/svg+xml;base64,${new Identicon(address).toString()}`,
         });
         setEditedPk(privateKey);
     };
@@ -92,7 +91,7 @@ const Profile: React.FunctionComponent = () => {
     const handleSetEditedName = (value: string) => {
         setEditedUser({
             ...editedUser,
-            name: value,
+            displayName: value,
         });
     };
 
@@ -122,8 +121,8 @@ const Profile: React.FunctionComponent = () => {
                 ...editedUser,
                 privateKey,
                 privateKeyType,
-                name: useDefaultName ? address.slice(-5) : editedUser.name,
-                pfp: `data:image/svg+xml;base64,${new Identicon(address).toString()}`,
+                displayName: useDefaultName ? address.slice(-5) : editedUser.displayName,
+                pfpUrl: `data:image/svg+xml;base64,${new Identicon(address).toString()}`,
             });
             setPkEditingUnlocked(false);
         }
@@ -133,7 +132,7 @@ const Profile: React.FunctionComponent = () => {
         const address = getUserAddress(editedUser);
         setEditedUser({
             ...editedUser,
-            name: address.slice(-5),
+            displayName: address.slice(-5),
         });
     };
 
@@ -204,7 +203,7 @@ const Profile: React.FunctionComponent = () => {
                     <div className="flex gap-4 flex-col flex-1 justify-center items-center">
                         <Image
                             alt={"pfp"}
-                            src={editedUser?.pfp}
+                            src={editedUser?.pfpUrl}
                             height={0}
                             width={0}
                             className="w-1/2 h-auto"
@@ -261,7 +260,7 @@ const Profile: React.FunctionComponent = () => {
                                     <input
                                         type={"text"}
                                         onClick={(e) => e.stopPropagation()}
-                                        value={editedUser?.name}
+                                        value={editedUser?.displayName}
                                         className={`form-control w-full h-[42px] text-white cursor-text placeholder-grey-300 flex-1 bg-grey-800 rounded-md text-xs px-3 py-3 caret-coral-400 focus:ring-transparent border-grey-400 hover:border-coral-300 focus:border-coral-400 focus:ring-coral-400`}
                                         onChange={(e) => handleSetEditedName(e.target.value)}
                                     />

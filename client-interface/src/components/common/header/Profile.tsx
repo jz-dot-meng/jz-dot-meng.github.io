@@ -13,9 +13,9 @@ export const Profile: React.FunctionComponent = () => {
                 href={"/profile/view"}
             >
                 <section className="rounded-full overflow-hidden p-1 bg-white">
-                    <Image alt={"pfp"} src={user.pfp} width={24} height={24} />
+                    <Image alt={"pfp"} src={user.pfpUrl} width={24} height={24} />
                 </section>
-                <section>@{user.name}</section>
+                <section>@{user.displayName}</section>
             </Link>
         );
     } else {

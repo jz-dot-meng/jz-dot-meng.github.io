@@ -26,3 +26,12 @@ yarn-debug.log*
 yarn-error.log*
 
 .next
+
+# planning
+memory-bank
+
+# Build outputs
+**/dist/
+
+# Turborepo cache
+**/.turbo/

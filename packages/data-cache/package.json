@@ -1,0 +1,38 @@
+{
+    "name": "data-cache",
+    "description": "A library for managing cache command and validation",
+    "version": "0.0.1",
+    "scripts": {
+        "build": "tsc -p ./tsconfig.json"
+    },
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        },
+        "./backend": {
+            "types": "./dist/backend.d.ts",
+            "default": "./dist/backend.js"
+        },
+        "./frontend": {
+            "types": "./dist/frontend.d.ts",
+            "default": "./dist/frontend.js"
+        }
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@noble/curves": "^1.7.0",
+        "@sinclair/typebox": "^0.34.13",
+        "@solana/web3.js": "^1.98.0",
+        "ioredis": "^5.4.2",
+        "ethers": "^6.13.4",
+        "simple-tools": "*"
+    },
+    "devDependencies": {
+        "typescript": "^5.7.2",
+        "prettier": "^2.8.8",
+        "vitest": "^3.1.1"
+    }
+}

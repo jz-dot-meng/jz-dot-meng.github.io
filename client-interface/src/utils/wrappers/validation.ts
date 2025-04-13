@@ -1,4 +1,4 @@
-import { UserValidator } from "@utils/functions/user";
+import { validateToken } from "data-cache";
 import { NextApiRequest } from "next";
 
 export const validateABNFRequest = (req: NextApiRequest) => {
@@ -9,6 +9,6 @@ export const validateABNFRequest = (req: NextApiRequest) => {
     if (!address) throw new Error("No address provided");
     if (!token) throw new Error("No token provided");
     const chain = mode;
-    const validatedTokenData = UserValidator.validateToken(chain, address, token);
+    const validatedTokenData = validateToken(chain, address, token);
     return validatedTokenData;
 };

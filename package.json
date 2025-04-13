@@ -2,14 +2,15 @@
     "name": "jz-dot-meng",
     "version": "0.2.0",
     "private": true,
-    "dependencies": {
-        "@types/node": "^16.11.42",
-        "typescript": "^4.7.4"
-    },
+    "packageManager": "npm@10.8.1",
     "scripts": {
         "lint": "npm run prettier --write .",
-        "ui:dev": "cd client-interface && next dev",
-        "ui:build": "cd client-interface && next build"
+        "build": "turbo run build",
+        "ui:dev": "cd client-interface && next dev"
+    },
+    "dependencies": {
+        "@types/node": "^22.10.2",
+        "typescript": "^5.7.2"
     },
     "devDependencies": {
         "@types/cors": "^2.8.13",
@@ -18,9 +19,12 @@
         "eslint-config-next": "^13.4.3",
         "eslint-config-react-app": "^7.0.1",
         "gh-pages": "^6.2.0",
-        "prettier": "^2.8.8"
+        "prettier": "^2.8.8",
+        "turbo": "^2.4.2",
+        "vitest": "^3.1.1"
     },
     "workspaces": [
-        "client-interface"
+        "client-interface",
+        "packages/*"
     ]
 }

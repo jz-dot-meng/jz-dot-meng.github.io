@@ -2,13 +2,14 @@ import { errorParseToString } from "@utils/functions/object";
 import {
     extractUserLocalData,
     extractUserRemoteData,
-    getUserAddress,
     LocalUserManagement,
-} from "@utils/functions/user";
-import { makeUserDetailsKey, makeUserDetailsKeyWithWriteData } from "@utils/storage/utils";
+} from "@utils/functions/user"; // Re-add extractUserRemoteData
+import { makeUserDetailsKey } from "@utils/storage/utils";
 import { ErrorResponse } from "@utils/types/api";
-import { User, UserRemoteInfoReponse } from "@utils/types/user";
+import { UserRemoteInfoReponse } from "@utils/types/user";
 import { api } from "@utils/wrappers/api";
+import { getUserAddress, signMessage, UpdateUserDetailsParams, User } from "data-cache"; // Re-add signMessage import
+import { DataCacheFrontend } from "data-cache/frontend"; // Import frontend helper
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -60,7 +61,7 @@ export const UserContextProvider = ({
                 ...cachedUserData,
             };
         }
-        const token = LocalUserManagement.signMessage(partialUser, {
+        const token = signMessage(partialUser, {
             statement: messageKey,
         });
         const data = {
@@ -95,21 +96,15 @@ export const UserContextProvider = ({
     };
 
     const updateUser = async (updatedUser: User) => {
-        const address = getUserAddress(updatedUser);
-        // change remote cache first
-        const userRemoteData = extractUserRemoteData(updatedUser);
-        const statement = makeUserDetailsKeyWithWriteData(address, userRemoteData.data);
-        const token = LocalUserManagement.signMessage(updatedUser, {
-            statement,
-        });
-        const data = {
-            token,
-            address,
-            mode: updatedUser.privateKeyType,
-        };
+        // Prepare params for the command handler
+        const params: UpdateUserDetailsParams = updatedUser;
+
+        // Use the frontend helper to sign the command and get the payload
+        const signedPayload = DataCacheFrontend.handleUpdateUser(updatedUser, params);
+        console.log("[UserContext] Generated signedPayload:", signedPayload); // <-- Log payload
         const response = await api<UserRemoteInfoReponse | ErrorResponse>(
-            "/api/user/update",
-            data
+            "/api/command", // Use the new unified command endpoint
+            signedPayload // Send the signed payload directly
         ).catch((err) => {
             console.log(err);
             return {
@@ -124,6 +119,8 @@ export const UserContextProvider = ({
         // store in local storage next
         const userLocalData = extractUserLocalData(updatedUser);
         LocalUserManagement.setUserLocalInfo(userLocalData);
+        // Re-extract remote data *after* successful update to store locally
+        const userRemoteData = extractUserRemoteData(updatedUser);
         LocalUserManagement.setUserRemoteInfo(userRemoteData.data);
         // store in state
         setUser(updatedUser);

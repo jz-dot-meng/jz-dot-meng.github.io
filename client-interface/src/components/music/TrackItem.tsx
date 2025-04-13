@@ -1,6 +1,6 @@
-import { formatTimeElapsed, getTimeElapsed } from "@utils/functions/datetime";
 import { LastFm } from "@utils/types/music";
 import React, { useMemo } from "react";
+import { formatTimeElapsed, getTimeElapsed } from "simple-tools";
 import { LiveIcon } from "../common/data/LiveIcon";
 
 interface TrackItemProps {

@@ -1,7 +1,7 @@
 import { GameButton } from "@components/common/buttons/GameButton";
 import { ToolWrapper } from "@components/tools/ToolWrapper";
 import { debugRustPrettify } from "@utils/functions/string";
-import { BaseSyntheticEvent, useMemo, useState } from "react";
+import { BaseSyntheticEvent, JSX, useMemo, useState } from "react";
 
 const DateFormatter: React.FunctionComponent = () => {
     const [errored, setErrored] = useState<boolean>(false);
@@ -122,7 +122,7 @@ const DateFormatter: React.FunctionComponent = () => {
                                     });
 
                                     return linesToRender;
-                                }, [prettifiedText, collapsedLines])}
+                                }, [prettifiedText, collapsedLines, errored])}
                             </div>
                         </div>
                     </div>

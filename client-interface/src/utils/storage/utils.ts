@@ -1,4 +1,4 @@
-import { UserRemoteInfo } from "@utils/types/user";
+import { UserRemoteInfo } from "data-cache";
 import { DATA_SEPARATOR, REMOTE_CACHE_PREFIX } from "./constants";
 
 export const makeUserDetailsKey = (address: string) =>
