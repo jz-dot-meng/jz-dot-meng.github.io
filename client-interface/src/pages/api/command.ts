@@ -1,5 +1,11 @@
 import cors from "@utils/wrappers/cors"; // Use default import
-import { ActionCommands, Chain, updateUserDetailsHandler } from "data-cache"; // Import types/handlers/constants from main entry
+import {
+    ActionCommands,
+    addBlogCommentHandler,
+    Chain,
+    fetchBlogCommentsHandler,
+    updateUserDetailsHandler,
+} from "data-cache"; // Import types/handlers/constants from main entry
 import { DataCacheBackend } from "data-cache/backend"; // Import backend class from subpath
 import Redis from "ioredis";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -55,6 +61,12 @@ function getBackendInstance(): DataCacheBackend {
         dataCacheBackend.registerCommand(
             ActionCommands.UPDATE_USER_DETAILS,
             updateUserDetailsHandler
+        );
+        // Register blog comment commands
+        dataCacheBackend.registerCommand(ActionCommands.ADD_BLOG_COMMENT, addBlogCommentHandler);
+        dataCacheBackend.registerCommand(
+            ActionCommands.FETCH_BLOG_COMMENTS,
+            fetchBlogCommentsHandler
         );
         // Register other commands here
         console.log("API Route: DataCacheBackend initialized and commands registered.");

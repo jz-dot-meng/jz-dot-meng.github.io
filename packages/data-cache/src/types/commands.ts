@@ -3,7 +3,8 @@
  */
 export const ActionCommands = {
     UPDATE_USER_DETAILS: "updateUserDetails",
-    // ADD_BLOG_COMMENT: "addBlogComment", // Example for future
+    ADD_BLOG_COMMENT: "addBlogComment",
+    FETCH_BLOG_COMMENTS: "fetchBlogComments",
     // UPDATE_GAME_SCORE: "updateGameScore", // Example for future
 } as const; // Use 'as const' for stricter typing
 
@@ -20,5 +21,20 @@ export interface UpdateUserDetailsParams {
 }
 
 // Add interfaces for other command parameters here later
-// export interface AddBlogCommentParams { ... }
+/**
+ * Defines the expected parameter structure for the "addBlogComment" command.
+ */
+export interface AddBlogCommentParams {
+    blogId: string;
+    comment: string;
+}
+
+/**
+ * Defines the expected parameter structure for the "fetchBlogComments" command.
+ */
+export interface FetchBlogCommentsParams {
+    blogId: string;
+    start?: number; // Starting index for pagination
+    count?: number; // Number of comments to fetch
+}
 // export interface UpdateGameScoreParams { ... }

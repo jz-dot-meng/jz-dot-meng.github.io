@@ -2,4 +2,5 @@
 export * from "./updateUserDetails.handler";
 
 // Export other handlers as they are created
-// export * from "./addBlogComment.handler";
+export * from "./addBlogComment.handler";
+export * from "./fetchBlogComments.handler";

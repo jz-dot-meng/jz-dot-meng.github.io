@@ -14,6 +14,7 @@ export const toolsLinkMap: HorizontalLinkType[] = [
 
 export const posts: Record<string, BlogData> = {
     "exploring-digital-identities-a-plan": {
+        id: "exploring-digital-identities-a-plan",
         title: "exploring digital identities - a plan",
         secondaryTitle: "creating an online social space",
         description: "the start of a deep dive into cryptography",
@@ -21,6 +22,7 @@ export const posts: Record<string, BlogData> = {
         tags: ["project"],
     },
     "digital-identities-and-impermanence": {
+        id: "digital-identities-and-impermanence",
         title: "digital identities, and impermanence",
         secondaryTitle: "a reflection, and new beginnings",
         description: "a short post explaining the reasoning for this new project",

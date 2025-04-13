@@ -1,6 +1,11 @@
 import { getUserAddress, signMessage } from "./tools"; // Import getUserAddress
 import { Chain, UserLocalInfo } from "./types"; // Import Chain type explicitly from index
-import { ActionCommands, UpdateUserDetailsParams } from "./types/commands";
+import {
+    ActionCommands,
+    AddBlogCommentParams,
+    FetchBlogCommentsParams,
+    UpdateUserDetailsParams,
+} from "./types/commands";
 
 // Define the return type for the signing functions
 interface SignedCommandPayload {
@@ -54,8 +59,45 @@ export class DataCacheFrontend {
             expiresInDays
         );
     }
+    /**
+     * Creates a signed token package for the "fetchBlogComments" command.
+     *
+     * @param userLocalInfo - The user's local information (key, type).
+     * @param params - The parameters for fetching blog comments (blogId, start, count).
+     * @param expiresInDays - Optional number of days until the token expires.
+     * @returns An object containing the base64 token, signer address, and chain mode.
+     */
+    static handleFetchBlogComments(
+        userLocalInfo: UserLocalInfo,
+        params: FetchBlogCommentsParams,
+        expiresInDays?: number
+    ): SignedCommandPayload {
+        return _signCommandInternal(
+            userLocalInfo,
+            ActionCommands.FETCH_BLOG_COMMENTS,
+            params,
+            expiresInDays
+        );
+    }
 
-    // Add other static command handlers here later
-    // static handleAddComment(...) { ... }
-    // static handleUpdateScore(...) { ... }
+    /**
+     * Creates a signed token package for the "addBlogComment" command.
+     *
+     * @param userLocalInfo - The user's local information (key, type).
+     * @param params - The parameters for adding a blog comment (blogId, comment).
+     * @param expiresInDays - Optional number of days until the token expires.
+     * @returns An object containing the base64 token, signer address, and chain mode.
+     */
+    static handleAddBlogComment(
+        userLocalInfo: UserLocalInfo,
+        params: AddBlogCommentParams,
+        expiresInDays?: number
+    ): SignedCommandPayload {
+        return _signCommandInternal(
+            userLocalInfo,
+            ActionCommands.ADD_BLOG_COMMENT,
+            params,
+            expiresInDays
+        );
+    }
 }

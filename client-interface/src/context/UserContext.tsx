@@ -49,7 +49,7 @@ export const UserContextProvider = ({
     };
 
     const getCachedOrRemoteUserData = async (partialUser: User): Promise<User> => {
-        if (!partialUser) {
+        if (!partialUser || !partialUser.privateKey) {
             return;
         }
         const address = getUserAddress(partialUser);
@@ -117,13 +117,15 @@ export const UserContextProvider = ({
             return;
         }
         // store in local storage next
-        const userLocalData = extractUserLocalData(updatedUser);
-        LocalUserManagement.setUserLocalInfo(userLocalData);
-        // Re-extract remote data *after* successful update to store locally
-        const userRemoteData = extractUserRemoteData(updatedUser);
-        LocalUserManagement.setUserRemoteInfo(userRemoteData.data);
-        // store in state
-        setUser(updatedUser);
+        if (updatedUser.privateKey) {
+            const userLocalData = extractUserLocalData(updatedUser);
+            LocalUserManagement.setUserLocalInfo(userLocalData);
+            // Re-extract remote data *after* successful update to store locally
+            const userRemoteData = extractUserRemoteData(updatedUser);
+            LocalUserManagement.setUserRemoteInfo(userRemoteData.data);
+            // store in state
+            setUser(updatedUser);
+        }
     };
 
     // get and validate user on load

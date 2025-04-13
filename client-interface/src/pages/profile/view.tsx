@@ -29,7 +29,7 @@ const Profile: React.FunctionComponent = () => {
         { display: pkEditingUnlocked ? "🔓" : "🔒", value: "edit" },
     ];
     const useDefaultName =
-        editedUser && editedUser.displayName === getUserAddress(editedUser).slice(-5);
+        editedUser?.privateKey && editedUser.displayName === getUserAddress(editedUser).slice(-5);
 
     /* -------------------------------------------------------------------------- */
     /*                                   COPYING                                  */

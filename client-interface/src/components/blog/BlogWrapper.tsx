@@ -2,6 +2,7 @@ import { Header } from "@components/common/header/Header";
 import { BlogData } from "@utils/types/blog";
 import Link from "next/link";
 import React, { ReactNode } from "react";
+import { BlogComments } from "./BlogComments";
 
 interface BlogWrapperProps {
     data: BlogData;
@@ -40,6 +41,9 @@ export const BlogWrapper: React.FunctionComponent<BlogWrapperProps> = ({ data, c
                     )}
                 </section>
                 <section className="py-8 flex flex-col gap-4">{children}</section>
+                <section className="py-4">
+                    <BlogComments blogId={data.id} />
+                </section>
                 <footer className="text-xs pb-8">
                     <Link href={"/blog"}>← Return to blogs</Link>
                 </footer>

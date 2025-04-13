@@ -30,6 +30,8 @@ yarn-error.log*
 # planning
 memory-bank
 
+**/node_modules
+
 # Build outputs
 **/dist/
 

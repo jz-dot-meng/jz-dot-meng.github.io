@@ -12,7 +12,7 @@ export const updateUserDetailsHandler: CommandHandler = async (
     address: string,
     params: UpdateUserDetailsParams, // Use the specific type
     redisClient: Redis
-): Promise<{ success: boolean }> => {
+) => {
     const redisKey = `user:${address}:details`;
     const dataToUpdate: Record<string, string> = {};
 
@@ -44,7 +44,7 @@ export const updateUserDetailsHandler: CommandHandler = async (
         const result = await redisClient.hset(redisKey, dataToUpdate);
         console.log(`[updateUserDetailsHandler] Redis HSET result: ${result}`); // result is the number of fields added (not updated)
 
-        return { success: true };
+        return dataToUpdate;
     } catch (error: any) {
         console.error(
             `[updateUserDetailsHandler] Error writing to Redis for key "${redisKey}":`,

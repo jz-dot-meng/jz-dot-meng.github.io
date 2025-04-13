@@ -28,7 +28,8 @@
         "@solana/web3.js": "^1.98.0",
         "ioredis": "^5.4.2",
         "ethers": "^6.13.4",
-        "simple-tools": "*"
+        "simple-tools": "*",
+        "uuid": "^11.1.0"
     },
     "devDependencies": {
         "typescript": "^5.7.2",
