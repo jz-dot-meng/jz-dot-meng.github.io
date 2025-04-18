@@ -176,3 +176,67 @@ const formatRustDebug = (text: string): string[] => {
     // Filter out potential empty lines just in case
     return result.filter((line) => line.trim().length > 0);
 };
+
+
+
+export const debugTsPrettify = (text: string): PrettifiedResult => {
+    if (!text) {
+        return {
+            success: false as const,
+            error: "Input text is empty",
+        };
+    }
+
+    try {
+        // Attempt to parse the input string as JSON
+        const parsedObject = JSON.parse(text);
+
+        // Re-stringify the object with indentation (4 spaces)
+        const prettifiedJson = JSON.stringify(parsedObject, null, 4);
+
+        // Split into lines
+        const formattedLines = prettifiedJson.split('\n');
+
+        return {
+            success: true as const,
+            data: formattedLines,
+        };
+    } catch (error) {
+        let errorMessage = "Unknown error occurred";
+        if (error instanceof SyntaxError) {
+            errorMessage = `Invalid JSON: ${error.message}`;
+        } else if (error instanceof Error) {
+            errorMessage = error.message;
+        }
+        return {
+            success: false as const,
+            error: errorMessage,
+        };
+    }
+};
+
+/**
+ * Attempts to strip // and /* ... * / comments from a JSON-like string.
+ * IMPORTANT: This is a best-effort approach using regex and may fail on complex edge cases,
+ * especially with comments inside strings or escaped characters.
+ * It does NOT handle trailing commas or unquoted keys.
+ */
+export const stripJsonComments = (jsonString: string): string => {
+    // Remove block comments /* ... */ (non-greedy to handle nested ones poorly but avoid over-matching)
+    // Replace with empty string
+    let stripped = jsonString.replace(/\/\*[\s\S]*?\*\//g, '');
+
+    // Remove line comments // ... (match until end of line)
+    // Replace with empty string
+    stripped = stripped.replace(/\/\/.*$/gm, '');
+
+    stripped = stripped.replace(/ /g, '')
+    stripped = stripped.replace(/\n/g, '') // Use global flag to remove all newlines
+
+    // Optional: Attempt to remove trailing commas (might be risky)
+    // stripped = stripped.replace(/,\s*([}\]])/g, '$1');
+
+    // Note: This doesn't handle comments inside strings correctly.
+    // A more robust solution would require a proper parser state machine.
+    return stripped;
+};

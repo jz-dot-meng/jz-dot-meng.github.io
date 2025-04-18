@@ -1,33 +1,74 @@
 import { GameButton } from "@components/common/buttons/GameButton";
 import { ToolWrapper } from "@components/tools/ToolWrapper";
-import { debugRustPrettify } from "@utils/functions/string";
+import { anchorIDLConvertNewToOld, isValidAnchorIdlNew } from "@utils/functions/idl";
+import { type Root as AnchorIdlOld } from '@utils/functions/idl/anchor_old';
+import { debugTsPrettify, PrettifiedResult, stripJsonComments } from "@utils/functions/string";
 import { BaseSyntheticEvent, JSX, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
-const RustFormatter: React.FunctionComponent = () => {
+const AnchorIdlFormatter: React.FunctionComponent = () => {
     const [errored, setErrored] = useState<boolean>(false);
     const [unvalidatedText, setUnvalidatedText] = useState<string>();
+    const [convertedIdl, setConvertedIdl] = useState<AnchorIdlOld>();
     const [prettifiedText, setPrettifiedText] = useState<string[]>();
     const [collapsedLines, setCollapsedLines] = useState<Record<number, boolean>>({});
+    
 
     const handleTextInput = (e: BaseSyntheticEvent) => {
         const text = e.target.value;
         setUnvalidatedText(text);
     };
 
-    const prettify = () => {
-        const prettified = debugRustPrettify(unvalidatedText);
-        if (prettified.success) {
-            setPrettifiedText(prettified.data);
-            setCollapsedLines({}); // Reset collapse state on new input
-            setErrored(false);
-        } else if (prettified.success === false) {
-            setPrettifiedText([prettified.error]);
+    const copy = () => {
+        navigator.clipboard.writeText(JSON.stringify(convertedIdl));
+        toast.info(`Converted IDL copied to clipboard`);
+    }
+
+    const convert = () => {
+        try {
+            if (!unvalidatedText) {
+                setPrettifiedText(["Input text is empty"]);
+                setErrored(true);
+                return;
+            }
+            // Attempt to strip comments before parsing
+            const strippedText = stripJsonComments(unvalidatedText);
+            const parsed = JSON.parse(strippedText); // Parse the stripped text
+
+            const isValidIdl = isValidAnchorIdlNew(parsed);
+            if (!isValidIdl) {
+                setPrettifiedText(["Input is valid JSON but not a valid new Anchor IDL"]);
+                setErrored(true);
+                return
+            }
+            const converted = anchorIDLConvertNewToOld(parsed);
+            setConvertedIdl(converted);
+            // function to prettify ts 
+            const prettified: PrettifiedResult = debugTsPrettify(JSON.stringify(converted)) 
+            if (prettified.success) {
+                setPrettifiedText(prettified.data)
+                setErrored(false);
+                setCollapsedLines({}); // Reset collapse state on new input
+            } else if (prettified.success === false) {
+                setPrettifiedText([prettified.error]);
+                setErrored(true);
+            }
+        } catch (err) {
+            console.error("Error parsing or converting IDL:", err); // Log the actual error
+            let errorMessage = "An unexpected error occurred processing the IDL.";
+            if (err instanceof SyntaxError) {
+                // Specific feedback for JSON parsing errors, even after stripping comments
+                errorMessage = `Invalid JSON input: ${err.message}. Please ensure the input is strictly valid JSON (e.g., no trailing commas, keys/strings must be quoted). Comments were stripped automatically.`;
+            } else if (err instanceof Error) {
+                errorMessage = `Error: ${err.message}`;
+            }
+            setPrettifiedText([errorMessage]);
             setErrored(true);
         }
     };
 
     return (
-        <ToolWrapper title="rust formatter" secondaryTitle="format rust debug logs">
+        <ToolWrapper title="anchor idl formatter" secondaryTitle="convert anchor +0.29.0 to the older format">
             <div className="flex flex-col gap-4">
                 <div className="flex flex-1 gap-2 flex-col max-h-96 md:flex-row">
                     <div className="flex flex-1 flex-col gap-1">
@@ -122,16 +163,18 @@ const RustFormatter: React.FunctionComponent = () => {
                                     });
 
                                     return linesToRender;
-                                }, [prettifiedText, collapsedLines, errored])}
+                                }, [convertedIdl, collapsedLines, errored])}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex">
-                    <GameButton onClick={prettify} buttonText={"Prettify"} />
+                <div className="flex gap-2">
+                    <GameButton onClick={convert} buttonText={"Convert"} />
+                    <GameButton onClick={copy} disabled={!convertedIdl} buttonText={"Copy"} />
+
                 </div>
             </div>
         </ToolWrapper>
     );
 };
-export default RustFormatter;
+export default AnchorIdlFormatter;

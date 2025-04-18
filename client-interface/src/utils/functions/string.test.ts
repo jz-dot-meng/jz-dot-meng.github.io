@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { debugRustPrettify } from "./string";
+import { debugRustPrettify, stripJsonComments } from "./string";
 
 describe("debugRustPrettify", () => {
     it("should format a simple struct correctly", () => {
@@ -96,3 +96,16 @@ describe("debugRustPrettify", () => {
         }
     });
 });
+
+
+describe("stripJsonComments", () => {
+    it("should handle newlines correclty", () => {
+        const input = `{
+          "test": {
+            "key": "value"
+          }
+        }`
+        const result = stripJsonComments(input);
+        expect(result).toBe('{"test":{"key":"value"}}')
+    })
+})

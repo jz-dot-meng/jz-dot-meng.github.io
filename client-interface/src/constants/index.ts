@@ -10,6 +10,7 @@ export const toolsLinkMap: HorizontalLinkType[] = [
     { url: "/tools/lowercase-me", name: "lowercase me" },
     { url: "/tools/hex-to-number", name: "hex to number" },
     { url: "/tools/rust-formatter", name: "rust formatter" },
+    { url: "/tools/anchor-idl-converter", name: "anchor idl converter" },
 ];
 
 export const posts: Record<string, BlogData> = {

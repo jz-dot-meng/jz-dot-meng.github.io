@@ -10,11 +10,11 @@ type HorizontalLinksProps = {
 export const HorizontalLinks: React.FunctionComponent<HorizontalLinksProps> = ({ ...props }) => {
     const { linkMap, isInternalLink = false } = props;
     return (
-        <ul className="list-none flex flex-col md:flex-row">
+        <ul className="list-none flex flex-col md:flex-row md:flex-nowrap md:overflow-x-auto no-scrollbar">
             {linkMap.map((link: HorizontalLinkType, index) => (
                 <li
                     key={index}
-                    className="text-lg inline pr-8 text-coral-400 font-bold no-underline"
+                    className="text-lg inline pr-8 text-coral-400 font-bold no-underline whitespace-nowrap"
                 >
                     {isInternalLink ? (
                         <Link href={link.url}>{link.name}</Link>
