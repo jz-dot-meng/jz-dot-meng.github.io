@@ -2,7 +2,7 @@ import { GameButton } from "@components/common/buttons/GameButton";
 import { ToolWrapper } from "@components/tools/ToolWrapper";
 import { anchorIDLConvertNewToOld, isValidAnchorIdlNew } from "@utils/functions/idl";
 import { type Root as AnchorIdlOld } from '@utils/functions/idl/anchor_old';
-import { debugTsPrettify, PrettifiedResult, stripJsonComments } from "@utils/functions/string";
+import { debugTsPrettify, PrettifiedResult } from "@utils/functions/string";
 import { BaseSyntheticEvent, JSX, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -31,9 +31,7 @@ const AnchorIdlFormatter: React.FunctionComponent = () => {
                 setErrored(true);
                 return;
             }
-            // Attempt to strip comments before parsing
-            const strippedText = stripJsonComments(unvalidatedText);
-            const parsed = JSON.parse(strippedText); // Parse the stripped text
+            const parsed = JSON.parse(unvalidatedText); // Parse the unvalidated text
 
             const isValidIdl = isValidAnchorIdlNew(parsed);
             if (!isValidIdl) {

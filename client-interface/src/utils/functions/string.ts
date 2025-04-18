@@ -214,29 +214,3 @@ export const debugTsPrettify = (text: string): PrettifiedResult => {
         };
     }
 };
-
-/**
- * Attempts to strip // and /* ... * / comments from a JSON-like string.
- * IMPORTANT: This is a best-effort approach using regex and may fail on complex edge cases,
- * especially with comments inside strings or escaped characters.
- * It does NOT handle trailing commas or unquoted keys.
- */
-export const stripJsonComments = (jsonString: string): string => {
-    // Remove block comments /* ... */ (non-greedy to handle nested ones poorly but avoid over-matching)
-    // Replace with empty string
-    let stripped = jsonString.replace(/\/\*[\s\S]*?\*\//g, '');
-
-    // Remove line comments // ... (match until end of line)
-    // Replace with empty string
-    stripped = stripped.replace(/\/\/.*$/gm, '');
-
-    stripped = stripped.replace(/ /g, '')
-    stripped = stripped.replace(/\n/g, '') // Use global flag to remove all newlines
-
-    // Optional: Attempt to remove trailing commas (might be risky)
-    // stripped = stripped.replace(/,\s*([}\]])/g, '$1');
-
-    // Note: This doesn't handle comments inside strings correctly.
-    // A more robust solution would require a proper parser state machine.
-    return stripped;
-};
