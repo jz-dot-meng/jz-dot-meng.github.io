@@ -1,11 +1,18 @@
 import { GameButton } from "@components/common/buttons/GameButton";
 import { ToolWrapper } from "@components/tools/ToolWrapper";
-import { debugRustPrettify } from "@utils/functions/string";
+import { debugTsPrettify, type PrettifiedResult } from "@utils/functions/string";
+import { isValidVersionedTransaction, mapVersionedTransaction } from "@utils/functions/transaction/solana";
+import type {
+    MappedTransaction as MappedTransactionType,
+    VersionedTransaction as VersionedTransactionType,
+} from "@utils/types/solana";
 import { type BaseSyntheticEvent, type JSX, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
-const RustFormatter: React.FunctionComponent = () => {
+const VersionedTxnMapper: React.FunctionComponent = () => {
     const [errored, setErrored] = useState<boolean>(false);
     const [unvalidatedText, setUnvalidatedText] = useState<string>();
+    const [mappedTxn, setMappedTxn] = useState<MappedTransactionType>();
     const [prettifiedText, setPrettifiedText] = useState<string[]>();
     const [collapsedLines, setCollapsedLines] = useState<Record<number, boolean>>({});
 
@@ -14,26 +21,76 @@ const RustFormatter: React.FunctionComponent = () => {
         setUnvalidatedText(text);
     };
 
-    const prettify = () => {
-        const prettified = debugRustPrettify(unvalidatedText);
-        if (prettified.success) {
-            setPrettifiedText(prettified.data);
-            setCollapsedLines({}); // Reset collapse state on new input
-            setErrored(false);
-        } else if (prettified.success === false) {
-            setPrettifiedText([prettified.error]);
+    const copy = () => {
+        navigator.clipboard.writeText(JSON.stringify(mappedTxn));
+        toast.info(`Mapped transaction copied to clipboard`);
+    };
+
+    const convert = () => {
+        try {
+            if (!unvalidatedText) {
+                const errorMsg = "Input text is empty";
+                setPrettifiedText([errorMsg]);
+                setErrored(true);
+                toast.error(errorMsg);
+                return;
+            }
+
+            const parsed = JSON.parse(unvalidatedText);
+
+            // Use the utility function for validation
+            const validation = isValidVersionedTransaction(parsed);
+            if (!validation.isValid) {
+                const errorMessages = [
+                    "Input is not a valid versioned transaction:",
+                    ...validation.errors
+                ];
+                setPrettifiedText(errorMessages);
+                setErrored(true);
+                toast.error("Invalid versioned transaction format");
+                return;
+            }
+
+            // Cast to proper type after validation
+            const validTxn = parsed as VersionedTransactionType;
+            const mapped = mapVersionedTransaction(validTxn);
+            setMappedTxn(mapped);
+
+            const prettified: PrettifiedResult = debugTsPrettify(JSON.stringify(mapped));
+            if (prettified.success) {
+                setPrettifiedText(prettified.data);
+                setErrored(false);
+                setCollapsedLines({}); // Reset collapse state on new input
+                toast.success("Transaction mapped successfully!");
+            } else if (prettified.success === false) {
+                const errorMsg = prettified.error;
+                setPrettifiedText([errorMsg]);
+                setErrored(true);
+                toast.error(`Prettification failed: ${errorMsg}`);
+            }
+        } catch (err) {
+            console.error("Error parsing or mapping transaction:", err);
+            let errorMessage = "An unexpected error occurred processing the transaction.";
+            if (err instanceof SyntaxError) {
+                errorMessage = `Invalid JSON input: ${err.message}. Please ensure the input is strictly valid JSON.`;
+            } else if (err instanceof Error) {
+                errorMessage = `Error: ${err.message}`;
+            }
+            setPrettifiedText([errorMessage]);
             setErrored(true);
+            toast.error(errorMessage);
         }
     };
 
     return (
-        <ToolWrapper title="rust formatter" secondaryTitle="format rust debug logs">
+        <ToolWrapper title="versioned txn mapper" secondaryTitle="map account indexes to static keys in versioned transactions">
             <div className="flex flex-col gap-4">
                 <div className="flex flex-1 gap-2 flex-col max-h-96 md:flex-row">
                     <div className="flex flex-1 flex-col gap-1">
                         <textarea
                             rows={10}
                             onInput={handleTextInput}
+                            placeholder="Paste your versioned transaction JSON here..."
                             className={`form-control w-full resize-none text-white cursor-text placeholder-grey-300 flex-1 bg-grey-800 rounded-md text-xs px-3 py-3 caret-coral-400 focus:ring-transparent border-grey-400 hover:border-coral-300 focus:border-coral-400 focus:ring-coral-400 no-scrollbar`}
                         ></textarea>
                     </div>
@@ -97,7 +154,7 @@ const RustFormatter: React.FunctionComponent = () => {
                                                 <span className="w-10 text-right pr-2 select-none flex items-center">
                                                     {isBlockStart && endLine !== undefined ? (
                                                         <button
-                                                            type={"button"}
+                                                            type="button"
                                                             onClick={handleToggleCollapse}
                                                             className="mr-1 text-[6px] hover:text-white focus:outline-none"
                                                         >
@@ -129,11 +186,13 @@ const RustFormatter: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex">
-                    <GameButton onClick={prettify} buttonText={"Prettify"} />
+                <div className="flex gap-2">
+                    <GameButton onClick={convert} buttonText={"Map Transaction"} />
+                    <GameButton onClick={copy} disabled={!mappedTxn} buttonText={"Copy"} />
                 </div>
             </div>
         </ToolWrapper>
     );
 };
-export default RustFormatter;
+
+export default VersionedTxnMapper;

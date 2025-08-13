@@ -266,7 +266,7 @@ const Profile: React.FunctionComponent = () => {
                                     />
                                 </div>
                                 <div className="flex-1 flex items-center justify-center">
-                                    <button onClick={() => handleResetAnonName()}>
+                                    <button type={"reset"} onClick={() => handleResetAnonName()}>
                                         Reset anon
                                     </button>
                                 </div>

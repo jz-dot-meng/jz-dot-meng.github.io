@@ -1,9 +1,9 @@
 import { GameButton } from "@components/common/buttons/GameButton";
 import { ToolWrapper } from "@components/tools/ToolWrapper";
 import { anchorIDLConvertNewToOld, isValidAnchorIdlNew } from "@utils/functions/idl";
-import { type Root as AnchorIdlOld } from '@utils/functions/idl/anchor_old';
-import { debugTsPrettify, PrettifiedResult } from "@utils/functions/string";
-import { BaseSyntheticEvent, JSX, useMemo, useState } from "react";
+import type { Root as AnchorIdlOld } from '@utils/functions/idl/anchor_old';
+import { debugTsPrettify, type PrettifiedResult } from "@utils/functions/string";
+import { type BaseSyntheticEvent, type JSX, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 
 const AnchorIdlFormatter: React.FunctionComponent = () => {
@@ -127,6 +127,7 @@ const AnchorIdlFormatter: React.FunctionComponent = () => {
 
                                         linesToRender.push(
                                             <div
+                                                // biome-ignore lint/suspicious/noArrayIndexKey: not looking to optimise here
                                                 key={index}
                                                 className={`flex text-xs ${
                                                     errored ? "text-red-400" : "text-grey-400"
@@ -135,6 +136,7 @@ const AnchorIdlFormatter: React.FunctionComponent = () => {
                                                 <span className="w-10 text-right pr-2 select-none flex items-center">
                                                     {isBlockStart && endLine !== undefined ? (
                                                         <button
+                                                            type={"button"}
                                                             onClick={handleToggleCollapse}
                                                             className="mr-1 text-[6px] hover:text-white focus:outline-none"
                                                         >
@@ -161,7 +163,7 @@ const AnchorIdlFormatter: React.FunctionComponent = () => {
                                     });
 
                                     return linesToRender;
-                                }, [convertedIdl, collapsedLines, errored])}
+                                }, [prettifiedText, collapsedLines, errored])}
                             </div>
                         </div>
                     </div>
