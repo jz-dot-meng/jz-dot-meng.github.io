@@ -1,5 +1,5 @@
-import { BlogData } from "../utils/types/blog";
-import { HorizontalLinkType } from "../utils/types/navigation";
+import type { BlogData } from "../utils/types/blog";
+import type { HorizontalLinkType } from "../utils/types/navigation";
 
 export const gamesLinkMap: HorizontalLinkType[] = [
     { url: "/minigame/memory", name: "memory" },
@@ -11,6 +11,7 @@ export const toolsLinkMap: HorizontalLinkType[] = [
     { url: "/tools/hex-to-number", name: "hex to number" },
     { url: "/tools/rust-formatter", name: "rust formatter" },
     { url: "/tools/anchor-idl-converter", name: "anchor idl converter" },
+    { url: "/tools/versioned-txn-mapper",  name: "versioned txn mapper" }
 ];
 
 export const posts: Record<string, BlogData> = {
